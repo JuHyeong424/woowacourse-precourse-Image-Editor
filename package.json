@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "wasm:build": "wasm-pack build ./rust-core --target web --out-dir ../src/wasm"
   },
   "dependencies": {
     "react": "19.2.0",
