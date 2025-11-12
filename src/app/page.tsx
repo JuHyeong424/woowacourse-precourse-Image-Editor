@@ -15,13 +15,13 @@ export default function Home() {
       <div className="flex m-4 gap-4">
         <Link
           href="/editor"
-          className="font-bold gradient-yellow-to-red p-4 rounded-xl"
+          className="font-bold gradient-yellow-to-red p-4 rounded-xl border-orange-400 hover:bg-none hover:bg-white hover:bg-clip-padding hover:text-orange-500 hover:border-none"
         >
           에디터 시작하기
         </Link>
         <Link
           href="/benchmark"
-          className="font-bold gradient-yellow-to-red p-4 rounded-xl bg-clip-text text-transparent border-2 border-orange-400"
+          className="font-bold gradient-yellow-to-red p-4 rounded-xl bg-clip-text text-transparent border-2 border-orange-400 hover:bg-none hover:bg-white hover:bg-clip-padding hover:border-transparent hover:text-orange-500"
         >
           성능 벤치마크
         </Link>
