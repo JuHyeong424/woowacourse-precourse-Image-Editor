@@ -2,7 +2,7 @@ import React from "react";
 
 interface UploadedImageComponentProps {
   canvasRef: React.RefObject<HTMLCanvasElement | null>;
-  setImage: () => HTMLImageElement | null;
+  setImage: (img: HTMLImageElement) => void;
 }
 
 export default function UploadedImageComponent({canvasRef, setImage}: UploadedImageComponentProps) {
