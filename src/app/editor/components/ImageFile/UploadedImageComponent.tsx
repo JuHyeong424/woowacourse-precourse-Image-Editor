@@ -37,7 +37,7 @@ export default function UploadedImageComponent({canvasRef, image, setImage}: Upl
         <IoMdCloseCircle onClick={deleteImage} className="absolute top-4 right-4 text-red-500 text-4xl cursor-pointer z-10" />
       )}
 
-      <canvas ref={canvasRef} className="w-full h-full border-2 border-gray-300"/>
+      <canvas ref={canvasRef} className="w-full h-full object-contain border-2 border-gray-300"/>
     </div>
   )
 }
