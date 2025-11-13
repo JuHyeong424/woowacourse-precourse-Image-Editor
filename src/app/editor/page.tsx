@@ -23,6 +23,8 @@ export default function EditorPage() {
     if (!image || !canvasRef.current) return;
 
     const canvas = canvasRef.current;
+    if (!canvas) return;
+
     const ctx = canvas?.getContext('2d');
     if (!ctx) return;
 
