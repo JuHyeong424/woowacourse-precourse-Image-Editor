@@ -2,7 +2,7 @@
 
 import {useEffect, useRef, useState} from "react";
 import {WasmModule} from "@/lib/wasm-loader";
-import UploadedImageComponent from "@/app/editor/components/UploadedImageComponent";
+import UploadedImageComponent from "@/app/editor/components/ImageFile/UploadedImageComponent";
 import GrayScaleComponent from "@/app/editor/components/GrayScaleComponent";
 
 export default function EditorPage() {
@@ -42,7 +42,7 @@ export default function EditorPage() {
         <input type="range" min="0" max="200" value={100} />
       </div>
 
-      <UploadedImageComponent canvasRef={canvasRef} setImage={setImage} />
+      <UploadedImageComponent canvasRef={canvasRef} image={image} setImage={setImage} />
     </div>
   );
 }
