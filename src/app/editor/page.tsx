@@ -32,7 +32,7 @@ export default function EditorPage() {
   }, [image]);
 
   return (
-    <div className="flex flex-row bg-black text-white min-h-screen gap-6 p-12">
+    <div className="flex flex-row bg-black text-white h-screen gap-6 p-12">
       <div className="flex flex-col p-4 border-2 min-w-[30%] h-full rounded-xl">
         <h2>편집 도구</h2>
 
