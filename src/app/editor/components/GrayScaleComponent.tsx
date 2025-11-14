@@ -19,7 +19,7 @@ export default function GrayScaleComponent({ wasm, canvasRef, image, originalPix
     setIsChecked(false);
   }, [image]);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
     setIsChecked(checked);
     if (checked)  {
