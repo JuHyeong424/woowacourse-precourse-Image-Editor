@@ -6,12 +6,19 @@ interface SelectFileProps {
 
 export default function SelectFileComponent({ setImage }: SelectFileProps) {
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target?.files[0]) {
-      const url = URL.createObjectURL(e.target?.files[0]);
-      const img = new Image();
-      img.src = url;
-      img.onload = () => setImage(img);
-    }
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      setImage(img);
+      URL.revokeObjectURL(url);
+    };
+    img.onerror = () => {
+      console.error("이미지 로드 실패");
+      URL.revokeObjectURL(url);
+    };
+    img.src = url;
   }
 
   return (
