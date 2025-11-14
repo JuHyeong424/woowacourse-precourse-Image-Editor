@@ -1,6 +1,7 @@
 import {WasmModule} from "@/lib/wasm-loader";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import useCanvasUtils from "@/app/hooks/useCanvasUtils";
+import {reset} from "next/dist/lib/picocolors";
 
 interface GrayScaleComponentProps {
   wasm: WasmModule | null;
@@ -11,6 +12,11 @@ interface GrayScaleComponentProps {
 
 export default function GrayScaleComponent({ wasm, canvasRef, image, originalPixels}: GrayScaleComponentProps) {
   const { getCanvasImageData } = useCanvasUtils({ canvasRef });
+  const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    setIsChecked(false);
+  }, [image]);
 
   const applyGrayscale = () => {
     if (!wasm || !image) return;
@@ -34,19 +40,24 @@ export default function GrayScaleComponent({ wasm, canvasRef, image, originalPix
     ctx.putImageData(imageData, 0, 0);
   };
 
+  const handleChange = (e) => {
+    const checked = e.target.checked;
+    setIsChecked(checked);
+    if (checked)  {
+      applyGrayscale()
+    } else {
+      resetColor();
+    }
+  };
+
   return (
     <div className="flex flex-row">
       <input
         type="checkbox"
         id="gray"
+        checked={isChecked}
         disabled={!wasm || !image}
-        onChange={(e) => {
-          if (e.target.checked) {
-            applyGrayscale();
-          } else {
-            resetColor();
-          }
-        }}
+        onChange={handleChange}
       />
       <label htmlFor="gray">흑백 필터</label>
     </div>
