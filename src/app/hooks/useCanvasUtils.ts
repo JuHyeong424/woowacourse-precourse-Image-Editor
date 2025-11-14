@@ -27,7 +27,7 @@ export default function useCanvasUtils({ canvasRef }: useCanvasUtilsProps) {
 
   const initializeCanvas = (image: HTMLImageElement): ImageData | null => {
     const info = getCanvas();
-    if (!info) return;
+    if (!info) return null;
 
     const { canvas, ctx } = info;
 
