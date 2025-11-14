@@ -1,7 +1,7 @@
 import {WasmModule} from "@/lib/wasm-loader";
 import React, {useEffect, useState} from "react";
 import useCanvasUtils from "@/app/hooks/useCanvasUtils";
-import {reset} from "next/dist/lib/picocolors";
+import useImageFilters from "@/app/hooks/useImageFilters";
 
 interface GrayScaleComponentProps {
   wasm: WasmModule | null;
@@ -12,41 +12,20 @@ interface GrayScaleComponentProps {
 
 export default function GrayScaleComponent({ wasm, canvasRef, image, originalPixels}: GrayScaleComponentProps) {
   const { getCanvasImageData } = useCanvasUtils({ canvasRef });
+  const { applyGrayscale, resetColor } = useImageFilters();
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
     setIsChecked(false);
   }, [image]);
 
-  const applyGrayscale = () => {
-    if (!wasm || !image) return;
-
-    const info = getCanvasImageData();
-    if (!info) return;
-
-    const { ctx, imageData } = info;
-
-    wasm.grayscale(imageData.data);
-    ctx.putImageData(imageData, 0, 0);
-  };
-
-  const resetColor = () => {
-    const info = getCanvasImageData();
-    if (!info) return;
-
-    const { ctx, imageData } = info;
-
-    imageData.data.set(originalPixels!);
-    ctx.putImageData(imageData, 0, 0);
-  };
-
   const handleChange = (e) => {
     const checked = e.target.checked;
     setIsChecked(checked);
     if (checked)  {
-      applyGrayscale()
+      applyGrayscale(wasm, image, getCanvasImageData)
     } else {
-      resetColor();
+      resetColor(getCanvasImageData, originalPixels);
     }
   };
 
