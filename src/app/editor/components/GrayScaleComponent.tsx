@@ -1,5 +1,6 @@
 import {WasmModule} from "@/lib/wasm-loader";
 import React from "react";
+import useCanvasUtils from "@/app/hooks/useCanvasUtils";
 
 interface GrayScaleComponentProps {
   wasm: WasmModule | null;
@@ -9,29 +10,25 @@ interface GrayScaleComponentProps {
 }
 
 export default function GrayScaleComponent({ wasm, canvasRef, image, originalPixels}: GrayScaleComponentProps) {
+  const { getCanvasImageData } = useCanvasUtils({ canvasRef });
 
   const applyGrayscale = () => {
-    if (!wasm || !canvasRef.current || !image) return;
+    if (!wasm || !image) return;
 
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const info = getCanvasImageData();
+    if (!info) return;
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    const { ctx, imageData } = info;
 
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     wasm.grayscale(imageData.data);
-
     ctx.putImageData(imageData, 0, 0);
   };
 
   const resetColor = () => {
-    const canvas = canvasRef.current;
-    if (!canvas || !originalPixels) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    const info = getCanvasImageData();
+    if (!info) return;
 
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const { ctx, imageData } = info;
 
     imageData.data.set(originalPixels!);
     ctx.putImageData(imageData, 0, 0);
