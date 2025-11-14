@@ -4,12 +4,14 @@ import {useEffect, useRef, useState} from "react";
 import {WasmModule} from "@/lib/wasm-loader";
 import UploadedImageComponent from "@/app/editor/components/ImageFile/UploadedImageComponent";
 import GrayScaleComponent from "@/app/editor/components/GrayScaleComponent";
+import useCanvasUtils from "@/app/hooks/useCanvasUtils";
 
 export default function EditorPage() {
   const [wasm, setWasm] = useState<WasmModule | null>(null);
   const [image, setImage] = useState<HTMLImageElement | null>(null);
   const [originalPixels, setOriginalPixels] = useState<ImageData["data"]  | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const { initializeCanvas } = useCanvasUtils({ canvasRef });
 
   useEffect(() => {
     const initWasm = async () => {
@@ -21,20 +23,12 @@ export default function EditorPage() {
   }, []);
 
   useEffect(() => {
-    if (!image || !canvasRef.current) return;
+    if (!image) return;
 
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const info = initializeCanvas(image);
+    if (!info) return;
 
-    const ctx = canvas?.getContext('2d');
-    if (!ctx) return;
-
-    canvas.width = image.width;
-    canvas.height = image.height;
-    ctx.drawImage(image, 0, 0);
-
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    setOriginalPixels(new Uint8ClampedArray(imageData.data));
+    setOriginalPixels(new Uint8ClampedArray(info.data));
   }, [image]);
 
   return (

@@ -13,7 +13,7 @@ export default function useCanvasUtils({ canvasRef }: useCanvasUtilsProps) {
     if (!ctx) return;
 
     return { canvas, ctx }
-  }
+  };
 
   const getCanvasImageData = () => {
     const info = getCanvas();
@@ -22,8 +22,21 @@ export default function useCanvasUtils({ canvasRef }: useCanvasUtilsProps) {
     const { canvas, ctx } = info;
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
-    return { ctx, imageData };
+    return { canvas, ctx, imageData };
   };
+
+  const initializeCanvas = (image: HTMLImageElement): ImageData | null => {
+    const info = getCanvas();
+    if (!info) return;
+
+    const { canvas, ctx } = info;
+
+    canvas.width = image.width;
+    canvas.height = image.height;
+    ctx.drawImage(image, 0, 0);
+
+    return ctx.getImageData(0, 0, canvas.width, canvas.height);
+  }
 
   const clearCanvas = () => {
     const info = getCanvas();
@@ -32,5 +45,5 @@ export default function useCanvasUtils({ canvasRef }: useCanvasUtilsProps) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   };
 
-  return { getCanvasImageData, clearCanvas };
+  return { getCanvasImageData, clearCanvas, initializeCanvas };
 }
