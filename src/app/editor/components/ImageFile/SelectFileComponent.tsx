@@ -1,25 +1,18 @@
 import React from "react";
+import useImageUtils from "@/app/hooks/useImageUtils";
 
 interface SelectFileProps {
-  setImage: (img: HTMLImageElement) => void;
+  setImage: (img: HTMLImageElement | null) => void;
 }
 
 export default function SelectFileComponent({ setImage }: SelectFileProps) {
+  const { loadImage } = useImageUtils();
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const url = URL.createObjectURL(file);
-    const img = new Image();
-    img.onload = () => {
-      setImage(img);
-      URL.revokeObjectURL(url);
-    };
-    img.onerror = () => {
-      console.error("이미지 로드 실패");
-      URL.revokeObjectURL(url);
-    };
-    img.src = url;
-  }
+
+    loadImage(file, setImage);
+  };
 
   return (
     <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
