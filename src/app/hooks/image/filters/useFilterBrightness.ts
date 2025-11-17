@@ -8,21 +8,25 @@ interface CanvasInfo {
 
 type GetCanvasImageData = () => CanvasInfo | null;
 
-export default function useFilterGrayscale() {
+export default function useFilterBrightness() {
   const { prepareFilter } = useFilterBase();
 
-  const applyGrayscale = (
+  const applyBrightness = (
     wasm: WasmModule | null,
     getCanvasImageData: GetCanvasImageData,
+    newValue: number,
+    originalPixels: Uint8ClampedArray<ArrayBuffer> | null,
   ) => {
     const info = prepareFilter(wasm, getCanvasImageData);
     if (!info) return;
 
     const { ctx, imageData } = info;
 
-    wasm?.grayscale(imageData.data);
+    if (originalPixels) imageData.data.set(originalPixels);
+
+    wasm?.brightness(imageData.data, newValue);
     ctx.putImageData(imageData, 0, 0);
   };
 
-  return { applyGrayscale };
+  return { applyBrightness };
 }

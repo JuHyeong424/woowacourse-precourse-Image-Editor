@@ -1,5 +1,5 @@
 import {WasmModule} from "@/lib/wasm-loader";
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import useFilterGrayscale from "@/app/hooks/image/filters/useFilterGrayscale";
 import useFilterResetColor from "@/app/hooks/image/filters/useFilterResetColor";
 
@@ -11,42 +11,53 @@ interface CanvasInfo {
 type GetCanvasImageData = () => CanvasInfo | null;
 
 interface GrayScaleComponentProps {
-  wasm: WasmModule | null;
-  image: HTMLImageElement | null;
-  canvasRef: React.RefObject<HTMLCanvasElement | null>;
-  originalPixels: ImageData["data"] | null;
-  getCanvasImageData: GetCanvasImageData;
+  disabled: boolean;
+  isGray: boolean;
+  setIsGray: (v: boolean) => void;
 }
 
-export default function GrayScaleComponent({ wasm, canvasRef, image, originalPixels, getCanvasImageData }: GrayScaleComponentProps) {
-  const { applyGrayscale } = useFilterGrayscale();
-  const { resetColor } = useFilterResetColor();
-  const [isChecked, setIsChecked] = useState(false);
-
-  useEffect(() => {
-    setIsChecked(false);
-  }, [image]);
-
+export default function GrayScaleComponent({disabled, isGray, setIsGray}: GrayScaleComponentProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const checked = e.target.checked;
-    setIsChecked(checked);
-    if (checked)  {
-      applyGrayscale(wasm, image, getCanvasImageData)
-    } else {
-      resetColor(getCanvasImageData, originalPixels);
-    }
+    setIsGray(e.target.checked);
   };
 
   return (
-    <div className="flex flex-row">
+    <div className="flex items-center gap-3">
       <input
         type="checkbox"
         id="gray"
-        checked={isChecked}
-        disabled={!wasm || !image}
+        checked={isGray}
+        disabled={disabled}
         onChange={handleChange}
+        className="peer hidden"
       />
-      <label htmlFor="gray">흑백 필터</label>
+
+      <label
+        htmlFor="gray"
+        className="
+          w-6 h-6 rounded-md border-2 border-gray-400
+          flex items-center justify-center
+          peer-checked:bg-blue-500 peer-checked:border-blue-500
+          peer-disabled:opacity-40
+          transition-all duration-200 cursor-pointer
+        "
+      >
+        <span
+          className={`
+            text-white text-sm
+            transition-opacity duration-200
+            ${isGray ? "opacity-100" : "opacity-0"}
+          `}
+        >
+          ✓
+        </span>
+      </label>
+
+      <span
+        className="text-xl cursor-pointer select-none"
+        onClick={() => !disabled && setIsGray(!isGray)}
+      >      흑백 필터
+    </span>
     </div>
   );
 }

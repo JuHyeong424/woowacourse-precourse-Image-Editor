@@ -4,6 +4,8 @@ import UploadedImageComponent from "@/app/editor/components/ImageFile/UploadedIm
 import GrayScaleComponent from "@/app/editor/components/GrayScaleComponent";
 import useImageEditor from "@/app/hooks/image/editor/useImageEditor";
 import useGetCanvasImageData from "@/app/hooks/canvas/useGetCanvasImageData";
+import BrightnessComponent from "@/app/editor/components/BrightnessComponent";
+import useImageFilterController from "@/app/hooks/image/filters/useImageFilterController";
 
 export default function EditorPage() {
   const {
@@ -16,23 +18,34 @@ export default function EditorPage() {
 
   const { getCanvasImageData } = useGetCanvasImageData({ canvasRef });
 
+  const {
+    filters,
+    setFilter,
+    disabled
+  } = useImageFilterController({
+    wasm,
+    image,
+    originalPixels,
+    getCanvasImageData
+  });
+
   return (
     <div className="flex flex-row bg-black text-white h-screen gap-6 p-12">
       <div className="flex flex-col p-4 border-2 min-w-[30%] h-full rounded-xl">
-        <h2>편집 도구</h2>
-
-        <GrayScaleComponent
-          wasm={wasm}
-          image={image}
-          canvasRef={canvasRef}
-          originalPixels={originalPixels}
-          getCanvasImageData={getCanvasImageData}
-        />
-
-        <span>밝기 조절: 0</span>
-        <input type="range" min="0" max="200" value={100} />
+        <h2 className="text-2xl text-center font-bold m-4">편집 도구</h2>
+        <div className="flex flex-col gap-4">
+          <GrayScaleComponent
+            disabled={disabled}
+            isGray={filters.isGray}
+            setIsGray={(v) => setFilter("isGray", v)}
+          />
+          <BrightnessComponent
+            disabled={disabled}
+            brightness={filters.brightness}
+            setBrightness={(v) => setFilter("brightness", v)}
+          />
+        </div>
       </div>
-
       <UploadedImageComponent canvasRef={canvasRef} image={image} setImage={setImage} />
     </div>
   );
