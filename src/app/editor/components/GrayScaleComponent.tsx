@@ -13,12 +13,11 @@ type GetCanvasImageData = () => CanvasInfo | null;
 interface GrayScaleComponentProps {
   wasm: WasmModule | null;
   image: HTMLImageElement | null;
-  canvasRef: React.RefObject<HTMLCanvasElement | null>;
   originalPixels: ImageData["data"] | null;
   getCanvasImageData: GetCanvasImageData;
 }
 
-export default function GrayScaleComponent({ wasm, canvasRef, image, originalPixels, getCanvasImageData }: GrayScaleComponentProps) {
+export default function GrayScaleComponent({ wasm, image, originalPixels, getCanvasImageData }: GrayScaleComponentProps) {
   const { applyGrayscale } = useFilterGrayscale();
   const { resetColor } = useFilterResetColor();
   const [isChecked, setIsChecked] = useState(false);

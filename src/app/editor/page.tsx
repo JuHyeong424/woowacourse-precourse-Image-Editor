@@ -4,6 +4,7 @@ import UploadedImageComponent from "@/app/editor/components/ImageFile/UploadedIm
 import GrayScaleComponent from "@/app/editor/components/GrayScaleComponent";
 import useImageEditor from "@/app/hooks/image/editor/useImageEditor";
 import useGetCanvasImageData from "@/app/hooks/canvas/useGetCanvasImageData";
+import BrightnessComponent from "@/app/editor/components/BrightnessComponent";
 
 export default function EditorPage() {
   const {
@@ -24,13 +25,17 @@ export default function EditorPage() {
         <GrayScaleComponent
           wasm={wasm}
           image={image}
-          canvasRef={canvasRef}
           originalPixels={originalPixels}
           getCanvasImageData={getCanvasImageData}
         />
 
-        <span>밝기 조절: 0</span>
-        <input type="range" min="0" max="200" value={100} />
+        <BrightnessComponent
+          wasm={wasm}
+          image={image}
+          originalPixels={originalPixels}
+          getCanvasImageData={getCanvasImageData}
+        />
+
       </div>
 
       <UploadedImageComponent canvasRef={canvasRef} image={image} setImage={setImage} />
