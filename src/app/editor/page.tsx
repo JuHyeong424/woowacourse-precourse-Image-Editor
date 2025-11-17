@@ -2,7 +2,7 @@
 
 import UploadedImageComponent from "@/app/editor/components/ImageFile/UploadedImageComponent";
 import GrayScaleComponent from "@/app/editor/components/GrayScaleComponent";
-import useImageEditor from "@/app/hooks/image/useImageEditor";
+import useImageEditor from "@/app/hooks/image/editor/useImageEditor";
 import useGetCanvasImageData from "@/app/hooks/cavas/useGetCanvasImageData";
 
 export default function EditorPage() {
