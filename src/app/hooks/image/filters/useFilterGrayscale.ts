@@ -7,7 +7,7 @@ interface CanvasInfo {
 
 type GetCanvasImageData = () => CanvasInfo | null;
 
-export default function useImageFilters() {
+export default function useFilterGrayscale() {
   const applyGrayscale = (
     wasm: WasmModule | null,
     image: HTMLImageElement | null,
@@ -24,18 +24,5 @@ export default function useImageFilters() {
     ctx.putImageData(imageData, 0, 0);
   };
 
-  const resetColor = (
-    getCanvasImageData: GetCanvasImageData,
-    originalPixels: ImageData["data"] | null,
-  ) => {
-    const info = getCanvasImageData();
-    if (!info) return;
-
-    const { ctx, imageData } = info;
-
-    imageData.data.set(originalPixels!);
-    ctx.putImageData(imageData, 0, 0);
-  };
-
-  return { applyGrayscale, resetColor };
+  return { applyGrayscale };
 }

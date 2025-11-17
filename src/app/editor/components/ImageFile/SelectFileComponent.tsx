@@ -1,5 +1,5 @@
 import React from "react";
-import useImageUtils from "@/app/hooks/useImageUtils";
+import useImageUtils from "@/app/hooks/image/useImageUtils";
 
 interface SelectFileProps {
   setImage: (img: HTMLImageElement | null) => void;

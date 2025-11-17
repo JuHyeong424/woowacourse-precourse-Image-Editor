@@ -1,6 +1,7 @@
 import {WasmModule} from "@/lib/wasm-loader";
 import React, {useEffect, useState} from "react";
-import useImageFilters from "@/app/hooks/useImageFilters";
+import useFilterGrayscale from "@/app/hooks/image/filters/useFilterGrayscale";
+import useFilterResetColor from "@/app/hooks/image/filters/useFilterResetColor";
 
 interface CanvasInfo {
   ctx: CanvasRenderingContext2D;
@@ -18,7 +19,8 @@ interface GrayScaleComponentProps {
 }
 
 export default function GrayScaleComponent({ wasm, canvasRef, image, originalPixels, getCanvasImageData }: GrayScaleComponentProps) {
-  const { applyGrayscale, resetColor } = useImageFilters();
+  const { applyGrayscale } = useFilterGrayscale();
+  const { resetColor } = useFilterResetColor();
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
