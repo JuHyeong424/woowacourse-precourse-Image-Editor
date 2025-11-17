@@ -24,7 +24,7 @@ export default function BrightnessComponent({ wasm, image, originalPixels, getCa
     setValue(100);
   }, [image]);
 
-  const handleBrightness = (e) => {
+  const handleBrightness = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(e.target.value);
     setValue(newValue);
     applyBrightness(wasm, getCanvasImageData, newValue, originalPixels);

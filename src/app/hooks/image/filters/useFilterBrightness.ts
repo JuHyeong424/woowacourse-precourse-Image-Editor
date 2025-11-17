@@ -12,7 +12,7 @@ export default function useFilterBrightness() {
     wasm: WasmModule | null,
     getCanvasImageData: GetCanvasImageData,
     newValue: number,
-    originalPixels: Uint8ClampedArray | null,
+    originalPixels: Uint8ClampedArray<ArrayBuffer> | null,
   ) => {
     if (!wasm) return;
 
