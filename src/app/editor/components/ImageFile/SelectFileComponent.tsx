@@ -1,18 +1,18 @@
 import React from "react";
+import useLoadImage from "@/app/hooks/image/useLoadImage";
 
 interface SelectFileProps {
-  setImage: (img: HTMLImageElement) => void;
+  setImage: (img: HTMLImageElement | null) => void;
 }
 
 export default function SelectFileComponent({ setImage }: SelectFileProps) {
+  const { loadImage } = useLoadImage();
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target?.files[0]) {
-      const url = URL.createObjectURL(e.target?.files[0]);
-      const img = new Image();
-      img.src = url;
-      img.onload = () => setImage(img);
-    }
-  }
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    loadImage(file, setImage);
+  };
 
   return (
     <div className="absolute inset-0 flex flex-col items-center justify-center z-10">

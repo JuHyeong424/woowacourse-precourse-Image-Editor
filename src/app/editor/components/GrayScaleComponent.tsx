@@ -1,40 +1,40 @@
 import {WasmModule} from "@/lib/wasm-loader";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import useFilterGrayscale from "@/app/hooks/image/filters/useFilterGrayscale";
+import useFilterResetColor from "@/app/hooks/image/filters/useFilterResetColor";
+
+interface CanvasInfo {
+  ctx: CanvasRenderingContext2D;
+  imageData: ImageData;
+}
+
+type GetCanvasImageData = () => CanvasInfo | null;
 
 interface GrayScaleComponentProps {
   wasm: WasmModule | null;
   image: HTMLImageElement | null;
   canvasRef: React.RefObject<HTMLCanvasElement | null>;
   originalPixels: ImageData["data"] | null;
+  getCanvasImageData: GetCanvasImageData;
 }
 
-export default function GrayScaleComponent({ wasm, canvasRef, image, originalPixels}: GrayScaleComponentProps) {
+export default function GrayScaleComponent({ wasm, canvasRef, image, originalPixels, getCanvasImageData }: GrayScaleComponentProps) {
+  const { applyGrayscale } = useFilterGrayscale();
+  const { resetColor } = useFilterResetColor();
+  const [isChecked, setIsChecked] = useState(false);
 
-  const applyGrayscale = () => {
-    if (!wasm || !canvasRef.current || !image) return;
+  useEffect(() => {
+    setIsChecked(false);
+  }, [image]);
 
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    wasm.grayscale(imageData.data);
-
-    ctx.putImageData(imageData, 0, 0);
-  };
-
-  const resetColor = () => {
-    const canvas = canvasRef.current;
-    if (!canvas || !originalPixels) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
-    imageData.data.set(originalPixels!);
-    ctx.putImageData(imageData, 0, 0);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = e.target.checked;
+    setIsChecked(checked);
+    if (checked)  {
+      applyGrayscale(wasm, image, getCanvasImageData)
+    } else {
+      resetColor(getCanvasImageData, originalPixels);
+    }
   };
 
   return (
@@ -42,14 +42,9 @@ export default function GrayScaleComponent({ wasm, canvasRef, image, originalPix
       <input
         type="checkbox"
         id="gray"
+        checked={isChecked}
         disabled={!wasm || !image}
-        onChange={(e) => {
-          if (e.target.checked) {
-            applyGrayscale();
-          } else {
-            resetColor();
-          }
-        }}
+        onChange={handleChange}
       />
       <label htmlFor="gray">흑백 필터</label>
     </div>
