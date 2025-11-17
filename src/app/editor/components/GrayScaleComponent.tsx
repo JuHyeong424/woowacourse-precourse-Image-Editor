@@ -15,12 +15,13 @@ interface GrayScaleComponentProps {
   image: HTMLImageElement | null;
   originalPixels: ImageData["data"] | null;
   getCanvasImageData: GetCanvasImageData;
+  isChecked: boolean;
+  setIsChecked: (v: boolean) => void;
 }
 
-export default function GrayScaleComponent({ wasm, image, originalPixels, getCanvasImageData }: GrayScaleComponentProps) {
+export default function GrayScaleComponent({ wasm, image, originalPixels, getCanvasImageData, isChecked, setIsChecked }: GrayScaleComponentProps) {
   const { applyGrayscale } = useFilterGrayscale();
   const { resetColor } = useFilterResetColor();
-  const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
     setIsChecked(false);

@@ -5,8 +5,10 @@ import GrayScaleComponent from "@/app/editor/components/GrayScaleComponent";
 import useImageEditor from "@/app/hooks/image/editor/useImageEditor";
 import useGetCanvasImageData from "@/app/hooks/canvas/useGetCanvasImageData";
 import BrightnessComponent from "@/app/editor/components/BrightnessComponent";
+import {useState} from "react";
 
 export default function EditorPage() {
+  const [isChecked, setIsChecked] = useState(false);
   const {
     wasm,
     image,
@@ -27,6 +29,8 @@ export default function EditorPage() {
           image={image}
           originalPixels={originalPixels}
           getCanvasImageData={getCanvasImageData}
+          isChecked={isChecked}
+          setIsChecked={setIsChecked}
         />
 
         <BrightnessComponent
@@ -34,6 +38,7 @@ export default function EditorPage() {
           image={image}
           originalPixels={originalPixels}
           getCanvasImageData={getCanvasImageData}
+          setIsChecked={setIsChecked}
         />
 
       </div>

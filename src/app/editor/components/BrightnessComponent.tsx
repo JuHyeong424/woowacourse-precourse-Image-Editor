@@ -14,9 +14,10 @@ interface BrightnessComponentProps {
   image: HTMLImageElement | null;
   originalPixels: ImageData["data"] | null;
   getCanvasImageData: GetCanvasImageData;
+  setIsChecked: (v: boolean) => void;
 }
 
-export default function BrightnessComponent({ wasm, image, originalPixels, getCanvasImageData }: BrightnessComponentProps) {
+export default function BrightnessComponent({ wasm, image, originalPixels, getCanvasImageData, setIsChecked }: BrightnessComponentProps) {
   const { applyBrightness } = useFilterBrightness();
   const [value, setValue] = useState(100);
 
@@ -25,6 +26,8 @@ export default function BrightnessComponent({ wasm, image, originalPixels, getCa
   }, [image]);
 
   const handleBrightness = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsChecked(false);
+
     const newValue = Number(e.target.value);
     setValue(newValue);
     applyBrightness(wasm, getCanvasImageData, newValue, originalPixels);
