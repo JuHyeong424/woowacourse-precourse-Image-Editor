@@ -11,32 +11,14 @@ interface CanvasInfo {
 type GetCanvasImageData = () => CanvasInfo | null;
 
 interface GrayScaleComponentProps {
-  wasm: WasmModule | null;
-  image: HTMLImageElement | null;
-  originalPixels: ImageData["data"] | null;
-  getCanvasImageData: GetCanvasImageData;
-  setOriginalPixels: React.Dispatch<React.SetStateAction<ImageData["data"] | null>>;
-  isChecked: boolean;
-  setIsChecked: (v: boolean) => void;
+  disabled: boolean;
+  isGray: boolean;
+  setIsGray: (v: boolean) => void;
 }
 
-export default function GrayScaleComponent({ wasm, image, originalPixels, setOriginalPixels, getCanvasImageData, isChecked, setIsChecked }: GrayScaleComponentProps) {
-  const { applyGrayscale } = useFilterGrayscale();
-  const { resetColor } = useFilterResetColor();
-
-  useEffect(() => {
-    setIsChecked(false);
-  }, [image]);
-
+export default function GrayScaleComponent({disabled, isGray, setIsGray}: GrayScaleComponentProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const checked = e.target.checked;
-    setIsChecked(checked);
-
-    if (checked)  {
-      applyGrayscale(wasm, getCanvasImageData);
-    } else {
-      resetColor(getCanvasImageData, originalPixels);
-    }
+    setIsGray(e.target.checked);
   };
 
   return (
@@ -44,8 +26,8 @@ export default function GrayScaleComponent({ wasm, image, originalPixels, setOri
       <input
         type="checkbox"
         id="gray"
-        checked={isChecked}
-        disabled={!wasm || !image}
+        checked={isGray}
+        disabled={disabled}
         onChange={handleChange}
         className="peer hidden"
       />
@@ -53,16 +35,28 @@ export default function GrayScaleComponent({ wasm, image, originalPixels, setOri
       <label
         htmlFor="gray"
         className="
-        w-6 h-6 rounded-md border-2 border-gray-400
-        flex items-center justify-center
-        peer-checked:bg-blue-500 peer-checked:border-blue-500
-        peer-disabled:opacity-40
-        transition-all duration-200 cursor-pointer
-      "
-      />
+          w-6 h-6 rounded-md border-2 border-gray-400
+          flex items-center justify-center
+          peer-checked:bg-blue-500 peer-checked:border-blue-500
+          peer-disabled:opacity-40
+          transition-all duration-200 cursor-pointer
+        "
+      >
+        <span
+          className={`
+            text-white text-sm
+            transition-opacity duration-200
+            ${isGray ? "opacity-100" : "opacity-0"}
+          `}
+        >
+          ✓
+        </span>
+      </label>
 
-      <span className="text-xl cursor-pointer select-none">
-      흑백 필터
+      <span
+        className="text-xl cursor-pointer select-none"
+        onClick={() => !disabled && setIsGray(!isGray)}
+      >      흑백 필터
     </span>
     </div>
   );
