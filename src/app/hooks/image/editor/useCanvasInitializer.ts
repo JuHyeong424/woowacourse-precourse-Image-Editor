@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import useInitializeCanvas from "@/app/hooks/cavas/useInitializeCanvas";
+import useInitializeCanvas from "@/app/hooks/canvas/useInitializeCanvas";
 
 interface useCanvasInitializerProps {
   canvasRef: React.RefObject<HTMLCanvasElement | null>;

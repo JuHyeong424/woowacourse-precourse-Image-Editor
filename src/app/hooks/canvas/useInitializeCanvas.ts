@@ -1,4 +1,4 @@
-import useGetCanvas from "@/app/hooks/cavas/useGetCanvas";
+import useGetCanvas from "@/app/hooks/canvas/useGetCanvas";
 import React from "react";
 
 interface useInitializeCanvasProps {

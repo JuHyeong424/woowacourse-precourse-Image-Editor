@@ -1,4 +1,4 @@
-export default function useImageUtils() {
+export default function useLoadImage() {
   const loadImage = (file: File, setImage: (img: HTMLImageElement) => void) => {
     const url = URL.createObjectURL(file);
     const img = new Image();
