@@ -17,8 +17,14 @@ interface BrightnessComponentProps {
   setIsChecked: (v: boolean) => void;
 }
 
-export default function BrightnessComponent({ wasm, image, originalPixels, getCanvasImageData, setIsChecked }: BrightnessComponentProps) {
-  const { applyBrightness } = useFilterBrightness();
+export default function BrightnessComponent({
+                                              wasm,
+                                              image,
+                                              originalPixels,
+                                              getCanvasImageData,
+                                              setIsChecked
+                                            }: BrightnessComponentProps) {
+  const {applyBrightness} = useFilterBrightness();
   const [value, setValue] = useState(100);
 
   useEffect(() => {
@@ -34,8 +40,12 @@ export default function BrightnessComponent({ wasm, image, originalPixels, getCa
   }
 
   return (
-    <div>
-      <label>밝기 조절: {value}</label>
+    <div className="flex flex-col gap-4 mt-6">
+      <div className="text-xl font-semibold text-white flex items-center gap-2">
+        <span>밝기 조절</span>
+        <span className="text-blue-400">{value}</span>
+      </div>
+
       <input
         type="range"
         min="0"
@@ -43,8 +53,8 @@ export default function BrightnessComponent({ wasm, image, originalPixels, getCa
         value={value}
         onChange={handleBrightness}
         disabled={!wasm || !image}
+        className="brightnessSlider"
       />
-
     </div>
   )
 }

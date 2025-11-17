@@ -30,3 +30,38 @@ body {
     @apply bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500;
   }
 }
+
+.brightnessSlider {
+  @apply
+  w-full h-2 rounded-lg appearance-none cursor-pointer
+  bg-gradient-to-r from-gray-500 to-blue-500
+  disabled:opacity-40 disabled:cursor-not-allowed
+}
+
+.brightnessSlider::-webkit-slider-thumb {
+  @apply
+  appearance-none w-5 h-5 rounded-full bg-white shadow-md
+  transition-all duration-150;
+}
+
+.brightnessSlider::-webkit-slider-thumb:hover {
+  @apply scale-110
+}
+
+.brightnessSlider::-webkit-slider-thumb:active {
+  @apply scale-125
+}
+
+.brightnessSlider::-moz-range-thumb {
+  @apply
+  w-5 h-5 rounded-full bg-white shadow-md
+  transition-all duration-150;
+}
+
+.brightnessSlider::-moz-range-thumb:hover {
+  @apply scale-110;
+}
+
+.brightnessSlider::-moz-range-thumb:active {
+  @apply scale-125;
+}

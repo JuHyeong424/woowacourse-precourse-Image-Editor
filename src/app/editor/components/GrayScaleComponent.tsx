@@ -1,5 +1,5 @@
 import {WasmModule} from "@/lib/wasm-loader";
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import useFilterGrayscale from "@/app/hooks/image/filters/useFilterGrayscale";
 import useFilterResetColor from "@/app/hooks/image/filters/useFilterResetColor";
 
@@ -38,15 +38,44 @@ export default function GrayScaleComponent({ wasm, image, originalPixels, getCan
   };
 
   return (
-    <div className="flex flex-row">
+    <div className="flex items-center gap-3">
       <input
         type="checkbox"
         id="gray"
         checked={isChecked}
         disabled={!wasm || !image}
         onChange={handleChange}
+        className="peer hidden"
       />
-      <label htmlFor="gray">흑백 필터</label>
+
+      <label
+        htmlFor="gray"
+        className="
+        w-6 h-6 rounded-md border-2 border-gray-400
+        flex items-center justify-center
+        peer-checked:bg-blue-500 peer-checked:border-blue-500
+        peer-disabled:opacity-40
+        transition-all duration-200 cursor-pointer
+      "
+      >
+        <svg
+          className="
+          w-4 h-4 text-white opacity-0 scale-50
+          peer-checked:opacity-100 peer-checked:scale-100
+          transition-all duration-200
+        "
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="3"
+          viewBox="0 0 24 24"
+        >
+          <path d="M5 13l4 4L19 7" />
+        </svg>
+      </label>
+
+      <span className="text-xl cursor-pointer select-none" onClick={() => setIsChecked(!isChecked)}>
+      흑백 필터
+    </span>
     </div>
   );
 }
