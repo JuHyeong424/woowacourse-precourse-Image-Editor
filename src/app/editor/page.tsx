@@ -5,8 +5,7 @@ import GrayScaleComponent from "@/app/editor/components/GrayScaleComponent";
 import useImageEditor from "@/app/hooks/image/editor/useImageEditor";
 import useGetCanvasImageData from "@/app/hooks/canvas/useGetCanvasImageData";
 import BrightnessComponent from "@/app/editor/components/BrightnessComponent";
-import {useCallback, useEffect, useState} from "react";
-import useImageFilters from "@/app/hooks/image/filters/useImageFilters";
+import useImageFilterController from "@/app/hooks/image/editor/useImageFilterController";
 
 export default function EditorPage() {
   const {
@@ -18,29 +17,17 @@ export default function EditorPage() {
   } = useImageEditor();
 
   const { getCanvasImageData } = useGetCanvasImageData({ canvasRef });
-  const { applyBrightness, applyGrayscale, resetColor } = useImageFilters();
 
-  const [brightness, setBrightness] = useState(100);
-  const [isGray, setIsGray] = useState(false);
-
-  useEffect(() => {
-    setBrightness(100);
-    setIsGray(false);
-  }, [image]);
-
-  const applyAllFilters = useCallback(() => {
-    if (!wasm || !image || !originalPixels) return;
-
-    resetColor(getCanvasImageData, originalPixels);
-
-    if (brightness !== 100) applyBrightness(wasm, getCanvasImageData, brightness, originalPixels);
-
-    if (isGray) applyGrayscale(wasm, getCanvasImageData);
-  }, [wasm, image, originalPixels, brightness, isGray, getCanvasImageData, resetColor, applyBrightness, applyGrayscale]);
-
-  useEffect(() => {
-    applyAllFilters();
-  }, [brightness, isGray, applyAllFilters]);
+  const {
+    filters,
+    setFilter,
+    disabled
+  } = useImageFilterController({
+    wasm,
+    image,
+    originalPixels,
+    getCanvasImageData
+  });
 
   return (
     <div className="flex flex-row bg-black text-white h-screen gap-6 p-12">
@@ -48,14 +35,14 @@ export default function EditorPage() {
         <h2 className="text-2xl text-center font-bold m-4">편집 도구</h2>
         <div className="flex flex-col gap-4">
           <GrayScaleComponent
-            disabled={!wasm || !image}
-            isGray={isGray}
-            setIsGray={setIsGray}
+            disabled={disabled}
+            isGray={filters.isGray}
+            setIsGray={(v) => setFilter("isGray", v)}
           />
           <BrightnessComponent
-            disabled={!wasm || !image}
-            brightness={brightness}
-            setBrightness={setBrightness}
+            disabled={disabled}
+            brightness={filters.brightness}
+            setBrightness={(v) => setFilter("brightness", v)}
           />
         </div>
       </div>
