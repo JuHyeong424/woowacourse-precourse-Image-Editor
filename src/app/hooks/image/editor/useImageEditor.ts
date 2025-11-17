@@ -15,6 +15,7 @@ export default function useImageEditor() {
     image,
     setImage,
     originalPixels,
+    setOriginalPixels,
     canvasRef
   };
 }

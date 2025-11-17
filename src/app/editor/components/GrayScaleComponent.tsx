@@ -15,11 +15,12 @@ interface GrayScaleComponentProps {
   image: HTMLImageElement | null;
   originalPixels: ImageData["data"] | null;
   getCanvasImageData: GetCanvasImageData;
+  setOriginalPixels: React.Dispatch<React.SetStateAction<ImageData["data"] | null>>;
   isChecked: boolean;
   setIsChecked: (v: boolean) => void;
 }
 
-export default function GrayScaleComponent({ wasm, image, originalPixels, getCanvasImageData, isChecked, setIsChecked }: GrayScaleComponentProps) {
+export default function GrayScaleComponent({ wasm, image, originalPixels, setOriginalPixels, getCanvasImageData, isChecked, setIsChecked }: GrayScaleComponentProps) {
   const { applyGrayscale } = useFilterGrayscale();
   const { resetColor } = useFilterResetColor();
 
@@ -30,8 +31,14 @@ export default function GrayScaleComponent({ wasm, image, originalPixels, getCan
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
     setIsChecked(checked);
+
     if (checked)  {
-      applyGrayscale(wasm, image, getCanvasImageData)
+      const info = getCanvasImageData();
+      if (info) {
+        setOriginalPixels(new Uint8ClampedArray(info.imageData.data));
+      }
+
+      applyGrayscale(wasm, getCanvasImageData);
     } else {
       resetColor(getCanvasImageData, originalPixels);
     }
@@ -57,23 +64,9 @@ export default function GrayScaleComponent({ wasm, image, originalPixels, getCan
         peer-disabled:opacity-40
         transition-all duration-200 cursor-pointer
       "
-      >
-        <svg
-          className="
-          w-4 h-4 text-white opacity-0 scale-50
-          peer-checked:opacity-100 peer-checked:scale-100
-          transition-all duration-200
-        "
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="3"
-          viewBox="0 0 24 24"
-        >
-          <path d="M5 13l4 4L19 7" />
-        </svg>
-      </label>
+      />
 
-      <span className="text-xl cursor-pointer select-none" onClick={() => setIsChecked(!isChecked)}>
+      <span className="text-xl cursor-pointer select-none">
       흑백 필터
     </span>
     </div>

@@ -17,13 +17,7 @@ interface BrightnessComponentProps {
   setIsChecked: (v: boolean) => void;
 }
 
-export default function BrightnessComponent({
-                                              wasm,
-                                              image,
-                                              originalPixels,
-                                              getCanvasImageData,
-                                              setIsChecked
-                                            }: BrightnessComponentProps) {
+export default function BrightnessComponent({ wasm, image, originalPixels, getCanvasImageData, setIsChecked }: BrightnessComponentProps) {
   const {applyBrightness} = useFilterBrightness();
   const [value, setValue] = useState(100);
 

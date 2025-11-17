@@ -13,8 +13,7 @@ export default function useFilterGrayscale() {
 
   const applyGrayscale = (
     wasm: WasmModule | null,
-    image: HTMLImageElement | null,
-    getCanvasImageData: GetCanvasImageData
+    getCanvasImageData: GetCanvasImageData,
   ) => {
     const info = prepareFilter(wasm, getCanvasImageData);
     if (!info) return;

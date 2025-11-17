@@ -14,6 +14,7 @@ export default function EditorPage() {
     image,
     setImage,
     originalPixels,
+    setOriginalPixels,
     canvasRef
   } = useImageEditor();
 
@@ -28,6 +29,7 @@ export default function EditorPage() {
             wasm={wasm}
             image={image}
             originalPixels={originalPixels}
+            setOriginalPixels={setOriginalPixels}
             getCanvasImageData={getCanvasImageData}
             isChecked={isChecked}
             setIsChecked={setIsChecked}
