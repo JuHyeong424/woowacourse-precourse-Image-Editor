@@ -33,11 +33,6 @@ export default function GrayScaleComponent({ wasm, image, originalPixels, setOri
     setIsChecked(checked);
 
     if (checked)  {
-      const info = getCanvasImageData();
-      if (info) {
-        setOriginalPixels(new Uint8ClampedArray(info.imageData.data));
-      }
-
       applyGrayscale(wasm, getCanvasImageData);
     } else {
       resetColor(getCanvasImageData, originalPixels);
