@@ -6,30 +6,20 @@ export type GetCanvasImageData = () => {
   canvas: HTMLCanvasElement;
 } | null;
 
-export interface UseAllFiltersProps {
-  wasm: WasmModule | null;
-  image: HTMLImageElement | null;
-  originalPixels: ImageData["data"] | null;
+export type ApplyBrightness = (
+  wasm: WasmModule | null,
+  getCanvasImageData: GetCanvasImageData,
+  value: number,
+  originalPixels: ImageData["data"] | null
+) => void;
 
-  brightness: number;
-  isGray: boolean;
+export type ApplyGrayscale = (
+  wasm: WasmModule | null,
+  getCanvasImageData: GetCanvasImageData
+) => void;
 
-  resetColor: (
-    getter: GetCanvasImageData,
-    originalPixels: ImageData["data"] | null
-  ) => void;
+type ResetColor = (
+  getCanvasImageData: GetCanvasImageData,
+  originalPixels: ImageData["data"] | null
+) => void;
 
-  applyBrightness: (
-    wasm: WasmModule,
-    getter: GetCanvasImageData,
-    brightness: number,
-    originalPixels: ImageData["data"] | null
-  ) => void;
-
-  applyGrayscale: (
-    wasm: WasmModule,
-    getter: GetCanvasImageData
-  ) => void;
-
-  getCanvasImageData: GetCanvasImageData;
-}
