@@ -1,7 +1,7 @@
 import React from "react";
 import {IoMdCloseCircle} from "react-icons/io";
 import SelectFileComponent from "@/app/editor/components/ImageFile/SelectFileComponent";
-import useCanvasUtils from "@/app/hooks/useCanvasUtils";
+import useClearCanvas from "@/app/hooks/cavas/useClearCanvas";
 
 interface UploadedImageComponentProps {
   canvasRef: React.RefObject<HTMLCanvasElement | null>;
@@ -10,7 +10,7 @@ interface UploadedImageComponentProps {
 }
 
 export default function UploadedImageComponent({canvasRef, image, setImage}: UploadedImageComponentProps) {
-  const { clearCanvas } = useCanvasUtils({ canvasRef });
+  const { clearCanvas } = useClearCanvas({ canvasRef });
   const hasImage = !!image;
 
   const deleteImage = () => {

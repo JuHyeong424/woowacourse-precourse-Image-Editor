@@ -1,13 +1,13 @@
 import {useEffect, useRef, useState} from "react";
 import {WasmModule} from "@/lib/wasm-loader";
-import useCanvasUtils from "@/app/hooks/useCanvasUtils";
+import useInitializeCanvas from "@/app/hooks/cavas/useInitializeCanvas";
 
 export default function useImageEditor() {
   const [wasm, setWasm] = useState<WasmModule | null>(null);
   const [image, setImage] = useState<HTMLImageElement | null>(null);
   const [originalPixels, setOriginalPixels] = useState<ImageData["data"]  | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const { initializeCanvas } = useCanvasUtils({ canvasRef });
+  const { initializeCanvas } = useInitializeCanvas({ canvasRef });
 
   useEffect(() => {
     const initWasm = async () => {
