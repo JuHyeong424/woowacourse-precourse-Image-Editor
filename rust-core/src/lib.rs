@@ -31,7 +31,7 @@ pub fn contrast(data: &mut [u8], value: f32) {
 pub fn saturation(data: &mut [u8], value: f32) { saturation::saturation(data, value) }
 
 #[wasm_bindgen]
-pub fn exposure(data: &mut [u8], value: f32) { saturation::saturation(data, value) }
+pub fn exposure(data: &mut [u8], value: f32) { exposure::exposure(data, value) }
 
 #[wasm_bindgen]
 pub fn invert(data: &mut [u8]) { invert::invert(data) }
@@ -49,5 +49,5 @@ pub fn hue(data: &mut [u8], degrees: f32) { hue::hue(data, degrees) }
 pub fn temperature(data: &mut [u8], temp: f32) { temperature::temperature(data, temp) }
 
 #[wasm_bindgen]
-pub fn tint(data: &mut [u8], tint: f32) { temperature::temperature(data, tint) }
+pub fn tint(data: &mut [u8], tint: f32) { tint::tint(data, tint) }
 
