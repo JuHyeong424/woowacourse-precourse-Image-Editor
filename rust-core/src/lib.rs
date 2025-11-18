@@ -10,8 +10,11 @@ pub fn grayscale(data: &mut [u8]) {
 }
 
 #[wasm_bindgen]
-pub fn brightness(data: &mut [u8]) {
-    brightness::brightness(data)
+pub fn brightness(data: &mut [u8], value: f32) {
+    brightness::brightness(data, value)
 }
 
-pub use contrast::contrast;
+#[wasm_bindgen]
+pub fn contrast(data: &mut [u8], value: f32) {
+    contrast::contrast(data, value)
+}

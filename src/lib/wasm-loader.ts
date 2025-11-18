@@ -1,11 +1,13 @@
 import type {
   grayscale as GrayscaleType,
-  brightness as BrightnessType
+  brightness as BrightnessType,
+  contrast as ContrastType,
 } from '@/wasm/rust_core';
 
 export interface WasmModule {
   grayscale: typeof GrayscaleType;
   brightness: typeof BrightnessType;
+  contrast: typeof ContrastType;
 }
 
 export const loadWASM = async (): Promise<WasmModule> => {
@@ -13,12 +15,14 @@ export const loadWASM = async (): Promise<WasmModule> => {
     return {
       grayscale: () => {},
       brightness: () => {},
+      contrast: () => {},
     };
   }
   const wasm = await import('@/wasm/rust_core');
   await wasm.default();
   return {
     grayscale: wasm.grayscale,
-    brightness: wasm.brightness
+    brightness: wasm.brightness,
+    contrast: wasm.contrast,
   };
 }
