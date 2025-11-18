@@ -8,6 +8,8 @@ import SliderFilterComponent from "@/app/editor/components/SliderFilterComponent
 import ButtonFilterComponent from "@/app/editor/components/ButtonFilterComponent";
 
 type FilterState = {
+  tint: number;
+  temperature: number;
   hue: number;
   sharpen: boolean;
   blur: boolean;
@@ -20,7 +22,7 @@ type FilterState = {
 };
 
 type BooleanFilterKey = "invert" | "isGray" | "blur" | "sharpen";
-type NumberFilterKey = | "exposure" | "saturation" | "contrast" | "brightness" | "hue";
+type NumberFilterKey = | "exposure" | "saturation" | "contrast" | "brightness" | "hue" | "temperature" | "tint";
 
 export default function EditorPage() {
   const {
@@ -44,8 +46,10 @@ export default function EditorPage() {
     { key: "brightness", label: "밝기 조절", min: 0, max: 200 },
     { key: "contrast", label: "대비 조절", min: 0, max: 200 },
     { key: "saturation", label: "채도 조절", min: 0, max: 200 },
-    { key: "exposure", label: "감마 조절", min: 0, max: 200 },
+    { key: "exposure", label: "감마 조절", min: -100, max: 100 },
     { key: "hue", label: "색조 회전", min: 0, max: 360 },
+    { key: "temperature", label: "색온도", min: -100, max: 100 },
+    { key: "tint", label: "색감", min: -100, max: 100 },
   ];
 
   const buttonFilters: { key: BooleanFilterKey; label: string; id: string; }[] = [
@@ -57,7 +61,7 @@ export default function EditorPage() {
 
   return (
     <div className="flex flex-row bg-black text-white h-screen gap-6 p-12">
-      <div className="flex flex-col p-4 border-2 min-w-[30%] h-full rounded-xl">
+      <div className="flex flex-col p-4 border-2 min-w-[30%] h-full rounded-xl overflow-y-auto overlay-scroll">
         <h2 className="text-2xl text-center font-bold m-4">편집 도구</h2>
         <div className="flex flex-col gap-4">
           {buttonFilters.map((filter) => (

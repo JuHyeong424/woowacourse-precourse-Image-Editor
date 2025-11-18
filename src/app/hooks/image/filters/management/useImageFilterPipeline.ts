@@ -5,12 +5,14 @@ import {
   ApplyBrightness,
   ApplyContrast, ApplyExposure,
   ApplyGrayscale, ApplyHue, ApplyInvert,
-  ApplySaturation, ApplySharpen,
+  ApplySaturation, ApplySharpen, ApplyTemperature, ApplyTint,
   GetCanvasImageData,
   ResetColor
 } from "@/app/types/filterTypes";
 
 interface Filters {
+  tint: number;
+  temperature: number;
   hue: number;
   sharpen: boolean;
   blur: boolean;
@@ -27,6 +29,8 @@ interface useImageFilterPipelineProps {
   image: HTMLImageElement | null;
   originalPixels: ImageData["data"] | null;
   getCanvasImageData: GetCanvasImageData;
+  applyTint: ApplyTint;
+  applyTemperature: ApplyTemperature;
   applyHue: ApplyHue;
   applySharpen: ApplySharpen;
   applyBlur: ApplyBlur;
@@ -44,6 +48,8 @@ export default function useImageFilterPipeline({
     image,
     originalPixels,
     getCanvasImageData,
+    applyTint,
+    applyTemperature,
     applyHue,
     applySharpen,
     applyBlur,
@@ -72,12 +78,20 @@ export default function useImageFilterPipeline({
       applySaturation(wasm, getCanvasImageData, filters.saturation);
     }
 
-    if (filters.exposure !== 100) {
+    if (filters.exposure !== 0) {
       applyExposure(wasm, getCanvasImageData, filters.exposure);
     }
 
     if (filters.hue !== 0) {
       applyHue(wasm, getCanvasImageData, filters.hue);
+    }
+
+    if (filters.temperature !== 0) {
+      applyTemperature(wasm, getCanvasImageData, filters.temperature);
+    }
+
+    if (filters.tint !== 0) {
+      applyTint(wasm, getCanvasImageData, filters.tint);
     }
 
     if (filters.invert) {
@@ -100,6 +114,7 @@ export default function useImageFilterPipeline({
     image,
     originalPixels,
     getCanvasImageData,
+    applyTint,
     applySharpen,
     applyBlur,
     applyInvert,

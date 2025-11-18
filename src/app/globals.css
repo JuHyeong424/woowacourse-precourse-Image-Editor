@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@import "tailwindcss";
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -66,4 +64,11 @@ body {
 
 .slider::-moz-range-thumb:active {
   @apply scale-125;
+}
+
+@layer utilities {
+  .overlay-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
 }

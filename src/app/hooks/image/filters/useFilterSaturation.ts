@@ -8,7 +8,7 @@ export default function useFilterSaturation() {
   const applySaturation = (
     wasm: WasmModule | null,
     getCanvasImageData: GetCanvasImageData,
-    newValue: number,
+    value: number,
   ) => {
     const info = prepareFilter(wasm, getCanvasImageData);
     if (!info) return;
@@ -16,7 +16,7 @@ export default function useFilterSaturation() {
     const { ctx, imageData } = info;
     const uint8View = new Uint8Array(imageData.data.buffer);
 
-    wasm?.saturation(uint8View, newValue / 100);
+    wasm?.saturation(uint8View, value / 100);
     ctx.putImageData(imageData, 0, 0);
   }
 
