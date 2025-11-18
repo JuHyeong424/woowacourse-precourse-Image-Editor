@@ -7,6 +7,7 @@ import useGetCanvasImageData from "@/app/hooks/canvas/useGetCanvasImageData";
 import BrightnessComponent from "@/app/editor/components/BrightnessComponent";
 import useImageFilterController from "@/app/hooks/image/filters/management/useImageFilterController";
 import ContrastComponent from "@/app/editor/components/ContrastComponent";
+import SaturationComponent from "@/app/editor/components/SaturationComponent";
 
 export default function EditorPage() {
   const {
@@ -49,6 +50,11 @@ export default function EditorPage() {
             disabled={disabled}
             contrast={filters.contrast}
             setContrast={(v) => setFilter("contrast", v)}
+          />
+          <SaturationComponent
+            disabled={disabled}
+            saturation={filters.saturation}
+            setSaturation={(v) => setFilter("saturation", v)}
           />
         </div>
       </div>

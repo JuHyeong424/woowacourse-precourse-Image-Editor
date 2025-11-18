@@ -3,6 +3,7 @@ use wasm_bindgen::prelude::*;
 mod brightness;
 mod grayscale;
 mod contrast;
+mod saturation;
 
 #[wasm_bindgen]
 pub fn grayscale(data: &mut [u8]) {
@@ -18,3 +19,6 @@ pub fn brightness(data: &mut [u8], value: f32) {
 pub fn contrast(data: &mut [u8], value: f32) {
     contrast::contrast(data, value)
 }
+
+#[wasm_bindgen]
+pub fn saturation(data: &mut [u8], value: f32) { saturation::saturation(data, value) }
