@@ -1,9 +1,9 @@
-import useImageFilters from "@/app/hooks/image/filters/useImageFilters";
+import useImageFilters from "@/app/hooks/image/filters/management/useImageFilters";
 import {WasmModule} from "@/lib/wasm-loader";
 import {GetCanvasImageData} from "@/app/types/filterTypes";
 import {useEffect} from "react";
-import useImageFilterState from "@/app/hooks/image/filters/useImageFilterState";
-import useImageFilterPipeline from "@/app/hooks/image/filters/useImageFilterPipeline";
+import useImageFilterState from "@/app/hooks/image/filters/management/useImageFilterState";
+import useImageFilterPipeline from "@/app/hooks/image/filters/management/useImageFilterPipeline";
 
 interface UseImageFilterControllerProps {
   wasm: WasmModule | null;

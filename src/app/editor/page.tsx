@@ -5,7 +5,7 @@ import GrayScaleComponent from "@/app/editor/components/GrayScaleComponent";
 import useImageEditor from "@/app/hooks/image/editor/useImageEditor";
 import useGetCanvasImageData from "@/app/hooks/canvas/useGetCanvasImageData";
 import BrightnessComponent from "@/app/editor/components/BrightnessComponent";
-import useImageFilterController from "@/app/hooks/image/filters/useImageFilterController";
+import useImageFilterController from "@/app/hooks/image/filters/management/useImageFilterController";
 import ContrastComponent from "@/app/editor/components/ContrastComponent";
 
 export default function EditorPage() {
