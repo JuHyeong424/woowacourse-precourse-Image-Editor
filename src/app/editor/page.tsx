@@ -4,10 +4,8 @@ import UploadedImageComponent from "@/app/editor/components/ImageFile/UploadedIm
 import GrayScaleComponent from "@/app/editor/components/GrayScaleComponent";
 import useImageEditor from "@/app/hooks/image/editor/useImageEditor";
 import useGetCanvasImageData from "@/app/hooks/canvas/useGetCanvasImageData";
-import BrightnessComponent from "@/app/editor/components/BrightnessComponent";
 import useImageFilterController from "@/app/hooks/image/filters/management/useImageFilterController";
-import ContrastComponent from "@/app/editor/components/ContrastComponent";
-import SaturationComponent from "@/app/editor/components/SaturationComponent";
+import SliderFilterComponent from "@/app/editor/components/SliderFilterComponent";
 
 export default function EditorPage() {
   const {
@@ -20,16 +18,18 @@ export default function EditorPage() {
 
   const { getCanvasImageData } = useGetCanvasImageData({ canvasRef });
 
-  const {
-    filters,
-    setFilter,
-    disabled
-  } = useImageFilterController({
+  const { filters, setFilter, disabled} = useImageFilterController({
     wasm,
     image,
     originalPixels,
     getCanvasImageData
   });
+
+  const sliderFilters = [
+    { key: "brightness", label: "밝기 조절" },
+    { key: "contrast", label: "대비 조절"},
+    { key: "saturation", label: "채도 조절"},
+  ]
 
   return (
     <div className="flex flex-row bg-black text-white h-screen gap-6 p-12">
@@ -41,21 +41,16 @@ export default function EditorPage() {
             isGray={filters.isGray}
             setIsGray={(v) => setFilter("isGray", v)}
           />
-          <BrightnessComponent
-            disabled={disabled}
-            brightness={filters.brightness}
-            setBrightness={(v) => setFilter("brightness", v)}
-          />
-          <ContrastComponent
-            disabled={disabled}
-            contrast={filters.contrast}
-            setContrast={(v) => setFilter("contrast", v)}
-          />
-          <SaturationComponent
-            disabled={disabled}
-            saturation={filters.saturation}
-            setSaturation={(v) => setFilter("saturation", v)}
-          />
+          {sliderFilters.map((filter) => (
+            <SliderFilterComponent
+              key={filter.key}
+              disabled={disabled}
+              label={filter.label}
+              value={filters[filter.key]}
+              setValue={(v) => setFilter(filter.key, v)}
+              className='slider'
+            />
+          ))}
         </div>
       </div>
       <UploadedImageComponent canvasRef={canvasRef} image={image} setImage={setImage} />
