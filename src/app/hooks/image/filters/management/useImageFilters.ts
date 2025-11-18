@@ -8,8 +8,10 @@ import useFilterExposure from "@/app/hooks/image/filters/useFilterExposure";
 import useFilterInvert from "@/app/hooks/image/filters/useFilterInvert";
 import useFilterBlur from "@/app/hooks/image/filters/useFilterBlur";
 import useFilterSharpen from "@/app/hooks/image/filters/useFilterSharpen";
+import useFilterHue from "@/app/hooks/image/filters/useFilterHue";
 
 export default function useImageFilters() {
+  const { applyHue } = useFilterHue();
   const { applySharpen } = useFilterSharpen();
   const { applyBlur } = useFilterBlur();
   const { applyInvert } = useFilterInvert();
@@ -21,6 +23,7 @@ export default function useImageFilters() {
   const { resetColor } = useFilterResetColor();
 
   return useMemo(() => ({
+    applyHue,
     applySharpen,
     applyBlur,
     applyInvert,
@@ -30,5 +33,5 @@ export default function useImageFilters() {
     applyBrightness,
     applyGrayscale,
     resetColor,
-  }), [applySharpen, applyBlur, applyInvert, applyExposure, applySaturation, applyContrast, applyBrightness, applyGrayscale, resetColor])
+  }), [applyHue, applySharpen, applyBlur, applyInvert, applyExposure, applySaturation, applyContrast, applyBrightness, applyGrayscale, resetColor])
 }

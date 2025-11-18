@@ -4,6 +4,7 @@ import useFilterBase from "@/app/hooks/image/filters/useFilterBase";
 interface CanvasInfo {
   ctx: CanvasRenderingContext2D;
   imageData: ImageData;
+  canvas: HTMLCanvasElement;
 }
 
 type GetCanvasImageData = () => CanvasInfo | null;

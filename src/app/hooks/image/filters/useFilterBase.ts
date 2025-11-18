@@ -12,7 +12,7 @@ export default function useFilterBase() {
   const prepareFilter = (
     wasm: WasmModule | null,
     getCanvasImageData: GetCanvasImageData,
-  ): CanvasInfo | null => {
+  )=> {
     if (!wasm) return;
 
     const info = getCanvasImageData();
