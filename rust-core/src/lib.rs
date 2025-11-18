@@ -9,6 +9,7 @@ mod invert;
 mod blur;
 mod sharpen;
 mod hue;
+mod temperature;
 
 #[wasm_bindgen]
 pub fn grayscale(data: &mut [u8]) {
@@ -42,4 +43,8 @@ pub fn sharpen(data: &mut [u8], width: usize, height: usize) { sharpen::sharpen(
 
 #[wasm_bindgen]
 pub fn hue(data: &mut [u8], degrees: f32) { hue::hue(data, degrees) }
+
+#[wasm_bindgen]
+pub fn temperature(data: &mut [u8], temp: f32) { temperature::temperature(data, temp) }
+
 
