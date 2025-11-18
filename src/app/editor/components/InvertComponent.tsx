@@ -1,22 +1,22 @@
 import React from "react";
 
-interface GrayScaleComponentProps {
+interface InvertComponentProps {
   disabled: boolean;
-  isGray: boolean;
-  setIsGray: (v: boolean) => void;
+  invert: boolean;
+  setInvert: (v: boolean) => void;
 }
 
-export default function GrayScaleComponent({disabled, isGray, setIsGray}: GrayScaleComponentProps) {
+export default function InvertComponent({disabled, invert, setInvert}: InvertComponentProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsGray(e.target.checked);
+    setInvert(e.target.checked);
   };
 
   return (
     <div className="flex items-center gap-3">
       <input
         type="checkbox"
-        id="gray"
-        checked={isGray}
+        id="invert"
+        checked={invert}
         disabled={disabled}
         onChange={handleChange}
         className="peer hidden"
@@ -36,7 +36,7 @@ export default function GrayScaleComponent({disabled, isGray, setIsGray}: GraySc
           className={`
             text-white text-sm
             transition-opacity duration-200
-            ${isGray ? "opacity-100" : "opacity-0"}
+            ${invert ? "opacity-100" : "opacity-0"}
           `}
         >
           ✓
@@ -45,9 +45,9 @@ export default function GrayScaleComponent({disabled, isGray, setIsGray}: GraySc
 
       <span
         className="text-xl cursor-pointer select-none"
-        onClick={() => !disabled && setIsGray(!isGray)}
+        onClick={() => !disabled && setInvert(!invert)}
       >
-        흑백 필터
+        색 반전 필터
     </span>
     </div>
   );

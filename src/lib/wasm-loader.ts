@@ -4,6 +4,7 @@ import type {
   contrast as ContrastType,
   saturation as SaturationType,
   exposure as ExposureType,
+  invert as InvertType,
 } from '@/wasm/rust_core';
 
 export interface WasmModule {
@@ -12,6 +13,7 @@ export interface WasmModule {
   contrast: typeof ContrastType;
   saturation: typeof SaturationType;
   exposure: typeof ExposureType;
+  invert: typeof InvertType;
 }
 
 export const loadWASM = async (): Promise<WasmModule> => {
@@ -22,6 +24,7 @@ export const loadWASM = async (): Promise<WasmModule> => {
       contrast: () => {},
       saturation: () => {},
       exposure: () => {},
+      invert: () => {},
     };
   }
   const wasm = await import('@/wasm/rust_core');
@@ -32,5 +35,6 @@ export const loadWASM = async (): Promise<WasmModule> => {
     contrast: wasm.contrast,
     saturation: wasm.saturation,
     exposure: wasm.exposure,
+    invert: wasm.invert,
   };
 }

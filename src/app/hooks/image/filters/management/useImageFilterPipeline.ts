@@ -10,6 +10,7 @@ import {
 } from "@/app/types/filterTypes";
 
 interface Filters {
+  invert: boolean;
   exposure: number;
   saturation: number;
   contrast: number;
@@ -35,6 +36,7 @@ export default function useImageFilterPipeline({
     image,
     originalPixels,
     getCanvasImageData,
+    applyInvert,
     applyExposure,
     applySaturation,
     applyContrast,
@@ -61,6 +63,10 @@ export default function useImageFilterPipeline({
 
     if (filters.exposure !== 100) {
       applyExposure(wasm, getCanvasImageData, filters.exposure);
+    }
+
+    if (filters.invert) {
+      applyInvert(wasm, getCanvasImageData, filters.invert);
     }
 
     if (filters.isGray) {

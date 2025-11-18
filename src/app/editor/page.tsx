@@ -6,6 +6,7 @@ import useImageEditor from "@/app/hooks/image/editor/useImageEditor";
 import useGetCanvasImageData from "@/app/hooks/canvas/useGetCanvasImageData";
 import useImageFilterController from "@/app/hooks/image/filters/management/useImageFilterController";
 import SliderFilterComponent from "@/app/editor/components/SliderFilterComponent";
+import InvertComponent from "@/app/editor/components/InvertComponent";
 
 export default function EditorPage() {
   const {
@@ -41,6 +42,11 @@ export default function EditorPage() {
             disabled={disabled}
             isGray={filters.isGray}
             setIsGray={(v) => setFilter("isGray", v)}
+          />
+          <InvertComponent
+            disabled={disabled}
+            invert={filters.invert}
+            setInvert={(v) => setFilter("invert", v)}
           />
           {sliderFilters.map((filter) => (
             <SliderFilterComponent

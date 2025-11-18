@@ -5,6 +5,7 @@ mod grayscale;
 mod contrast;
 mod saturation;
 mod exposure;
+mod invert;
 
 #[wasm_bindgen]
 pub fn grayscale(data: &mut [u8]) {
@@ -26,3 +27,8 @@ pub fn saturation(data: &mut [u8], value: f32) { saturation::saturation(data, va
 
 #[wasm_bindgen]
 pub fn exposure(data: &mut [u8], value: f32) { saturation::saturation(data, value) }
+
+#[wasm_bindgen]
+pub fn exposure(data: &mut [u8]) { exposure::exposure(data) }
+
+
