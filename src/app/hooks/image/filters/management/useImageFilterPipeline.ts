@@ -48,6 +48,7 @@ export default function useImageFilterPipeline({
     image,
     originalPixels,
     getCanvasImageData,
+    applyTint,
     applyTemperature,
     applyHue,
     applySharpen,
@@ -90,7 +91,7 @@ export default function useImageFilterPipeline({
     }
 
     if (filters.tint !== 0) {
-      applyTemperature(wasm, getCanvasImageData, filters.tint);
+      applyTint(wasm, getCanvasImageData, filters.tint);
     }
 
     if (filters.invert) {
@@ -113,6 +114,7 @@ export default function useImageFilterPipeline({
     image,
     originalPixels,
     getCanvasImageData,
+    applyTint,
     applySharpen,
     applyBlur,
     applyInvert,
