@@ -14,8 +14,9 @@ export default function useFilterExposure() {
     if (!info) return;
 
     const { ctx, imageData } = info;
+    const uint8View = new Uint8Array(imageData.data.buffer);
 
-    wasm?.saturation(imageData.data, newValue / 100);
+    wasm?.saturation(uint8View, newValue / 100);
     ctx.putImageData(imageData, 0, 0);
   }
 

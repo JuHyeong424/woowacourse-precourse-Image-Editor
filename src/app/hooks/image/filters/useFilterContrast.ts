@@ -14,8 +14,9 @@ export default function useFilterContrast() {
     if (!info) return;
 
     const { ctx, imageData } = info;
+    const uint8View = new Uint8Array(imageData.data.buffer);
 
-    wasm?.contrast(imageData.data, newValue);
+    wasm?.contrast(uint8View, newValue);
     ctx.putImageData(imageData, 0, 0);
   };
 

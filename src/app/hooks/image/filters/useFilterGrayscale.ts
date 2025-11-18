@@ -19,8 +19,9 @@ export default function useFilterGrayscale() {
     if (!info) return;
 
     const { ctx, imageData } = info;
+    const uint8View = new Uint8Array(imageData.data.buffer);
 
-    wasm?.grayscale(imageData.data);
+    wasm?.grayscale(uint8View);
     ctx.putImageData(imageData, 0, 0);
   };
 

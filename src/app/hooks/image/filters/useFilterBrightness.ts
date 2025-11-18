@@ -20,8 +20,9 @@ export default function useFilterBrightness() {
     if (!info) return;
 
     const { ctx, imageData } = info;
+    const uint8View = new Uint8Array(imageData.data.buffer);
 
-    wasm?.brightness(imageData.data, newValue);
+    wasm?.brightness(uint8View, newValue);
     ctx.putImageData(imageData, 0, 0);
   };
 

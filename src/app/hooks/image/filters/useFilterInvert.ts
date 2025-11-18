@@ -8,7 +8,6 @@ export default function useFilterInvert() {
   const applyInvert = (
     wasm: WasmModule | null,
     getCanvasImageData: GetCanvasImageData,
-    newValue: number,
   ) => {
     const info = prepareFilter(wasm, getCanvasImageData);
     if (!info) return;

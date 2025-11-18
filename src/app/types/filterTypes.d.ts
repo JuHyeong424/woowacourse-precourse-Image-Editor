@@ -40,7 +40,7 @@ export type ApplyGrayscale = (
   getCanvasImageData: GetCanvasImageData
 ) => void;
 
-type ResetColor = (
+export type ResetColor = (
   getCanvasImageData: GetCanvasImageData,
   originalPixels: ImageData["data"] | null
 ) => void;

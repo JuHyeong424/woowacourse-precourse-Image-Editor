@@ -3,7 +3,7 @@ import {WasmModule} from "@/lib/wasm-loader";
 import {
   ApplyBrightness,
   ApplyContrast, ApplyExposure,
-  ApplyGrayscale,
+  ApplyGrayscale, ApplyInvert,
   ApplySaturation,
   GetCanvasImageData,
   ResetColor
@@ -23,6 +23,7 @@ interface useImageFilterPipelineProps {
   image: HTMLImageElement | null;
   originalPixels: ImageData["data"] | null;
   getCanvasImageData: GetCanvasImageData;
+  applyInvert: ApplyInvert;
   applyExposure: ApplyExposure;
   applySaturation: ApplySaturation;
   applyContrast: ApplyContrast;
@@ -66,7 +67,7 @@ export default function useImageFilterPipeline({
     }
 
     if (filters.invert) {
-      applyInvert(wasm, getCanvasImageData, filters.invert);
+      applyInvert(wasm, getCanvasImageData);
     }
 
     if (filters.isGray) {
@@ -77,6 +78,8 @@ export default function useImageFilterPipeline({
     image,
     originalPixels,
     getCanvasImageData,
+    applyInvert,
+    applyExposure,
     applySaturation,
     applyContrast,
     applyBrightness,
