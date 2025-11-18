@@ -6,11 +6,16 @@ export type GetCanvasImageData = () => {
   canvas: HTMLCanvasElement;
 } | null;
 
+export type ApplyContrast = (
+  wasm: WasmModule | null,
+  getCanvasImageData: GetCanvasImageData,
+  value: number,
+) => void;
+
 export type ApplyBrightness = (
   wasm: WasmModule | null,
   getCanvasImageData: GetCanvasImageData,
   value: number,
-  originalPixels: ImageData["data"] | null
 ) => void;
 
 export type ApplyGrayscale = (

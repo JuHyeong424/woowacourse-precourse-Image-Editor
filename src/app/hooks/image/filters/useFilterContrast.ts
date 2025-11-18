@@ -1,17 +1,11 @@
-import {WasmModule} from "@/lib/wasm-loader";
 import useFilterBase from "@/app/hooks/image/filters/useFilterBase";
+import {WasmModule} from "@/lib/wasm-loader";
+import {GetCanvasImageData} from "@/app/types/filterTypes";
 
-interface CanvasInfo {
-  ctx: CanvasRenderingContext2D;
-  imageData: ImageData;
-}
-
-type GetCanvasImageData = () => CanvasInfo | null;
-
-export default function useFilterBrightness() {
+export default function useFilterContrast() {
   const { prepareFilter } = useFilterBase();
 
-  const applyBrightness = (
+  const applyContrast = (
     wasm: WasmModule | null,
     getCanvasImageData: GetCanvasImageData,
     newValue: number,
@@ -21,9 +15,9 @@ export default function useFilterBrightness() {
 
     const { ctx, imageData } = info;
 
-    wasm?.brightness(imageData.data, newValue);
+    wasm?.contrast(imageData.data, newValue);
     ctx.putImageData(imageData, 0, 0);
   };
 
-  return { applyBrightness };
+  return { applyContrast };
 }
