@@ -1,26 +1,17 @@
 use wasm_bindgen::prelude::*;
 
+mod brightness;
+mod grayscale;
+mod contrast;
+
 #[wasm_bindgen]
 pub fn grayscale(data: &mut [u8]) {
-    for i in (0..data.len()).step_by(4) {
-        let avg = ((data[i] as u32 + data[i + 1] as u32 + data[i + 2] as u32) / 3) as u8;
-        data[i] = avg;
-        data[i + 1] = avg;
-        data[i + 2] = avg;
-    }
+    grayscale::grayscale(data)
 }
 
 #[wasm_bindgen]
-pub fn brightness(data: &mut [u8], value: u32) {
-    let factor = value as f32 / 100.0;
-
-    for i in (0..data.len()).step_by(4) {
-        let r = data[i] as f32 * factor;
-        let g = data[i + 1] as f32 * factor;
-        let b = data[i + 2] as f32 * factor;
-
-        data[i]     = r.min(255.0).max(0.0) as u8;
-        data[i + 1] = g.min(255.0).max(0.0) as u8;
-        data[i + 2] = b.min(255.0).max(0.0) as u8;
-    }
+pub fn brightness(data: &mut [u8]) {
+    brightness::brightness(data)
 }
+
+pub use contrast::contrast;
