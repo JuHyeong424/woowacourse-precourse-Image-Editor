@@ -6,6 +6,12 @@ export type GetCanvasImageData = () => {
   canvas: HTMLCanvasElement;
 } | null;
 
+export type ApplyTemperature = (
+  wasm: WasmModule | null,
+  getCanvasImageData: GetCanvasImageData,
+  temperature: number,
+) => void;
+
 export type ApplyHue = (
   wasm: WasmModule | null,
   getCanvasImageData: GetCanvasImageData,

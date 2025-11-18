@@ -8,6 +8,7 @@ import type {
   blur as BlurType,
   sharpen as SharpenType,
   hue as HueType,
+  temperature as TemperatureType,
 } from '@/wasm/rust_core';
 
 export interface WasmModule {
@@ -20,6 +21,7 @@ export interface WasmModule {
   blur: typeof BlurType;
   sharpen: typeof SharpenType;
   hue: typeof HueType;
+  temperature: typeof TemperatureType;
 }
 
 export const loadWASM = async (): Promise<WasmModule> => {
@@ -34,6 +36,7 @@ export const loadWASM = async (): Promise<WasmModule> => {
       blur: () => {},
       sharpen: () => {},
       hue: () => {},
+      temperature: () => {},
     };
   }
   const wasm = await import('@/wasm/rust_core');
@@ -48,5 +51,6 @@ export const loadWASM = async (): Promise<WasmModule> => {
     blur: wasm.blur,
     sharpen: wasm.sharpen,
     hue: wasm.hue,
+    temperature: wasm.temperature,
   };
 }
