@@ -1,4 +1,4 @@
-pub fn brightness(data: &mut [u8], value: u32) {
+pub fn brightness(data: &mut [u8], value: f32) {
     let factor = value as f32 / 100.0;
 
     for i in (0..data.len()).step_by(4) {
