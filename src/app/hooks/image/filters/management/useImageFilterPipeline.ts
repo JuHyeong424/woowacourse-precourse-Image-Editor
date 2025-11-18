@@ -1,6 +1,7 @@
 import {useCallback} from "react";
 import {WasmModule} from "@/lib/wasm-loader";
 import {
+  ApplyBlur,
   ApplyBrightness,
   ApplyContrast, ApplyExposure,
   ApplyGrayscale, ApplyInvert,
@@ -10,6 +11,7 @@ import {
 } from "@/app/types/filterTypes";
 
 interface Filters {
+  blur: boolean;
   invert: boolean;
   exposure: number;
   saturation: number;
@@ -23,6 +25,7 @@ interface useImageFilterPipelineProps {
   image: HTMLImageElement | null;
   originalPixels: ImageData["data"] | null;
   getCanvasImageData: GetCanvasImageData;
+  applyBlur: ApplyBlur;
   applyInvert: ApplyInvert;
   applyExposure: ApplyExposure;
   applySaturation: ApplySaturation;
@@ -37,6 +40,7 @@ export default function useImageFilterPipeline({
     image,
     originalPixels,
     getCanvasImageData,
+    applyBlur,
     applyInvert,
     applyExposure,
     applySaturation,
@@ -68,6 +72,10 @@ export default function useImageFilterPipeline({
 
     if (filters.invert) {
       applyInvert(wasm, getCanvasImageData);
+    }
+
+    if (filters.blur) {
+      applyBlur(wasm, getCanvasImageData);
     }
 
     if (filters.isGray) {

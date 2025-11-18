@@ -6,6 +6,11 @@ export type GetCanvasImageData = () => {
   canvas: HTMLCanvasElement;
 } | null;
 
+export type ApplyBlur = (
+  wasm: WasmModule | null,
+  getCanvasImageData: GetCanvasImageData
+) => void;
+
 export type ApplyInvert = (
   wasm: WasmModule | null,
   getCanvasImageData: GetCanvasImageData
