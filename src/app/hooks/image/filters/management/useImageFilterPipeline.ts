@@ -1,8 +1,16 @@
 import {useCallback} from "react";
 import {WasmModule} from "@/lib/wasm-loader";
-import {ApplyBrightness, ApplyContrast, ApplyGrayscale, GetCanvasImageData, ResetColor} from "@/app/types/filterTypes";
+import {
+  ApplyBrightness,
+  ApplyContrast,
+  ApplyGrayscale,
+  ApplySaturation,
+  GetCanvasImageData,
+  ResetColor
+} from "@/app/types/filterTypes";
 
 interface Filters {
+  saturation: number;
   contrast: number;
   brightness: number;
   isGray: boolean;
@@ -13,6 +21,7 @@ interface useImageFilterPipelineProps {
   image: HTMLImageElement | null;
   originalPixels: ImageData["data"] | null;
   getCanvasImageData: GetCanvasImageData;
+  applySaturation: ApplySaturation;
   applyContrast: ApplyContrast;
   applyBrightness: ApplyBrightness;
   applyGrayscale: ApplyGrayscale;
@@ -24,6 +33,7 @@ export default function useImageFilterPipeline({
     image,
     originalPixels,
     getCanvasImageData,
+    applySaturation,
     applyContrast,
     applyBrightness,
     applyGrayscale,
@@ -42,6 +52,10 @@ export default function useImageFilterPipeline({
       applyContrast(wasm, getCanvasImageData, filters.contrast);
     }
 
+    if (filters.saturation !== 100) {
+      applySaturation(wasm, getCanvasImageData, filters.saturation);
+    }
+
     if (filters.isGray) {
       applyGrayscale(wasm, getCanvasImageData);
     }
@@ -50,6 +64,7 @@ export default function useImageFilterPipeline({
     image,
     originalPixels,
     getCanvasImageData,
+    applySaturation,
     applyContrast,
     applyBrightness,
     applyGrayscale,

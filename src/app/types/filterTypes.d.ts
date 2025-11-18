@@ -6,6 +6,12 @@ export type GetCanvasImageData = () => {
   canvas: HTMLCanvasElement;
 } | null;
 
+export type ApplySaturation = (
+  wasm: WasmModule | null,
+  getCanvasImageData: GetCanvasImageData,
+  value: number,
+) => void;
+
 export type ApplyContrast = (
   wasm: WasmModule | null,
   getCanvasImageData: GetCanvasImageData,
