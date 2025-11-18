@@ -6,6 +6,7 @@ import useImageEditor from "@/app/hooks/image/editor/useImageEditor";
 import useGetCanvasImageData from "@/app/hooks/canvas/useGetCanvasImageData";
 import BrightnessComponent from "@/app/editor/components/BrightnessComponent";
 import useImageFilterController from "@/app/hooks/image/filters/useImageFilterController";
+import ContrastComponent from "@/app/editor/components/ContrastComponent";
 
 export default function EditorPage() {
   const {
@@ -43,6 +44,11 @@ export default function EditorPage() {
             disabled={disabled}
             brightness={filters.brightness}
             setBrightness={(v) => setFilter("brightness", v)}
+          />
+          <ContrastComponent
+            disabled={disabled}
+            contrast={filters.contrast}
+            setContrast={(v) => setFilter("contrast", v)}
           />
         </div>
       </div>

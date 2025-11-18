@@ -19,7 +19,7 @@ export default function useImageFilterController(
     originalPixels,
     getCanvasImageData
   }: UseImageFilterControllerProps) {
-  const { applyBrightness, applyGrayscale, resetColor } = useImageFilters();
+  const { applyContrast, applyBrightness, applyGrayscale, resetColor } = useImageFilters();
 
   const { filters, setFilter } = useImageFilterState(image);
 
@@ -28,6 +28,7 @@ export default function useImageFilterController(
     image,
     originalPixels,
     getCanvasImageData,
+    applyContrast,
     applyBrightness,
     applyGrayscale,
     resetColor
