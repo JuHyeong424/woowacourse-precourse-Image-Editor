@@ -6,6 +6,27 @@ export type GetCanvasImageData = () => {
   canvas: HTMLCanvasElement;
 } | null;
 
+export type ApplySharpen = (
+  wasm: WasmModule | null,
+  getCanvasImageData: GetCanvasImageData
+) => void;
+
+export type ApplyBlur = (
+  wasm: WasmModule | null,
+  getCanvasImageData: GetCanvasImageData
+) => void;
+
+export type ApplyInvert = (
+  wasm: WasmModule | null,
+  getCanvasImageData: GetCanvasImageData
+) => void;
+
+export type ApplyExposure = (
+  wasm: WasmModule | null,
+  getCanvasImageData: GetCanvasImageData,
+  value: number,
+) => void;
+
 export type ApplySaturation = (
   wasm: WasmModule | null,
   getCanvasImageData: GetCanvasImageData,
@@ -29,7 +50,7 @@ export type ApplyGrayscale = (
   getCanvasImageData: GetCanvasImageData
 ) => void;
 
-type ResetColor = (
+export type ResetColor = (
   getCanvasImageData: GetCanvasImageData,
   originalPixels: ImageData["data"] | null
 ) => void;

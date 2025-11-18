@@ -1,29 +1,37 @@
 import React from "react";
 
-interface GrayScaleComponentProps {
+interface ButtonFilterComponentProps {
   disabled: boolean;
-  isGray: boolean;
-  setIsGray: (v: boolean) => void;
+  label: string;
+  id: string;
+  value: boolean;
+  setValue: (v: boolean) => void;
 }
 
-export default function GrayScaleComponent({disabled, isGray, setIsGray}: GrayScaleComponentProps) {
+export default function ButtonFilterComponent({
+    disabled,
+    label,
+    id,
+    value,
+    setValue
+  }: ButtonFilterComponentProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsGray(e.target.checked);
+    setValue(e.target.checked);
   };
 
   return (
     <div className="flex items-center gap-3">
       <input
         type="checkbox"
-        id="gray"
-        checked={isGray}
+        id={id}
+        checked={value}
         disabled={disabled}
         onChange={handleChange}
         className="peer hidden"
       />
 
       <label
-        htmlFor="gray"
+        htmlFor={id}
         className="
           w-6 h-6 rounded-md border-2 border-gray-400
           flex items-center justify-center
@@ -36,7 +44,7 @@ export default function GrayScaleComponent({disabled, isGray, setIsGray}: GraySc
           className={`
             text-white text-sm
             transition-opacity duration-200
-            ${isGray ? "opacity-100" : "opacity-0"}
+            ${value ? "opacity-100" : "opacity-0"}
           `}
         >
           ✓
@@ -45,8 +53,9 @@ export default function GrayScaleComponent({disabled, isGray, setIsGray}: GraySc
 
       <span
         className="text-xl cursor-pointer select-none"
-        onClick={() => !disabled && setIsGray(!isGray)}
-      >      흑백 필터
+        onClick={() => !disabled && setValue(!value)}
+      >
+        {label}
     </span>
     </div>
   );

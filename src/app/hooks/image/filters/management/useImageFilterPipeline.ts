@@ -1,15 +1,20 @@
 import {useCallback} from "react";
 import {WasmModule} from "@/lib/wasm-loader";
 import {
+  ApplyBlur,
   ApplyBrightness,
-  ApplyContrast,
-  ApplyGrayscale,
-  ApplySaturation,
+  ApplyContrast, ApplyExposure,
+  ApplyGrayscale, ApplyInvert,
+  ApplySaturation, ApplySharpen,
   GetCanvasImageData,
   ResetColor
 } from "@/app/types/filterTypes";
 
 interface Filters {
+  sharpen: boolean;
+  blur: boolean;
+  invert: boolean;
+  exposure: number;
   saturation: number;
   contrast: number;
   brightness: number;
@@ -21,6 +26,10 @@ interface useImageFilterPipelineProps {
   image: HTMLImageElement | null;
   originalPixels: ImageData["data"] | null;
   getCanvasImageData: GetCanvasImageData;
+  applySharpen: ApplySharpen;
+  applyBlur: ApplyBlur;
+  applyInvert: ApplyInvert;
+  applyExposure: ApplyExposure;
   applySaturation: ApplySaturation;
   applyContrast: ApplyContrast;
   applyBrightness: ApplyBrightness;
@@ -33,6 +42,10 @@ export default function useImageFilterPipeline({
     image,
     originalPixels,
     getCanvasImageData,
+    applySharpen,
+    applyBlur,
+    applyInvert,
+    applyExposure,
     applySaturation,
     applyContrast,
     applyBrightness,
@@ -56,6 +69,22 @@ export default function useImageFilterPipeline({
       applySaturation(wasm, getCanvasImageData, filters.saturation);
     }
 
+    if (filters.exposure !== 100) {
+      applyExposure(wasm, getCanvasImageData, filters.exposure);
+    }
+
+    if (filters.invert) {
+      applyInvert(wasm, getCanvasImageData);
+    }
+
+    if (filters.blur) {
+      applyBlur(wasm, getCanvasImageData);
+    }
+
+    if (filters.sharpen) {
+      applySharpen(wasm, getCanvasImageData);
+    }
+
     if (filters.isGray) {
       applyGrayscale(wasm, getCanvasImageData);
     }
@@ -64,6 +93,10 @@ export default function useImageFilterPipeline({
     image,
     originalPixels,
     getCanvasImageData,
+    applySharpen,
+    applyBlur,
+    applyInvert,
+    applyExposure,
     applySaturation,
     applyContrast,
     applyBrightness,
