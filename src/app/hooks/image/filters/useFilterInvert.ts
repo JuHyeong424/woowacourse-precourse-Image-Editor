@@ -13,8 +13,9 @@ export default function useFilterInvert() {
     if (!info) return;
 
     const { ctx, imageData } = info;
+    const uint8View = new Uint8Array(imageData.data.buffer);
 
-    wasm?.invert(imageData.data);
+    wasm?.invert(uint8View);
     ctx.putImageData(imageData, 0, 0);
   }
 

@@ -7,6 +7,18 @@ import useImageFilterController from "@/app/hooks/image/filters/management/useIm
 import SliderFilterComponent from "@/app/editor/components/SliderFilterComponent";
 import ButtonFilterComponent from "@/app/editor/components/ButtonFilterComponent";
 
+type FilterState = {
+  invert: boolean;
+  exposure: number;
+  saturation: number;
+  contrast: number;
+  brightness: number;
+  isGray: boolean;
+};
+
+type BooleanFilterKey = "invert" | "isGray";
+type NumberFilterKey = | "exposure" | "saturation" | "contrast" | "brightness";
+
 export default function EditorPage() {
   const {
     wasm,
@@ -25,16 +37,16 @@ export default function EditorPage() {
     getCanvasImageData
   });
 
-  const sliderFilters = [
+  const sliderFilters: { key: NumberFilterKey; label: string }[] = [
     { key: "brightness", label: "밝기 조절" },
     { key: "contrast", label: "대비 조절"},
     { key: "saturation", label: "채도 조절"},
     { key: "exposure", label: "감마 조절"},
   ];
 
-  const buttonFilters = [
-    { key: "isGray", label: "흑백 필터" },
-    { key: "invert", label: "색 반전 필터" },
+  const buttonFilters: { key: BooleanFilterKey; label: string; id: string; }[] = [
+    { key: "isGray", label: "흑백 필터", id: "grayscale" },
+    { key: "invert", label: "색 반전 필터", id: "invert" },
   ];
 
   return (
@@ -47,6 +59,7 @@ export default function EditorPage() {
               key={filter.key}
               disabled={disabled}
               label={filter.label}
+              id={filter.id}
               value={filters[filter.key]}
               setValue={(v) => setFilter(filter.key, v)}
             />

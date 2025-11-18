@@ -1,11 +1,20 @@
 import React from "react";
 
+interface ButtonFilterComponentProps {
+  disabled: boolean;
+  label: string;
+  id: string;
+  value: boolean;
+  setValue: (v: boolean) => void;
+}
+
 export default function ButtonFilterComponent({
     disabled,
     label,
+    id,
     value,
     setValue
-  }) {
+  }: ButtonFilterComponentProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.checked);
   };
@@ -14,7 +23,7 @@ export default function ButtonFilterComponent({
     <div className="flex items-center gap-3">
       <input
         type="checkbox"
-        id="invert"
+        id={id}
         checked={value}
         disabled={disabled}
         onChange={handleChange}
@@ -22,7 +31,7 @@ export default function ButtonFilterComponent({
       />
 
       <label
-        htmlFor="gray"
+        htmlFor={id}
         className="
           w-6 h-6 rounded-md border-2 border-gray-400
           flex items-center justify-center
