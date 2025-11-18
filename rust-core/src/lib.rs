@@ -37,4 +37,4 @@ pub fn invert(data: &mut [u8]) { invert::invert(data) }
 pub fn blur(data: &mut [u8], width: usize, height: usize) { blur::blur(data, width, height) }
 
 #[wasm_bindgen]
-pub fn sharpen(data: &mut [u8], width: uszie, height: usize) { sharpen::sharpen(data, width, height) }
+pub fn sharpen(data: &mut [u8], width: usize, height: usize) { sharpen::sharpen(data, width, height) }
