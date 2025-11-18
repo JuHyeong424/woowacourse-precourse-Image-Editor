@@ -39,7 +39,6 @@ fn rgb_to_hsl(r: f32, g: f32, b: f32) -> (f32, f32, f32) {
     } else {
         (r - g) / d + 4.0
     };
-
     h /= 6.0;
     (h, s, l)
 }
@@ -64,6 +63,5 @@ fn hsl_to_rgb(h: f32, s: f32, l: f32) -> (f32, f32, f32) {
     let r = hue_to_rgb(p, q, h + 1.0 / 3.0);
     let g = hue_to_rgb(p, q, h);
     let b = hue_to_rgb(p, q, h - 1.0 / 3.0);
-
     (r, g, b)
 }

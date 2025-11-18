@@ -42,3 +42,4 @@ pub fn sharpen(data: &mut [u8], width: usize, height: usize) { sharpen::sharpen(
 
 #[wasm_bindgen]
 pub fn hue(data: &mut [u8], degrees: f32) { hue::hue(data, degrees) }
+
