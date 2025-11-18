@@ -8,6 +8,7 @@ mod exposure;
 mod invert;
 mod blur;
 mod sharpen;
+mod hue;
 
 #[wasm_bindgen]
 pub fn grayscale(data: &mut [u8]) {
@@ -38,3 +39,6 @@ pub fn blur(data: &mut [u8], width: usize, height: usize) { blur::blur(data, wid
 
 #[wasm_bindgen]
 pub fn sharpen(data: &mut [u8], width: usize, height: usize) { sharpen::sharpen(data, width, height) }
+
+#[wasm_bindgen]
+pub fn hue(data: &mut [u8], degrees: f32) { hue::hue(data, degrees) }
