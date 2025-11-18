@@ -61,7 +61,7 @@ export default function EditorPage() {
 
   return (
     <div className="flex flex-row bg-black text-white h-screen gap-6 p-12">
-      <div className="flex flex-col p-4 border-2 min-w-[30%] h-full rounded-xl">
+      <div className="flex flex-col p-4 border-2 min-w-[30%] h-full rounded-xl overflow-y-auto overlay-scroll">
         <h2 className="text-2xl text-center font-bold m-4">편집 도구</h2>
         <div className="flex flex-col gap-4">
           {buttonFilters.map((filter) => (
