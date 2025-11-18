@@ -46,7 +46,7 @@ export default function EditorPage() {
     { key: "brightness", label: "밝기 조절", min: 0, max: 200 },
     { key: "contrast", label: "대비 조절", min: 0, max: 200 },
     { key: "saturation", label: "채도 조절", min: 0, max: 200 },
-    { key: "exposure", label: "감마 조절", min: 0, max: 200 },
+    { key: "exposure", label: "감마 조절", min: -100, max: 100 },
     { key: "hue", label: "색조 회전", min: 0, max: 360 },
     { key: "temperature", label: "색온도", min: -100, max: 100 },
     { key: "tint", label: "색감", min: -100, max: 100 },

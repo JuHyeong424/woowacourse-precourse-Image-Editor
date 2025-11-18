@@ -78,7 +78,7 @@ export default function useImageFilterPipeline({
       applySaturation(wasm, getCanvasImageData, filters.saturation);
     }
 
-    if (filters.exposure !== 100) {
+    if (filters.exposure !== 0) {
       applyExposure(wasm, getCanvasImageData, filters.exposure);
     }
 
