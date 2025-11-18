@@ -8,6 +8,7 @@ import SliderFilterComponent from "@/app/editor/components/SliderFilterComponent
 import ButtonFilterComponent from "@/app/editor/components/ButtonFilterComponent";
 
 type FilterState = {
+  hue: number;
   sharpen: boolean;
   blur: boolean;
   invert: boolean;
@@ -19,7 +20,7 @@ type FilterState = {
 };
 
 type BooleanFilterKey = "invert" | "isGray" | "blur" | "sharpen";
-type NumberFilterKey = | "exposure" | "saturation" | "contrast" | "brightness";
+type NumberFilterKey = | "exposure" | "saturation" | "contrast" | "brightness" | "hue";
 
 export default function EditorPage() {
   const {
@@ -39,11 +40,12 @@ export default function EditorPage() {
     getCanvasImageData
   });
 
-  const sliderFilters: { key: NumberFilterKey; label: string }[] = [
-    { key: "brightness", label: "밝기 조절" },
-    { key: "contrast", label: "대비 조절"},
-    { key: "saturation", label: "채도 조절"},
-    { key: "exposure", label: "감마 조절"},
+  const sliderFilters: { key: NumberFilterKey; label: string; min: number; max: number; }[] = [
+    { key: "brightness", label: "밝기 조절", min: 0, max: 200 },
+    { key: "contrast", label: "대비 조절", min: 0, max: 200 },
+    { key: "saturation", label: "채도 조절", min: 0, max: 200 },
+    { key: "exposure", label: "감마 조절", min: 0, max: 200 },
+    { key: "hue", label: "색조 회전", min: 0, max: 360 },
   ];
 
   const buttonFilters: { key: BooleanFilterKey; label: string; id: string; }[] = [
@@ -75,6 +77,8 @@ export default function EditorPage() {
               label={filter.label}
               value={filters[filter.key]}
               setValue={(v) => setFilter(filter.key, v)}
+              min={filter.min}
+              max={filter.max}
               className='slider'
             />
           ))}

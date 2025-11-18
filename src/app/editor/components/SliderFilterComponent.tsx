@@ -5,8 +5,8 @@ interface SliderFilterComponentProps {
   label: string;
   value: number;
   setValue: (v: number) => void;
-  min?: number;
-  max?: number;
+  min: number;
+  max: number;
   className: string;
 }
 
@@ -15,8 +15,8 @@ export default function SliderFilterComponent({
     label,
     value,
     setValue,
-    min = 0,
-    max = 200,
+    min,
+    max,
     className
   }: SliderFilterComponentProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
