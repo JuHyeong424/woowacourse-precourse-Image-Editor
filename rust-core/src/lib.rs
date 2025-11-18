@@ -34,3 +34,4 @@ pub fn invert(data: &mut [u8]) { invert::invert(data) }
 
 #[wasm_bindgen]
 pub fn blur(data: &mut [u8], width: usize, height: usize) { blur::blur(data, width, height) }
+
