@@ -8,16 +8,17 @@ import SliderFilterComponent from "@/app/editor/components/SliderFilterComponent
 import ButtonFilterComponent from "@/app/editor/components/ButtonFilterComponent";
 
 type FilterState = {
+  sharpen: boolean;
   blur: boolean;
   invert: boolean;
+  isGray: boolean;
   exposure: number;
   saturation: number;
   contrast: number;
   brightness: number;
-  isGray: boolean;
 };
 
-type BooleanFilterKey = "invert" | "isGray" | "blur";
+type BooleanFilterKey = "invert" | "isGray" | "blur" | "sharpen";
 type NumberFilterKey = | "exposure" | "saturation" | "contrast" | "brightness";
 
 export default function EditorPage() {
@@ -49,6 +50,7 @@ export default function EditorPage() {
     { key: "isGray", label: "흑백 필터", id: "grayscale" },
     { key: "invert", label: "색 반전 필터", id: "invert" },
     { key: "blur", label: "블러 필터", id: "blur"},
+    { key: "sharpen", label: "선명도 필터", id: "sharpen" },
   ];
 
   return (

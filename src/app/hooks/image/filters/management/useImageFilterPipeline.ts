@@ -5,12 +5,13 @@ import {
   ApplyBrightness,
   ApplyContrast, ApplyExposure,
   ApplyGrayscale, ApplyInvert,
-  ApplySaturation,
+  ApplySaturation, ApplySharpen,
   GetCanvasImageData,
   ResetColor
 } from "@/app/types/filterTypes";
 
 interface Filters {
+  sharpen: boolean;
   blur: boolean;
   invert: boolean;
   exposure: number;
@@ -25,6 +26,7 @@ interface useImageFilterPipelineProps {
   image: HTMLImageElement | null;
   originalPixels: ImageData["data"] | null;
   getCanvasImageData: GetCanvasImageData;
+  applySharpen: ApplySharpen;
   applyBlur: ApplyBlur;
   applyInvert: ApplyInvert;
   applyExposure: ApplyExposure;
@@ -40,6 +42,7 @@ export default function useImageFilterPipeline({
     image,
     originalPixels,
     getCanvasImageData,
+    applySharpen,
     applyBlur,
     applyInvert,
     applyExposure,
@@ -78,6 +81,10 @@ export default function useImageFilterPipeline({
       applyBlur(wasm, getCanvasImageData);
     }
 
+    if (filters.sharpen) {
+      applySharpen(wasm, getCanvasImageData);
+    }
+
     if (filters.isGray) {
       applyGrayscale(wasm, getCanvasImageData);
     }
@@ -86,6 +93,8 @@ export default function useImageFilterPipeline({
     image,
     originalPixels,
     getCanvasImageData,
+    applySharpen,
+    applyBlur,
     applyInvert,
     applyExposure,
     applySaturation,
