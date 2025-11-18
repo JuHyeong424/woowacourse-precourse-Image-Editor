@@ -1,14 +1,13 @@
 import React from "react";
 
-interface InvertComponentProps {
-  disabled: boolean;
-  invert: boolean;
-  setInvert: (v: boolean) => void;
-}
-
-export default function InvertComponent({disabled, invert, setInvert}: InvertComponentProps) {
+export default function ButtonFilterComponent({
+    disabled,
+    label,
+    value,
+    setValue
+  }) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInvert(e.target.checked);
+    setValue(e.target.checked);
   };
 
   return (
@@ -16,7 +15,7 @@ export default function InvertComponent({disabled, invert, setInvert}: InvertCom
       <input
         type="checkbox"
         id="invert"
-        checked={invert}
+        checked={value}
         disabled={disabled}
         onChange={handleChange}
         className="peer hidden"
@@ -36,7 +35,7 @@ export default function InvertComponent({disabled, invert, setInvert}: InvertCom
           className={`
             text-white text-sm
             transition-opacity duration-200
-            ${invert ? "opacity-100" : "opacity-0"}
+            ${value ? "opacity-100" : "opacity-0"}
           `}
         >
           ✓
@@ -45,9 +44,9 @@ export default function InvertComponent({disabled, invert, setInvert}: InvertCom
 
       <span
         className="text-xl cursor-pointer select-none"
-        onClick={() => !disabled && setInvert(!invert)}
+        onClick={() => !disabled && setValue(!value)}
       >
-        색 반전 필터
+        {label}
     </span>
     </div>
   );
