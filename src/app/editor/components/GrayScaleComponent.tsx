@@ -1,14 +1,4 @@
-import {WasmModule} from "@/lib/wasm-loader";
-import React, {useEffect} from "react";
-import useFilterGrayscale from "@/app/hooks/image/filters/useFilterGrayscale";
-import useFilterResetColor from "@/app/hooks/image/filters/useFilterResetColor";
-
-interface CanvasInfo {
-  ctx: CanvasRenderingContext2D;
-  imageData: ImageData;
-}
-
-type GetCanvasImageData = () => CanvasInfo | null;
+import React from "react";
 
 interface GrayScaleComponentProps {
   disabled: boolean;
