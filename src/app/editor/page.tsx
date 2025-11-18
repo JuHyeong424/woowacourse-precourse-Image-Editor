@@ -29,6 +29,7 @@ export default function EditorPage() {
     { key: "brightness", label: "밝기 조절" },
     { key: "contrast", label: "대비 조절"},
     { key: "saturation", label: "채도 조절"},
+    { key: "exposure", label: "감마 조절"},
   ]
 
   return (

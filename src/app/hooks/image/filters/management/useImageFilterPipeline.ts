@@ -2,7 +2,7 @@ import {useCallback} from "react";
 import {WasmModule} from "@/lib/wasm-loader";
 import {
   ApplyBrightness,
-  ApplyContrast,
+  ApplyContrast, ApplyExposure,
   ApplyGrayscale,
   ApplySaturation,
   GetCanvasImageData,
@@ -10,6 +10,7 @@ import {
 } from "@/app/types/filterTypes";
 
 interface Filters {
+  exposure: number;
   saturation: number;
   contrast: number;
   brightness: number;
@@ -21,6 +22,7 @@ interface useImageFilterPipelineProps {
   image: HTMLImageElement | null;
   originalPixels: ImageData["data"] | null;
   getCanvasImageData: GetCanvasImageData;
+  applyExposure: ApplyExposure;
   applySaturation: ApplySaturation;
   applyContrast: ApplyContrast;
   applyBrightness: ApplyBrightness;
@@ -33,6 +35,7 @@ export default function useImageFilterPipeline({
     image,
     originalPixels,
     getCanvasImageData,
+    applyExposure,
     applySaturation,
     applyContrast,
     applyBrightness,
@@ -54,6 +57,10 @@ export default function useImageFilterPipeline({
 
     if (filters.saturation !== 100) {
       applySaturation(wasm, getCanvasImageData, filters.saturation);
+    }
+
+    if (filters.exposure !== 100) {
+      applyExposure(wasm, getCanvasImageData, filters.exposure);
     }
 
     if (filters.isGray) {
