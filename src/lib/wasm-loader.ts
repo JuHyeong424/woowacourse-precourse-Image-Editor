@@ -10,6 +10,7 @@ import type {
   hue as HueType,
   temperature as TemperatureType,
   tint as TintType,
+  highlights_shadow as Hightlights_shadowType,
 } from '@/wasm/rust_core';
 
 export interface WasmModule {
@@ -24,6 +25,7 @@ export interface WasmModule {
   hue: typeof HueType;
   temperature: typeof TemperatureType;
   tint: typeof TintType;
+  highlights_shadow: typeof Hightlights_shadowType;
 }
 
 export const loadWASM = async (): Promise<WasmModule> => {
@@ -40,6 +42,7 @@ export const loadWASM = async (): Promise<WasmModule> => {
       hue: () => {},
       temperature: () => {},
       tint: () => {},
+      highlights_shadow: () => {},
     };
   }
   const wasm = await import('@/wasm/rust_core');
@@ -56,5 +59,6 @@ export const loadWASM = async (): Promise<WasmModule> => {
     hue: wasm.hue,
     temperature: wasm.temperature,
     tint: wasm.tint,
+    highlights_shadow: wasm.highlights_shadow,
   };
 }
