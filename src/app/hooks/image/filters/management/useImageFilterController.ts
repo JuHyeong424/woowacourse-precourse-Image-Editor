@@ -20,6 +20,7 @@ export default function useImageFilterController(
     getCanvasImageData
   }: UseImageFilterControllerProps) {
   const {
+    applyClarity,
     applyHighlightShadow,
     applyTint,
     applyTemperature,
@@ -42,6 +43,7 @@ export default function useImageFilterController(
     image,
     originalPixels,
     getCanvasImageData,
+    applyClarity,
     applyHighlightShadow,
     applyTint,
     applyTemperature,
