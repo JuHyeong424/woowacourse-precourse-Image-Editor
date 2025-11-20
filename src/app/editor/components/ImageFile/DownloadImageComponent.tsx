@@ -6,11 +6,17 @@ export default function DownloadImageComponent({ canvasRef }: DownloadImageCompo
   const handleDownload  = () => {
     if (!canvasRef.current) return;
 
-    const link = document.createElement("a");
-    link.href = canvasRef.current?.toDataURL("image/png");
-    link.download = "edited-image.png";
-    link.click();
-  }
+    canvasRef.current?.toBlob((blob) => {
+      if (!blob) return;
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "edited-image.png";
+      link.click();
+      URL.revokeObjectURL(url);
+    }, "image/png");
+  };
 
   return (
     <div>
