@@ -1,8 +1,8 @@
 import SliderFilterComponent from "@/app/editor/components/FilterPanel/SliderFilterComponent";
 import React from "react";
-import {NumberFilterKey} from "@/app/types/filterStateTypes";
+import {FilterProps, NumberFilterKey} from "@/app/types/filterStateTypes";
 
-export default function SliderFilters({ filters, setFilter, disabled }) {
+export default function SliderFilters({ filters, setFilter, disabled }: FilterProps) {
   const sliderFilters: { key: NumberFilterKey; label: string; min: number; max: number; }[] = [
     { key: "brightness", label: "밝기 조절", min: 0, max: 200 },
     { key: "contrast", label: "대비 조절", min: 0, max: 200 },

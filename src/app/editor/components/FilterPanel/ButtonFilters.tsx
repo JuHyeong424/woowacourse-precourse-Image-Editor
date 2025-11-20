@@ -1,8 +1,8 @@
 import ButtonFilterComponent from "@/app/editor/components/FilterPanel/ButtonFilterComponent";
 import React from "react";
-import {BooleanFilterKey} from "@/app/types/filterStateTypes";
+import {BooleanFilterKey, FilterProps} from "@/app/types/filterStateTypes";
 
-export default function ButtonFilters({ filters, setFilter, disabled }) {
+export default function ButtonFilters({ filters, setFilter, disabled }: FilterProps) {
   const buttonFilters: { key: BooleanFilterKey; label: string; id: string; }[] = [
     { key: "isGray", label: "흑백 필터", id: "grayscale" },
     { key: "invert", label: "색 반전 필터", id: "invert" },

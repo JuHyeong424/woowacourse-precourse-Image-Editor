@@ -16,5 +16,16 @@ type FilterState = {
   brightness: number;
 };
 
+type SetFilter = <K extends keyof FilterState>(
+  key: K,
+  value: FilterState[K]
+) => void;
+
 export type BooleanFilterKey = "invert" | "isGray" | "blur" | "sharpen";
 export type NumberFilterKey = | "exposure" | "saturation" | "contrast" | "brightness" | "hue" | "temperature" | "tint" | "shadows" | "highlights" | "clarity" | "vignette";
+
+export interface FilterProps {
+  filters: FilterState;
+  setFilter: SetFilter;
+  disabled: boolean;
+}
