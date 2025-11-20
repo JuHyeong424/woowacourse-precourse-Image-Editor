@@ -33,21 +33,23 @@ interface useImageFilterPipelineProps {
   image: HTMLImageElement | null;
   originalPixels: ImageData["data"] | null;
   getCanvasImageData: GetCanvasImageData;
-  applyVignette: ApplyVignette;
-  applyClarity: ApplyClarity;
-  applyHighlightShadow: ApplyHighlightShadow;
-  applyTint: ApplyTint;
-  applyTemperature: ApplyTemperature;
-  applyHue: ApplyHue;
-  applySharpen: ApplySharpen;
-  applyBlur: ApplyBlur;
-  applyInvert: ApplyInvert;
-  applyExposure: ApplyExposure;
-  applySaturation: ApplySaturation;
-  applyContrast: ApplyContrast;
-  applyBrightness: ApplyBrightness;
-  applyGrayscale: ApplyGrayscale;
-  resetColor: ResetColor;
+  filters: {
+    applyVignette: ApplyVignette;
+    applyClarity: ApplyClarity;
+    applyHighlightShadow: ApplyHighlightShadow;
+    applyTint: ApplyTint;
+    applyTemperature: ApplyTemperature;
+    applyHue: ApplyHue;
+    applySharpen: ApplySharpen;
+    applyBlur: ApplyBlur;
+    applyInvert: ApplyInvert;
+    applyExposure: ApplyExposure;
+    applySaturation: ApplySaturation;
+    applyContrast: ApplyContrast;
+    applyBrightness: ApplyBrightness;
+    applyGrayscale: ApplyGrayscale;
+    resetColor: ResetColor;
+  };
 }
 
 export default function useImageFilterPipeline({
@@ -55,100 +57,54 @@ export default function useImageFilterPipeline({
     image,
     originalPixels,
     getCanvasImageData,
-    applyVignette,
-    applyClarity,
-    applyHighlightShadow,
-    applyTint,
-    applyTemperature,
-    applyHue,
-    applySharpen,
-    applyBlur,
-    applyInvert,
-    applyExposure,
-    applySaturation,
-    applyContrast,
-    applyBrightness,
-    applyGrayscale,
-    resetColor
+    filters
 }: useImageFilterPipelineProps) {
-  return useCallback((filters: Filters) => {
+  return useCallback((state: Filters) => {
     if (!wasm || !image || !originalPixels) return;
+
+    const {
+      applyBrightness,
+      applyContrast,
+      applySaturation,
+      applyExposure,
+      applyHue,
+      applyTemperature,
+      applyTint,
+      applyHighlightShadow,
+      applyClarity,
+      applyVignette,
+      applyInvert,
+      applyBlur,
+      applySharpen,
+      applyGrayscale,
+      resetColor
+    } = filters;
 
     resetColor(getCanvasImageData, originalPixels);
 
-    if (filters.brightness !== 100) {
-      applyBrightness(wasm, getCanvasImageData, filters.brightness);
-    }
+    if (state.brightness !== 100) applyBrightness(wasm, getCanvasImageData, state.brightness);
+    if (state.contrast !== 100) applyContrast(wasm, getCanvasImageData, state.contrast);
+    if (state.saturation !== 100) applySaturation(wasm, getCanvasImageData, state.saturation);
+    if (state.exposure !== 0) applyExposure(wasm, getCanvasImageData, state.exposure);
+    if (state.hue !== 0) applyHue(wasm, getCanvasImageData, state.hue);
+    if (state.temperature !== 0) applyTemperature(wasm, getCanvasImageData, state.temperature);
+    if (state.tint !== 0) applyTint(wasm, getCanvasImageData, state.tint);
 
-    if (filters.contrast !== 100) {
-      applyContrast(wasm, getCanvasImageData, filters.contrast);
-    }
+    if (state.shadows !== 0 || state.highlights !== 0)
+      applyHighlightShadow(wasm, getCanvasImageData, state.shadows, state.highlights);
 
-    if (filters.saturation !== 100) {
-      applySaturation(wasm, getCanvasImageData, filters.saturation);
-    }
+    if (state.clarity !== 0) applyClarity(wasm, getCanvasImageData, state.clarity);
+    if (state.vignette !== 0) applyVignette(wasm, getCanvasImageData, state.vignette);
 
-    if (filters.exposure !== 0) {
-      applyExposure(wasm, getCanvasImageData, filters.exposure);
-    }
-
-    if (filters.hue !== 0) {
-      applyHue(wasm, getCanvasImageData, filters.hue);
-    }
-
-    if (filters.temperature !== 0) {
-      applyTemperature(wasm, getCanvasImageData, filters.temperature);
-    }
-
-    if (filters.tint !== 0) {
-      applyTint(wasm, getCanvasImageData, filters.tint);
-    }
-
-    if (filters.shadows !== 0 || filters.highlights !== 0) {
-      applyHighlightShadow(wasm, getCanvasImageData, filters.shadows, filters.highlights);
-    }
-
-    if (filters.clarity !== 0) {
-      applyClarity(wasm, getCanvasImageData, filters.clarity);
-    }
-
-    if (filters.vignette !== 0) {
-      applyVignette(wasm, getCanvasImageData, filters.vignette);
-    }
-
-    if (filters.invert) {
-      applyInvert(wasm, getCanvasImageData);
-    }
-
-    if (filters.blur) {
-      applyBlur(wasm, getCanvasImageData);
-    }
-
-    if (filters.sharpen) {
-      applySharpen(wasm, getCanvasImageData);
-    }
-
-    if (filters.isGray) {
-      applyGrayscale(wasm, getCanvasImageData);
-    }
+    if (state.invert) applyInvert(wasm, getCanvasImageData);
+    if (state.blur) applyBlur(wasm, getCanvasImageData);
+    if (state.sharpen) applySharpen(wasm, getCanvasImageData);
+    if (state.isGray) applyGrayscale(wasm, getCanvasImageData);
   }, [
     wasm,
     image,
     originalPixels,
     getCanvasImageData,
-    applyClarity,
-    applyHighlightShadow,
-    applyTint,
-    applyTemperature,
-    applyHue,
-    applySharpen,
-    applyBlur,
-    applyInvert,
-    applyExposure,
-    applySaturation,
-    applyContrast,
-    applyBrightness,
-    applyGrayscale,
-    resetColor,
+    filters
   ]);
 }

@@ -1,13 +1,13 @@
-export default function rafThrottle<T extends any[]>(fn: (...args: T) => void) {
+export default function rafThrottle<T>(fn: (arg: T) => void) {
   let ticking = false;
 
-  return (...args: T): void => {
+  return (arg: T) => {
     if (ticking) return;
 
     ticking = true;
 
     requestAnimationFrame(() => {
-      fn(...args);
+      fn(arg);
       ticking = false;
     });
   };
