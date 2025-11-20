@@ -6,6 +6,13 @@ export type GetCanvasImageData = () => {
   canvas: HTMLCanvasElement;
 } | null;
 
+export type ApplyHighlightShadow = (
+  wasm: WasmModule | null,
+  getCanvasImageData: GetCanvasImageData,
+  shadows: number,
+  highlights: number,
+) => void;
+
 export type ApplyTint = (
   wasm: WasmModule | null,
   getCanvasImageData: GetCanvasImageData,
