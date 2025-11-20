@@ -1,6 +1,6 @@
 import ButtonFilterComponent from "@/app/editor/components/FilterPanel/button/ButtonFilterComponent";
 import React from "react";
-import {BooleanFilterKey, FilterProps} from "@/app/types/filterStateTypes";
+import {FilterProps} from "@/app/types/filterStateTypes";
 import {BUTTON_FILTERS} from "@/app/constants/filter";
 
 export default function ButtonFilters({ filters, setFilter, disabled }: FilterProps) {
