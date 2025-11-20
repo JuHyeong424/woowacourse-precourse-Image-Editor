@@ -2,6 +2,7 @@ import React from "react";
 import {IoMdCloseCircle} from "react-icons/io";
 import SelectFileComponent from "@/app/editor/components/ImageFile/SelectFileComponent";
 import useClearCanvas from "@/app/hooks/canvas/useClearCanvas";
+import DownloadImageComponent from "@/app/editor/components/ImageFile/DownloadImageComponent";
 
 interface UploadedImageComponentProps {
   canvasRef: React.RefObject<HTMLCanvasElement | null>;
@@ -10,7 +11,7 @@ interface UploadedImageComponentProps {
 }
 
 export default function UploadedImageComponent({canvasRef, image, setImage}: UploadedImageComponentProps) {
-  const { clearCanvas } = useClearCanvas({ canvasRef });
+  const {clearCanvas} = useClearCanvas({canvasRef});
   const hasImage = !!image;
 
   const deleteImage = () => {
@@ -21,14 +22,16 @@ export default function UploadedImageComponent({canvasRef, image, setImage}: Upl
   return (
     <div
       className="relative flex flex-1 border-2 h-full rounded-lg p-4 flex-col items-center justify-center text-center">
-      {!hasImage && <SelectFileComponent setImage={setImage} />}
-
+      {!hasImage && <SelectFileComponent setImage={setImage}/>}
       {hasImage && (
-        <IoMdCloseCircle
-          onClick={deleteImage}
-          className="absolute top-4 right-4 text-red-500 text-4xl cursor-pointer z-10 bg-white rounded-full m-4"/>
+        <>
+          <IoMdCloseCircle
+            onClick={deleteImage}
+            className="absolute top-4 left-4 text-red-500 text-4xl cursor-pointer z-10 bg-white rounded-full m-4"
+          />
+          <DownloadImageComponent canvasRef={canvasRef} />
+        </>
       )}
-
       <canvas
         ref={canvasRef}
         className="w-full h-full object-contain border-2 border-gray-300"
