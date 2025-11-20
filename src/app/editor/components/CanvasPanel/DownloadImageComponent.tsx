@@ -4,7 +4,7 @@ interface DownloadImageComponentProps {
   canvasRef: React.RefObject<HTMLCanvasElement | null>;
 }
 
-export default function DownloadImageComponent({canvasRef}: DownloadImageComponentProps) {
+export default function DownloadImageComponent({ canvasRef }: DownloadImageComponentProps) {
   const handleDownload = async () => {
     if (canvasRef.current) {
       await downloadCanvas({canvasRef, fileName: "edited-image.png"});
