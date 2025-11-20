@@ -12,6 +12,7 @@ mod hue;
 mod temperature;
 mod tint;
 mod highlights_shadow;
+mod clarity;
 
 #[wasm_bindgen]
 pub fn grayscale(data: &mut [u8]) {
@@ -54,3 +55,7 @@ pub fn tint(data: &mut [u8], tint: f32) { tint::tint(data, tint) }
 
 #[wasm_bindgen]
 pub fn highlights_shadow(data: &mut [u8] , shadow: f32, highlights: f32) { highlights_shadow::highlights_shadows(data, shadow, highlights) }
+
+#[wasm_bindgen]
+pub fn clarity(data: &mut [u8], width: usize, height: usize, clarity: f32) { clarity::clarity(data, width, height, clarity) }
+

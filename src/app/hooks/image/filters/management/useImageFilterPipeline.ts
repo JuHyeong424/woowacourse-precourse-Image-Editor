@@ -2,7 +2,7 @@ import {useCallback} from "react";
 import {WasmModule} from "@/lib/wasm-loader";
 import {
   ApplyBlur,
-  ApplyBrightness,
+  ApplyBrightness, ApplyClarity,
   ApplyContrast, ApplyExposure,
   ApplyGrayscale, ApplyHighlightShadow, ApplyHue, ApplyInvert,
   ApplySaturation, ApplySharpen, ApplyTemperature, ApplyTint,
@@ -11,6 +11,7 @@ import {
 } from "@/app/types/filterTypes";
 
 interface Filters {
+  clarity: number;
   shadows:number;
   highlights: number;
   tint: number;
@@ -31,6 +32,7 @@ interface useImageFilterPipelineProps {
   image: HTMLImageElement | null;
   originalPixels: ImageData["data"] | null;
   getCanvasImageData: GetCanvasImageData;
+  applyClarity: ApplyClarity;
   applyHighlightShadow: ApplyHighlightShadow;
   applyTint: ApplyTint;
   applyTemperature: ApplyTemperature;
@@ -51,6 +53,7 @@ export default function useImageFilterPipeline({
     image,
     originalPixels,
     getCanvasImageData,
+    applyClarity,
     applyHighlightShadow,
     applyTint,
     applyTemperature,
@@ -102,6 +105,10 @@ export default function useImageFilterPipeline({
       applyHighlightShadow(wasm, getCanvasImageData, filters.shadows, filters.highlights);
     }
 
+    if (filters.clarity !== 0) {
+      applyClarity(wasm, getCanvasImageData, filters.clarity);
+    }
+
     if (filters.invert) {
       applyInvert(wasm, getCanvasImageData);
     }
@@ -122,6 +129,7 @@ export default function useImageFilterPipeline({
     image,
     originalPixels,
     getCanvasImageData,
+    applyClarity,
     applyHighlightShadow,
     applyTint,
     applyTemperature,
