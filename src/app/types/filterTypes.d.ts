@@ -6,6 +6,12 @@ export type GetCanvasImageData = () => {
   canvas: HTMLCanvasElement;
 } | null;
 
+export type ApplyVignette = (
+  wasm: WasmModule | null,
+  getCanvasImageData: GetCanvasImageData,
+  vignette: number,
+) => void;
+
 export type ApplyClarity = (
   wasm: WasmModule | null,
   getCanvasImageData: GetCanvasImageData,

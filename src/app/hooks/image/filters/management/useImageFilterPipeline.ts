@@ -5,12 +5,13 @@ import {
   ApplyBrightness, ApplyClarity,
   ApplyContrast, ApplyExposure,
   ApplyGrayscale, ApplyHighlightShadow, ApplyHue, ApplyInvert,
-  ApplySaturation, ApplySharpen, ApplyTemperature, ApplyTint,
+  ApplySaturation, ApplySharpen, ApplyTemperature, ApplyTint, ApplyVignette,
   GetCanvasImageData,
   ResetColor
 } from "@/app/types/filterTypes";
 
 interface Filters {
+  vignette: number;
   clarity: number;
   shadows:number;
   highlights: number;
@@ -32,6 +33,7 @@ interface useImageFilterPipelineProps {
   image: HTMLImageElement | null;
   originalPixels: ImageData["data"] | null;
   getCanvasImageData: GetCanvasImageData;
+  applyVignette: ApplyVignette;
   applyClarity: ApplyClarity;
   applyHighlightShadow: ApplyHighlightShadow;
   applyTint: ApplyTint;
@@ -53,6 +55,7 @@ export default function useImageFilterPipeline({
     image,
     originalPixels,
     getCanvasImageData,
+    applyVignette,
     applyClarity,
     applyHighlightShadow,
     applyTint,
@@ -107,6 +110,10 @@ export default function useImageFilterPipeline({
 
     if (filters.clarity !== 0) {
       applyClarity(wasm, getCanvasImageData, filters.clarity);
+    }
+
+    if (filters.vignette !== 0) {
+      applyVignette(wasm, getCanvasImageData, filters.vignette);
     }
 
     if (filters.invert) {

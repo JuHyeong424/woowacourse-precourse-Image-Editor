@@ -8,6 +8,7 @@ import SliderFilterComponent from "@/app/editor/components/SliderFilterComponent
 import ButtonFilterComponent from "@/app/editor/components/ButtonFilterComponent";
 
 type FilterState = {
+  vignette: number;
   clarity: number;
   shadows: number;
   highlights: number;
@@ -25,7 +26,7 @@ type FilterState = {
 };
 
 type BooleanFilterKey = "invert" | "isGray" | "blur" | "sharpen";
-type NumberFilterKey = | "exposure" | "saturation" | "contrast" | "brightness" | "hue" | "temperature" | "tint" | "shadows" | "highlights" | "clarity";
+type NumberFilterKey = | "exposure" | "saturation" | "contrast" | "brightness" | "hue" | "temperature" | "tint" | "shadows" | "highlights" | "clarity" | "vignette";
 
 export default function EditorPage() {
   const {
@@ -56,6 +57,7 @@ export default function EditorPage() {
     { key: "shadows", label: "섀도우 조절", min: -100, max: 100 },
     { key: "highlights", label: "하이라이트 조절", min: -100, max: 100 },
     { key: "clarity", label: "로컬 대비 조절", min: -100, max: 100 },
+    { key: "vignette", label: "비네트 강도 조절", min: -100, max: 100 },
   ];
 
   const buttonFilters: { key: BooleanFilterKey; label: string; id: string; }[] = [

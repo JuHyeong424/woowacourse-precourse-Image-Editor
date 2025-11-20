@@ -13,6 +13,7 @@ mod temperature;
 mod tint;
 mod highlights_shadow;
 mod clarity;
+mod vignette;
 
 #[wasm_bindgen]
 pub fn grayscale(data: &mut [u8]) {
@@ -59,3 +60,5 @@ pub fn highlights_shadow(data: &mut [u8] , shadow: f32, highlights: f32) { highl
 #[wasm_bindgen]
 pub fn clarity(data: &mut [u8], width: usize, height: usize, clarity: f32) { clarity::clarity(data, width, height, clarity) }
 
+#[wasm_bindgen]
+pub fn vignette(data: &mut [u8], width: usize, height: usize, vignette: f32) { vignette::vignette(data, width, height, vignette) }
