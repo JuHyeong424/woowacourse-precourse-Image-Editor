@@ -6,7 +6,7 @@ export interface CanvasInfo {
   ctx: CanvasRenderingContext2D;
 }
 
-export default function getCanvas(canvasRef: React.RefObject<HTMLCanvasElement | null>): CanvasInfo | null {
+export default function getCanvasUtil(canvasRef: React.RefObject<HTMLCanvasElement | null>): CanvasInfo | null {
   const canvas = canvasRef.current;
   if (!canvas) return null;
 

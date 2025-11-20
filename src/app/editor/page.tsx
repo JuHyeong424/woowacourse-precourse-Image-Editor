@@ -5,7 +5,7 @@ import useImageEditor from "@/app/hooks/image/editor/useImageEditor";
 import useImageFilterController from "@/app/hooks/image/filters/management/useImageFilterController";
 import React from "react";
 import FilterPanel from "@/app/editor/components/FilterPanel/FilterPanel";
-import getCanvasImageDataUtil from "@/app/utils/canvas/getCanvasImageData";
+import getCanvasImageDataUtil from "@/app/utils/canvas/getCanvasImageDataUtil";
 
 export default function EditorPage() {
   const {

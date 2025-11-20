@@ -1,4 +1,4 @@
-import getCanvas from "@/app/utils/canvas/getCanvas";
+import getCanvasUtil from "@/app/utils/canvas/getCanvasUtil";
 import {CANVAS_ORIGIN_X, CANVAS_ORIGIN_Y} from "@/app/constants/canvas";
 
 export interface CanvasImageInfo {
@@ -8,7 +8,7 @@ export interface CanvasImageInfo {
 }
 
 export default function getCanvasImageDataUtil(canvasRef: React.RefObject<HTMLCanvasElement | null>): CanvasImageInfo | null {
-  const info = getCanvas(canvasRef);
+  const info = getCanvasUtil(canvasRef);
   if (!info) return null;
 
   const { canvas, ctx } = info;
