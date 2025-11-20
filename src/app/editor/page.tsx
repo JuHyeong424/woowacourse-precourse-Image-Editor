@@ -1,6 +1,6 @@
 "use client"
 
-import UploadedImageComponent from "@/app/editor/components/CanvasPanel/UploadedImageComponent";
+import CanvasPanel from "@/app/editor/components/CanvasPanel/CanvasPanel";
 import useImageEditor from "@/app/hooks/image/editor/useImageEditor";
 import useGetCanvasImageData from "@/app/hooks/canvas/useGetCanvasImageData";
 import useImageFilterController from "@/app/hooks/image/filters/management/useImageFilterController";
@@ -32,7 +32,11 @@ export default function EditorPage() {
         setFilter={setFilter}
         disabled={disabled}
       />
-      <UploadedImageComponent canvasRef={canvasRef} image={image} setImage={setImage} />
+      <CanvasPanel
+        canvasRef={canvasRef}
+        image={image}
+        setImage={setImage}
+      />
     </div>
   );
 }

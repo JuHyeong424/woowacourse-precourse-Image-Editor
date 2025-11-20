@@ -10,7 +10,7 @@ interface UploadedImageComponentProps {
   setImage: (img: HTMLImageElement | null) => void;
 }
 
-export default function UploadedImageComponent({canvasRef, image, setImage}: UploadedImageComponentProps) {
+export default function CanvasPanel({canvasRef, image, setImage}: UploadedImageComponentProps) {
   const {clearCanvas} = useClearCanvas({canvasRef});
   const hasImage = !!image;
 
