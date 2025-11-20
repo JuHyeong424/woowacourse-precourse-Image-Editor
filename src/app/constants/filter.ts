@@ -1,5 +1,7 @@
 import {BooleanFilterKey, NumberFilterKey} from "@/app/types/filterStateTypes";
 
+export const FINAL_FILTER_APPLY_DELAY = 120;
+
 export const BUTTON_FILTERS: {
   key: BooleanFilterKey;
   label: string;

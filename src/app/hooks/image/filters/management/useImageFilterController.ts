@@ -6,6 +6,7 @@ import useImageFilterPipeline from "@/app/hooks/image/filters/management/useImag
 import rafThrottle from "@/app/utils/rafThrottle";
 import {FilterState} from "@/app/types/filterStateTypes";
 import useFilterFunctions from "@/app/hooks/image/filters/management/useFilterFunctions";
+import {FINAL_FILTER_APPLY_DELAY} from "@/app/constants/filter";
 
 interface UseImageFilterControllerProps {
   wasm: WasmModule | null;
@@ -47,7 +48,7 @@ export default function useImageFilterController(
 
     const id = setTimeout(() => {
       applyAllFilters(filters);
-    }, 120);
+    }, FINAL_FILTER_APPLY_DELAY);
 
     return () => clearTimeout(id);
   }, [filters, disabled, throttledApply, applyAllFilters]);
