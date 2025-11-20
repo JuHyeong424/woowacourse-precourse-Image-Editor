@@ -6,6 +6,7 @@ import useGetCanvasImageData from "@/app/hooks/canvas/useGetCanvasImageData";
 import useImageFilterController from "@/app/hooks/image/filters/management/useImageFilterController";
 import SliderFilterComponent from "@/app/editor/components/SliderFilterComponent";
 import ButtonFilterComponent from "@/app/editor/components/ButtonFilterComponent";
+import React from "react";
 
 type FilterState = {
   vignette: number;
