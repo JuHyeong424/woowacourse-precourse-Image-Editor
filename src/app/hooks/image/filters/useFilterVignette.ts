@@ -1,4 +1,4 @@
-import useFilterBase from "@/app/hooks/image/filters/useFilterBase";
+import useFilterBase from "@/app/hooks/image/filters/core/useFilterBase";
 import {WasmModule} from "@/lib/wasm-loader";
 import {GetCanvasImageData} from "@/app/types/filterTypes";
 

@@ -1,4 +1,4 @@
-import useImageFilters from "@/app/hooks/image/filters/management/useImageFilters";
+import useImageFilters from "@/app/hooks/image/filters/manager/useImageFilters";
 
 export default function useFilterFunctions() {
   const {

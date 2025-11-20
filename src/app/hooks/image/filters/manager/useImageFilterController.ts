@@ -1,11 +1,11 @@
 import {WasmModule} from "@/lib/wasm-loader";
 import {GetCanvasImageData} from "@/app/types/filterTypes";
 import {useEffect, useMemo} from "react";
-import useImageFilterState from "@/app/hooks/image/filters/management/useImageFilterState";
-import useImageFilterPipeline from "@/app/hooks/image/filters/management/useImageFilterPipeline";
+import useImageFilterState from "@/app/hooks/image/filters/core/useImageFilterState";
+import useImageFilterPipeline from "@/app/hooks/image/filters/pipeline/useImageFilterPipeline";
 import rafThrottle from "@/app/utils/rafThrottle";
 import {FilterState} from "@/app/types/filterStateTypes";
-import useFilterFunctions from "@/app/hooks/image/filters/management/useFilterFunctions";
+import useFilterFunctions from "@/app/hooks/image/filters/manager/useFilterFunctions";
 import {FINAL_FILTER_APPLY_DELAY} from "@/app/constants/filter";
 
 interface UseImageFilterControllerProps {

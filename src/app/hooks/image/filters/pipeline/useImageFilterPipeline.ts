@@ -9,24 +9,7 @@ import {
   GetCanvasImageData,
   ResetColor
 } from "@/app/types/filterTypes";
-
-interface Filters {
-  vignette: number;
-  clarity: number;
-  shadows:number;
-  highlights: number;
-  tint: number;
-  temperature: number;
-  hue: number;
-  sharpen: boolean;
-  blur: boolean;
-  invert: boolean;
-  exposure: number;
-  saturation: number;
-  contrast: number;
-  brightness: number;
-  isGray: boolean;
-}
+import {FilterState} from "@/app/types/filterStateTypes";
 
 interface useImageFilterPipelineProps {
   wasm: WasmModule | null;
@@ -53,13 +36,13 @@ interface useImageFilterPipelineProps {
 }
 
 export default function useImageFilterPipeline({
-    wasm,
-    image,
-    originalPixels,
-    getCanvasImageData,
-    filters
-}: useImageFilterPipelineProps) {
-  return useCallback((state: Filters) => {
+                                                 wasm,
+                                                 image,
+                                                 originalPixels,
+                                                 getCanvasImageData,
+                                                 filters
+                                               }: useImageFilterPipelineProps) {
+  return useCallback((state: FilterState) => {
     if (!wasm || !image || !originalPixels) return;
 
     const {
@@ -82,29 +65,34 @@ export default function useImageFilterPipeline({
 
     resetColor(getCanvasImageData, originalPixels);
 
-    if (state.brightness !== 100) applyBrightness(wasm, getCanvasImageData, state.brightness);
-    if (state.contrast !== 100) applyContrast(wasm, getCanvasImageData, state.contrast);
-    if (state.saturation !== 100) applySaturation(wasm, getCanvasImageData, state.saturation);
-    if (state.exposure !== 0) applyExposure(wasm, getCanvasImageData, state.exposure);
-    if (state.hue !== 0) applyHue(wasm, getCanvasImageData, state.hue);
-    if (state.temperature !== 0) applyTemperature(wasm, getCanvasImageData, state.temperature);
-    if (state.tint !== 0) applyTint(wasm, getCanvasImageData, state.tint);
+    const numericFilterMap = [
+      ["brightness", applyBrightness, 100],
+      ["contrast", applyContrast, 100],
+      ["saturation", applySaturation, 100],
+      ["exposure", applyExposure, 0],
+      ["hue", applyHue, 0],
+      ["temperature", applyTemperature, 0],
+      ["tint", applyTint, 0],
+      ["clarity", applyClarity, 0],
+      ["vignette", applyVignette, 0],
+    ] as const;
+
+    numericFilterMap.forEach(([key, fn, defaultValue]) => {
+      if (state[key] !== defaultValue) fn(wasm, getCanvasImageData, state[key]);
+    });
 
     if (state.shadows !== 0 || state.highlights !== 0)
       applyHighlightShadow(wasm, getCanvasImageData, state.shadows, state.highlights);
 
-    if (state.clarity !== 0) applyClarity(wasm, getCanvasImageData, state.clarity);
-    if (state.vignette !== 0) applyVignette(wasm, getCanvasImageData, state.vignette);
+    const booleanFilterMap = [
+      ["invert", applyInvert],
+      ["blur", applyBlur],
+      ["sharpen", applySharpen],
+      ["isGray", applyGrayscale],
+    ] as const;
 
-    if (state.invert) applyInvert(wasm, getCanvasImageData);
-    if (state.blur) applyBlur(wasm, getCanvasImageData);
-    if (state.sharpen) applySharpen(wasm, getCanvasImageData);
-    if (state.isGray) applyGrayscale(wasm, getCanvasImageData);
-  }, [
-    wasm,
-    image,
-    originalPixels,
-    getCanvasImageData,
-    filters
-  ]);
+    booleanFilterMap.forEach(([key, fn]) => {
+      if (state[key]) fn(wasm, getCanvasImageData);
+    })
+  }, [wasm, image, originalPixels, getCanvasImageData, filters]);
 }
