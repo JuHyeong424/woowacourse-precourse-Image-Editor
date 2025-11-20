@@ -2,10 +2,10 @@
 
 import CanvasPanel from "@/app/editor/components/CanvasPanel/CanvasPanel";
 import useImageEditor from "@/app/hooks/image/editor/useImageEditor";
-import useGetCanvasImageData from "@/app/hooks/canvas/useGetCanvasImageData";
 import useImageFilterController from "@/app/hooks/image/filters/management/useImageFilterController";
 import React from "react";
 import FilterPanel from "@/app/editor/components/FilterPanel/FilterPanel";
+import getCanvasImageDataUtil from "@/app/utils/canvas/getCanvasImageData";
 
 export default function EditorPage() {
   const {
@@ -16,7 +16,7 @@ export default function EditorPage() {
     canvasRef
   } = useImageEditor();
 
-  const { getCanvasImageData } = useGetCanvasImageData({ canvasRef });
+  const getCanvasImageData = () => getCanvasImageDataUtil(canvasRef);
 
   const { filters, setFilter, disabled} = useImageFilterController({
     wasm,
