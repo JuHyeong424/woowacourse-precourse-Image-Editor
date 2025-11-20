@@ -12,6 +12,7 @@ import type {
   tint as TintType,
   highlights_shadow as Highlights_shadowType,
   clarity as ClarityType,
+  vignette as VignetteType,
 } from '@/wasm/rust_core';
 
 export interface WasmModule {
@@ -28,6 +29,7 @@ export interface WasmModule {
   tint: typeof TintType;
   highlights_shadow: typeof Highlights_shadowType;
   clarity: typeof ClarityType;
+  vignette: typeof VignetteType;
 }
 
 export const loadWASM = async (): Promise<WasmModule> => {
@@ -46,6 +48,7 @@ export const loadWASM = async (): Promise<WasmModule> => {
       tint: () => {},
       highlights_shadow: () => {},
       clarity: () => {},
+      vignette: () => {},
     };
   }
   const wasm = await import('@/wasm/rust_core');
@@ -64,5 +67,6 @@ export const loadWASM = async (): Promise<WasmModule> => {
     tint: wasm.tint,
     highlights_shadow: wasm.highlights_shadow,
     clarity: wasm.clarity,
+    vignette: wasm.vignette,
   };
 }
