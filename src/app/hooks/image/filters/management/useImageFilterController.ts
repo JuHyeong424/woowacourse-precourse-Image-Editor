@@ -5,6 +5,7 @@ import {useCallback, useEffect, useMemo} from "react";
 import useImageFilterState from "@/app/hooks/image/filters/management/useImageFilterState";
 import useImageFilterPipeline from "@/app/hooks/image/filters/management/useImageFilterPipeline";
 import rafThrottle from "@/app/utils/rafThrottle";
+import {FilterState} from "@/app/types/filterStateTypes";
 
 interface UseImageFilterControllerProps {
   wasm: WasmModule | null;
@@ -38,34 +39,34 @@ export default function useImageFilterController(
     resetColor
   } = useImageFilters();
 
-  const { filters, setFilter } = useImageFilterState(image);
+  const {filters, setFilter} = useImageFilterState(image);
 
   const applyAllFilters = useCallback(
     useImageFilterPipeline({
-    wasm,
-    image,
-    originalPixels,
-    getCanvasImageData,
-    applyVignette,
-    applyClarity,
-    applyHighlightShadow,
-    applyTint,
-    applyTemperature,
-    applyHue,
-    applySharpen,
-    applyBlur,
-    applyInvert,
-    applyExposure,
-    applySaturation,
-    applyContrast,
-    applyBrightness,
-    applyGrayscale,
-    resetColor
-  }), [wasm, image, originalPixels]);
+      wasm,
+      image,
+      originalPixels,
+      getCanvasImageData,
+      applyVignette,
+      applyClarity,
+      applyHighlightShadow,
+      applyTint,
+      applyTemperature,
+      applyHue,
+      applySharpen,
+      applyBlur,
+      applyInvert,
+      applyExposure,
+      applySaturation,
+      applyContrast,
+      applyBrightness,
+      applyGrayscale,
+      resetColor
+    }), [wasm, image, originalPixels]);
 
   const disabled = !wasm || !image;
   const throttledApply = useMemo(
-    () => rafThrottle(applyAllFilters),
+    () => rafThrottle((filters: FilterState) => applyAllFilters(filters)),
     [applyAllFilters]
   );
 
