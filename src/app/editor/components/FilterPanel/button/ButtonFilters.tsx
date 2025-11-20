@@ -1,4 +1,4 @@
-import ButtonFilterComponent from "@/app/editor/components/FilterPanel/ButtonFilterComponent";
+import ButtonFilterComponent from "@/app/editor/components/FilterPanel/button/ButtonFilterComponent";
 import React from "react";
 import {BooleanFilterKey, FilterProps} from "@/app/types/filterStateTypes";
 

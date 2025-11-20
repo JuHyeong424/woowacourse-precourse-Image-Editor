@@ -1,6 +1,6 @@
 "use client"
 
-import UploadedImageComponent from "@/app/editor/components/ImageFile/UploadedImageComponent";
+import UploadedImageComponent from "@/app/editor/components/CanvasPanel/UploadedImageComponent";
 import useImageEditor from "@/app/hooks/image/editor/useImageEditor";
 import useGetCanvasImageData from "@/app/hooks/canvas/useGetCanvasImageData";
 import useImageFilterController from "@/app/hooks/image/filters/management/useImageFilterController";

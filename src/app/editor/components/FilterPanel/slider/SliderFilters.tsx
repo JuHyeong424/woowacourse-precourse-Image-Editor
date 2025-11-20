@@ -1,4 +1,4 @@
-import SliderFilterComponent from "@/app/editor/components/FilterPanel/SliderFilterComponent";
+import SliderFilterComponent from "@/app/editor/components/FilterPanel/slider/SliderFilterComponent";
 import React from "react";
 import {FilterProps, NumberFilterKey} from "@/app/types/filterStateTypes";
 

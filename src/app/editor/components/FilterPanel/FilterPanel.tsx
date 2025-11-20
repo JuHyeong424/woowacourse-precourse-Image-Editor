@@ -1,6 +1,6 @@
 import React from "react";
-import ButtonFilters from "@/app/editor/components/FilterPanel/ButtonFilters";
-import SliderFilters from "@/app/editor/components/FilterPanel/SliderFilters";
+import ButtonFilters from "@/app/editor/components/FilterPanel/button/ButtonFilters";
+import SliderFilters from "@/app/editor/components/FilterPanel/slider/SliderFilters";
 import {FilterProps} from "@/app/types/filterStateTypes";
 
 export default function FilterPanel({ filters, setFilter, disabled }: FilterProps) {

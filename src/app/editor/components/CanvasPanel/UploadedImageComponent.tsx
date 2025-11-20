@@ -1,8 +1,8 @@
 import React from "react";
 import {IoMdCloseCircle} from "react-icons/io";
-import SelectFileComponent from "@/app/editor/components/ImageFile/SelectFileComponent";
+import SelectFileComponent from "@/app/editor/components/CanvasPanel/SelectFileComponent";
 import useClearCanvas from "@/app/hooks/canvas/useClearCanvas";
-import DownloadImageComponent from "@/app/editor/components/ImageFile/DownloadImageComponent";
+import DownloadImageComponent from "@/app/editor/components/CanvasPanel/DownloadImageComponent";
 
 interface UploadedImageComponentProps {
   canvasRef: React.RefObject<HTMLCanvasElement | null>;
