@@ -1,46 +1,24 @@
-import base64ToBlob from "@/app/utils/base64ToBlob";
+import canvasToBlob from "@/app/utils/canvasToBlob";
+import isIOS from "@/app/utils/isIOS";
+import openInIOS from "@/app/utils/openInIOS";
+import downloadBlob from "@/app/utils/downloadBlob";
 
-interface downloadCanvasProps {
+interface DownloadCanvasProps {
   canvasRef: React.RefObject<HTMLCanvasElement | null>;
   fileName: string;
 }
 
-export default async function downloadCanvas({ canvasRef, fileName }: downloadCanvasProps) {
-  const isIOS =
-    /iPad|iPhone|iPod/.test(navigator.userAgent);
+export default async function downloadCanvas({ canvasRef, fileName }: DownloadCanvasProps) {
+  const canvas = canvasRef.current;
+  if (!canvas) return;
 
-  const blob =
-    await new Promise<Blob | null>((resolve) => {
-      if (canvasRef.current?.toBlob) {
-        canvasRef.current?.toBlob((b) => resolve(b), "image/png");
-      } else {
-        const dataURL = canvasRef.current?.toDataURL("image/png");
-
-        if (!dataURL) {
-          resolve(null);
-          return;
-        }
-
-        resolve(base64ToBlob(dataURL));
-      }
-    });
-
+  const blob = await canvasToBlob(canvas);
   if (!blob) return;
 
-  if (isIOS) {
-    const url = URL.createObjectURL(blob);
-
-    const win = window.open(url, "_blank");
-    if (!win) alert("팝업 차단 해제 후 다시 시도하세요.");
-
+  if (isIOS()) {
+    openInIOS(blob);
     return;
   }
 
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = fileName;
-  link.click();
-
-  URL.revokeObjectURL(url);
+  downloadBlob(blob, fileName);
 }
