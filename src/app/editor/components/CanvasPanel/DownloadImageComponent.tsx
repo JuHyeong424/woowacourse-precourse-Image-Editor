@@ -7,7 +7,7 @@ interface DownloadImageComponentProps {
 export default function DownloadImageComponent({ canvasRef }: DownloadImageComponentProps) {
   const handleDownload = async () => {
     if (canvasRef.current) {
-      await downloadCanvas({canvasRef, fileName: "edited-image.png"});
+      await downloadCanvas({ canvasRef, fileName: "edited-image.png" });
     }
   };
 

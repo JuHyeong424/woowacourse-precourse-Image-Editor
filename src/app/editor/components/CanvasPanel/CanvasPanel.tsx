@@ -11,7 +11,7 @@ interface UploadedImageComponentProps {
 }
 
 export default function CanvasPanel({ canvasRef, image, setImage }: UploadedImageComponentProps) {
-  const {clearCanvas} = useClearCanvas({canvasRef});
+  const { clearCanvas } = useClearCanvas({ canvasRef });
   const hasImage = !!image;
 
   const deleteImage = () => {
