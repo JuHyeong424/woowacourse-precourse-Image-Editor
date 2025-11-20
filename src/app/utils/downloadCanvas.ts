@@ -15,6 +15,12 @@ export default async function downloadCanvas({ canvasRef, fileName }: downloadCa
         canvasRef.current?.toBlob((b) => resolve(b), "image/png");
       } else {
         const dataURL = canvasRef.current?.toDataURL("image/png");
+
+        if (!dataURL) {
+          resolve(null);
+          return;
+        }
+
         resolve(base64ToBlob(dataURL));
       }
     });
