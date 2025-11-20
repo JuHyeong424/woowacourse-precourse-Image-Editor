@@ -1,5 +1,5 @@
-import useGetCanvas from "@/app/hooks/canvas/useGetCanvas";
 import React from "react";
+import getCanvas from "@/app/utils/canvas/getCanvas";
 
 interface useGetCanvasImageDataProps {
   canvasRef: React.RefObject<HTMLCanvasElement | null>;
@@ -7,7 +7,7 @@ interface useGetCanvasImageDataProps {
 
 export default function useGetCanvasImageData({ canvasRef }: useGetCanvasImageDataProps) {
   const getCanvasImageData = () => {
-    const info = useGetCanvas({ canvasRef });
+    const info = getCanvas(canvasRef);
     if (!info) return null;
 
     const { canvas, ctx } = info;

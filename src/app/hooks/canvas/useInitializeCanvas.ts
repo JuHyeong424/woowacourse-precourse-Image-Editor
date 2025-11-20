@@ -1,6 +1,6 @@
-import useGetCanvas from "@/app/hooks/canvas/useGetCanvas";
 import React from "react";
 import resizeImage from "@/app/utils/resizeImage";
+import getCanvas from "@/app/utils/canvas/getCanvas";
 
 interface useInitializeCanvasProps {
   canvasRef: React.RefObject<HTMLCanvasElement | null>;
@@ -8,7 +8,7 @@ interface useInitializeCanvasProps {
 
 export default function useInitializeCanvas({ canvasRef }: useInitializeCanvasProps) {
   const initializeCanvas = (image: HTMLImageElement): ImageData | null => {
-    const info = useGetCanvas({ canvasRef });
+    const info = getCanvas(canvasRef);
     if (!info) return null;
 
     const { canvas, ctx } = info;

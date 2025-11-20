@@ -1,8 +1,8 @@
-import useGetCanvas from "@/app/hooks/canvas/useGetCanvas";
 import React from "react";
+import getCanvas from "@/app/utils/canvas/getCanvas";
 
 export default function clearCanvas(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
-  const info = useGetCanvas({ canvasRef });
+  const info = getCanvas(canvasRef);
   if (!info) return;
 
   const { canvas, ctx } = info;
