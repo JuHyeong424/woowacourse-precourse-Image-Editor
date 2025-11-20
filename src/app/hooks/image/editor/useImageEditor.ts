@@ -4,7 +4,7 @@ import useCanvasInitializer from "@/app/hooks/image/editor/useCanvasInitializer"
 
 export default function useImageEditor() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const { wasm } = useWasmLoader();
+  const { wasm, loading, error } = useWasmLoader();
   const [image, setImage] = useState<HTMLImageElement | null>(null);
   const [originalPixels, setOriginalPixels] = useState<ImageData["data"]  | null>(null);
 
@@ -12,6 +12,8 @@ export default function useImageEditor() {
 
   return {
     wasm,
+    loading,
+    error,
     image,
     setImage,
     originalPixels,
