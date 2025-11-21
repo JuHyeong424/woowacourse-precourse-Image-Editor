@@ -1,98 +1,49 @@
 import {useCallback} from "react";
 import {WasmModule} from "@/lib/wasm-loader";
-import {
-  ApplyBlur,
-  ApplyBrightness, ApplyClarity,
-  ApplyContrast, ApplyExposure,
-  ApplyGrayscale, ApplyHighlightShadow, ApplyHue, ApplyInvert,
-  ApplySaturation, ApplySharpen, ApplyTemperature, ApplyTint, ApplyVignette,
-  GetCanvasImageData,
-  ResetColor
-} from "@/app/types/filterTypes";
+import {GetCanvasImageData} from "@/app/types/filterTypes";
 import {FilterState} from "@/app/types/filterStateTypes";
+import {FilterConfig, FilterFunctions} from "@/app/types/imageFilterTypes";
+import {FILTER_TYPE} from "@/app/config/filterConstants";
 
 interface useImageFilterPipelineProps {
   wasm: WasmModule | null;
   image: HTMLImageElement | null;
   originalPixels: ImageData["data"] | null;
   getCanvasImageData: GetCanvasImageData;
-  filters: {
-    applyVignette: ApplyVignette;
-    applyClarity: ApplyClarity;
-    applyHighlightShadow: ApplyHighlightShadow;
-    applyTint: ApplyTint;
-    applyTemperature: ApplyTemperature;
-    applyHue: ApplyHue;
-    applySharpen: ApplySharpen;
-    applyBlur: ApplyBlur;
-    applyInvert: ApplyInvert;
-    applyExposure: ApplyExposure;
-    applySaturation: ApplySaturation;
-    applyContrast: ApplyContrast;
-    applyBrightness: ApplyBrightness;
-    applyGrayscale: ApplyGrayscale;
-    resetColor: ResetColor;
-  };
+  filters: FilterFunctions;
+  filterConfigs: FilterConfig[];
 }
 
-export default function useImageFilterPipeline({
-                                                 wasm,
-                                                 image,
-                                                 originalPixels,
-                                                 getCanvasImageData,
-                                                 filters
-                                               }: useImageFilterPipelineProps) {
+export default function useImageFilterPipeline(
+  {
+    wasm,
+    image,
+    originalPixels,
+    getCanvasImageData,
+    filters,
+    filterConfigs,
+  }: useImageFilterPipelineProps) {
   return useCallback((state: FilterState) => {
     if (!wasm || !image || !originalPixels) return;
 
-    const {
-      applyBrightness,
-      applyContrast,
-      applySaturation,
-      applyExposure,
-      applyHue,
-      applyTemperature,
-      applyTint,
-      applyHighlightShadow,
-      applyClarity,
-      applyVignette,
-      applyInvert,
-      applyBlur,
-      applySharpen,
-      applyGrayscale,
-      resetColor
-    } = filters;
+    filters.resetColor(getCanvasImageData, originalPixels);
 
-    resetColor(getCanvasImageData, originalPixels);
+    filterConfigs.forEach(config => {
+      const {key, type, apply, defaultValue, condition} = config;
 
-    const numericFilterMap = [
-      ["brightness", applyBrightness, 100],
-      ["contrast", applyContrast, 100],
-      ["saturation", applySaturation, 100],
-      ["exposure", applyExposure, 0],
-      ["hue", applyHue, 0],
-      ["temperature", applyTemperature, 0],
-      ["tint", applyTint, 0],
-      ["clarity", applyClarity, 0],
-      ["vignette", applyVignette, 0],
-    ] as const;
+      switch (type) {
+        case FILTER_TYPE.NUMERIC:
+          if (state[key] !== defaultValue) apply(wasm, getCanvasImageData, state[key]);
+          break;
 
-    numericFilterMap.forEach(([key, fn, defaultValue]) => {
-      if (state[key] !== defaultValue) fn(wasm, getCanvasImageData, state[key]);
+        case FILTER_TYPE.BOOLEAN:
+          if (state[key]) apply(wasm, getCanvasImageData);
+          break;
+
+        case FILTER_TYPE.SPECIAL:
+          if (condition?.(state)) apply(wasm, getCanvasImageData, state.shadows, state.highlights);
+          break;
+      }
     });
-
-    if (state.shadows !== 0 || state.highlights !== 0)
-      applyHighlightShadow(wasm, getCanvasImageData, state.shadows, state.highlights);
-
-    const booleanFilterMap = [
-      ["invert", applyInvert],
-      ["blur", applyBlur],
-      ["sharpen", applySharpen],
-      ["isGray", applyGrayscale],
-    ] as const;
-
-    booleanFilterMap.forEach(([key, fn]) => {
-      if (state[key]) fn(wasm, getCanvasImageData);
-    })
-  }, [wasm, image, originalPixels, getCanvasImageData, filters]);
+  }, [wasm, image, originalPixels, getCanvasImageData, filters, filterConfigs]);
 }

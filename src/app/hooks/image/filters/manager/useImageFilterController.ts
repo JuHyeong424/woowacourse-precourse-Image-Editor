@@ -5,8 +5,9 @@ import useImageFilterState from "@/app/hooks/image/filters/core/useImageFilterSt
 import useImageFilterPipeline from "@/app/hooks/image/filters/pipeline/useImageFilterPipeline";
 import rafThrottle from "@/app/utils/rafThrottle";
 import {FilterState} from "@/app/types/filterStateTypes";
-import useFilterFunctions from "@/app/hooks/image/filters/manager/useFilterFunctions";
 import {FINAL_FILTER_APPLY_DELAY} from "@/app/constants/filter";
+import useImageFilters from "@/app/hooks/image/filters/manager/useImageFilters";
+import {getFilterConfigs} from "@/app/config/filterConfigs";
 
 interface UseImageFilterControllerProps {
   wasm: WasmModule | null;
@@ -22,16 +23,19 @@ export default function useImageFilterController(
     originalPixels,
     getCanvasImageData
   }: UseImageFilterControllerProps) {
-  const filterFunctions = useFilterFunctions();
+  const filterFunctions = useImageFilters();
 
   const {filters, setFilter} = useImageFilterState(image);
+
+  const filterConfigs = useMemo(() => getFilterConfigs(filterFunctions), [filterFunctions]);
 
   const applyAllFilters = useImageFilterPipeline({
     wasm,
     image,
     originalPixels,
     getCanvasImageData,
-    filters: filterFunctions
+    filters: filterFunctions,
+    filterConfigs
   });
 
   const disabled = !wasm || !image;
