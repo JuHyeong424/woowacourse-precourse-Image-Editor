@@ -8,6 +8,7 @@ interface SliderFilterComponentProps {
   min: number;
   max: number;
   className: string;
+  id: string;
 }
 
 export default function SliderFilterComponent({
@@ -17,7 +18,8 @@ export default function SliderFilterComponent({
     setValue,
     min,
     max,
-    className
+    className,
+    id
   }: SliderFilterComponentProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(e.target.value);
@@ -33,6 +35,8 @@ export default function SliderFilterComponent({
 
       <input
         type="range"
+        id={id}
+        data-testid={`${id}-slider`}
         min={min}
         max={max}
         value={value}
