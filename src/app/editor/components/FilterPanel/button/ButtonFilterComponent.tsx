@@ -32,6 +32,7 @@ export default function ButtonFilterComponent({
 
       <label
         htmlFor={id}
+        data-testid={`${id}-button`}
         className="
           w-6 h-6 rounded-md border-2 border-gray-400
           flex items-center justify-center
@@ -53,6 +54,7 @@ export default function ButtonFilterComponent({
 
       <span
         className="text-xl cursor-pointer select-none"
+        data-testid={`${id}-label`}
         onClick={() => !disabled && setValue(!value)}
       >
         {label}

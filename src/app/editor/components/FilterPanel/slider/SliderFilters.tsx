@@ -9,6 +9,7 @@ export default function SliderFilters({ filters, setFilter, disabled }: FilterPr
       {SLIDER_FLITER.map((filter) => (
         <SliderFilterComponent
           key={filter.key}
+          id={filter.key}
           disabled={disabled}
           label={filter.label}
           value={filters[filter.key]}
