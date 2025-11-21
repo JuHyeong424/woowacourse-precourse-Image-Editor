@@ -1,6 +1,7 @@
 import useFilterBase from "@/app/hooks/image/filters/core/useFilterBase";
 import {WasmModule} from "@/lib/wasm-loader";
 import {GetCanvasImageData} from "@/app/types/filterTypes";
+import {CANVAS_ORIGIN_X, CANVAS_ORIGIN_Y} from "@/app/constants/canvas";
 
 export default function useFilterSharpen() {
   const { prepareFilter } = useFilterBase();
@@ -16,7 +17,7 @@ export default function useFilterSharpen() {
     const unit8View = new Uint8Array(imageData.data.buffer);
 
     wasm?.sharpen(unit8View, canvas.width, canvas.height);
-    ctx.putImageData(imageData, 0, 0);
+    ctx.putImageData(imageData, CANVAS_ORIGIN_X, CANVAS_ORIGIN_Y);
   };
 
   return { applySharpen };

@@ -1,5 +1,6 @@
 import {WasmModule} from "@/lib/wasm-loader";
 import useFilterBase from "@/app/hooks/image/filters/core/useFilterBase";
+import {CANVAS_ORIGIN_X, CANVAS_ORIGIN_Y} from "@/app/constants/canvas";
 
 interface CanvasInfo {
   ctx: CanvasRenderingContext2D;
@@ -23,7 +24,7 @@ export default function useFilterGrayscale() {
     const uint8View = new Uint8Array(imageData.data.buffer);
 
     wasm?.grayscale(uint8View);
-    ctx.putImageData(imageData, 0, 0);
+    ctx.putImageData(imageData, CANVAS_ORIGIN_X, CANVAS_ORIGIN_Y);
   };
 
   return { applyGrayscale };
