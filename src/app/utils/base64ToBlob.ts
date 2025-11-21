@@ -1,5 +1,7 @@
+import {COMMA} from "@/app/constants/regex";
+
 export default function base64ToBlob(dataURL: string): Blob {
-  const parts = dataURL.split(",");
+  const parts = dataURL.split(COMMA);
   const mime = parts[0].match(/:(.*?);/)![1];
   const binary = atob(parts[1]);
   const len = binary.length;

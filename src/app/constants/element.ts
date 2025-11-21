@@ -1,0 +1,1 @@
+export const A_ELEMENT = 'a';

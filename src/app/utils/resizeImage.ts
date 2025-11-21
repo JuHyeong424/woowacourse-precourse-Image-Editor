@@ -1,13 +1,13 @@
+import {DEFAULT_MAX_IMAGE_SIZE} from "@/app/constants/image";
+
 interface resizeImageProps {
   width: number;
   height: number;
 }
 
 export default function resizeImage({ width, height }: resizeImageProps) {
-  const MAX_SIZE = 1080;
-
-  if (width > MAX_SIZE || height > MAX_SIZE) {
-    const scale = MAX_SIZE / Math.max(width, height);
+  if (width > DEFAULT_MAX_IMAGE_SIZE || height > DEFAULT_MAX_IMAGE_SIZE) {
+    const scale = DEFAULT_MAX_IMAGE_SIZE / Math.max(width, height);
     width = width * scale;
     height = height * scale;
   }
