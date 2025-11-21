@@ -1,13 +1,14 @@
 import downloadCanvas from "@/app/utils/downloadCanvas";
+import {DEFAULT_DOWNLOAD_FILENAME} from "@/app/constants/file";
 
 interface DownloadImageComponentProps {
   canvasRef: React.RefObject<HTMLCanvasElement | null>;
 }
 
-export default function DownloadImageComponent({canvasRef}: DownloadImageComponentProps) {
+export default function DownloadImageComponent({ canvasRef }: DownloadImageComponentProps) {
   const handleDownload = async () => {
     if (canvasRef.current) {
-      await downloadCanvas({canvasRef, fileName: "edited-image.png"});
+      await downloadCanvas({ canvasRef, fileName: DEFAULT_DOWNLOAD_FILENAME });
     }
   };
 

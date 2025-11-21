@@ -1,5 +1,6 @@
 import React from "react";
 import useLoadImage from "@/app/hooks/image/useLoadImage";
+import {UPLOAD_FIRST_FILE} from "@/app/constants/file";
 
 interface SelectFileProps {
   setImage: (img: HTMLImageElement | null) => void;
@@ -8,7 +9,7 @@ interface SelectFileProps {
 export default function SelectFileComponent({ setImage }: SelectFileProps) {
   const { loadImage } = useLoadImage();
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+    const file = e.target.files?.[UPLOAD_FIRST_FILE];
     if (!file) return;
 
     loadImage(file, setImage);

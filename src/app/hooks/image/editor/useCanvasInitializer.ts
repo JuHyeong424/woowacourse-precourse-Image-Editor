@@ -17,5 +17,5 @@ export default function useCanvasInitializer({ canvasRef, image, setOriginalPixe
     if (!info) return;
 
     setOriginalPixels(new Uint8ClampedArray(info.data));
-  }, [image]);
+  }, [image, initializeCanvas]);
 }

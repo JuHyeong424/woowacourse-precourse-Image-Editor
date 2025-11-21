@@ -14,8 +14,9 @@ import useFilterTint from "@/app/hooks/image/filters/useFilterTinit";
 import useFilterHighlightShadow from "@/app/hooks/image/filters/useFilterHighlightShadow";
 import useFilterClarity from "@/app/hooks/image/filters/useFilterClarity";
 import useFilterVignette from "@/app/hooks/image/filters/useFilterVignette";
+import {FilterFunctions} from "@/app/types/imageFilterTypes";
 
-export default function useImageFilters() {
+export default function useImageFilters():FilterFunctions {
   const { applyVignette } = useFilterVignette();
   const { applyClarity } = useFilterClarity();
   const { applyHighlightShadow } = useFilterHighlightShadow();

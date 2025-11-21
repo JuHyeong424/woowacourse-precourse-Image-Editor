@@ -1,3 +1,5 @@
+import {CANVAS_ORIGIN_X, CANVAS_ORIGIN_Y} from "@/app/constants/canvas";
+
 interface CanvasInfo {
   ctx: CanvasRenderingContext2D;
   imageData: ImageData;
@@ -16,7 +18,7 @@ export default function useFilterResetColor() {
     const { ctx, imageData } = info;
 
     imageData.data.set(originalPixels!);
-    ctx.putImageData(imageData, 0, 0);
+    ctx.putImageData(imageData, CANVAS_ORIGIN_X, CANVAS_ORIGIN_Y);
   };
 
   return { resetColor };
