@@ -51,8 +51,12 @@ export const loadWASM = async (): Promise<WasmModule> => {
       vignette: () => {},
     };
   }
+
   const wasm = await import('@/wasm/rust_core');
   await wasm.default();
+
+  (window as any).__wasmLoaded = true;
+
   return {
     grayscale: wasm.grayscale,
     brightness: wasm.brightness,

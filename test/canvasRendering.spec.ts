@@ -1,10 +1,13 @@
 import {expect, test} from "@playwright/test";
+import path from "path";
 
 test("이미지 업로드 후 canvas 렌더링 확인", async ({ page }) => {
   await page.goto("http://localhost:3000/editor");
 
   const fileInput = page.locator('input[type="file"]');
-  await fileInput.setInputFiles("texts/fixtures/sample.webp");
+
+  const filePath = path.join(__dirname, "fixtures", "sample.webp");
+  await fileInput.setInputFiles(filePath);
 
   const canvas = page.locator("canvas");
   await expect(canvas).toBeVisible();

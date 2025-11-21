@@ -1,15 +1,19 @@
 import {expect, test} from "@playwright/test";
+import path from "path";
 
 test("흑백 필터 적용 시 픽셀 값 변화 확인", async ({ page }) => {
   await page.goto("http://localhost:3000/editor");
 
   const fileInput = page.locator('input[type="file"]');
-  await fileInput.setInputFiles("tests/fixtures/sample.webp");
+
+  const filePath = path.join(__dirname, "fixtures", "sample.webp");
+  await fileInput.setInputFiles(filePath);
+
 
   const canvas = page.locator("canvas");
   await expect(canvas).toBeVisible();
 
-  await page.getByRole("button", { name: "흑백 필터" }).click();
+  await page.getByTestId("grayscale-button").click();
 
   const pixel = await canvas.evaluate((c: HTMLCanvasElement) => {
     const ctx = c.getContext("2d");
