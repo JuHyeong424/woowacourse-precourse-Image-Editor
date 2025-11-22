@@ -12,5 +12,10 @@ test("Vignette 필터 적용 테스트", async ({ page }) => {
 
   const after = await getPixel(page);
 
-  expect(after).not.toEqual(before);
+  const diff =
+    Math.abs(after[0] - before[0]) +
+    Math.abs(after[1] - before[1]) +
+    Math.abs(after[2] - before[2]);
+
+  expect(diff).toBeGreaterThan(2);
 });
