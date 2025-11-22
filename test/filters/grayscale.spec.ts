@@ -1,11 +1,12 @@
 import { test, expect } from "@playwright/test";
-import { loadEditorAndImage, getPixel } from "../utils/canvas";
+import {loadEditorAndImage, getPixel, waitForCanvasUpdate} from "../utils/canvas";
 
 test("Grayscale 필터 적용 테스트", async ({ page }) => {
   const canvas = await loadEditorAndImage(page);
   const before = await getPixel(page);
 
   await page.getByTestId("grayscale-button").click();
+  await waitForCanvasUpdate(page);
 
   const after = await getPixel(page);
 
