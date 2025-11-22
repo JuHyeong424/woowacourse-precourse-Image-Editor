@@ -52,7 +52,7 @@ export const loadWASM = async (): Promise<WasmModule> => {
     };
   }
 
-  const wasm = await import("@/wasm/rust_core");
+  const wasm = await import("@/wasm/rust_core.js");
   await wasm.default();
 
   (window as any).__wasmLoaded = true;
