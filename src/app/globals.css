@@ -9,7 +9,7 @@ html, body {
 }
 
 p {
-  @apply text-base leading-relaxed md:text-lg;
+  @apply text-base leading-relaxed medium:text-lg;
 }
 
 a {
