@@ -1,28 +1,25 @@
-@import "tailwindcss";
+@tailwind base;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+html, body {
+  @apply bg-black text-white m-0 p-0;
+  width: 100% !important;
+  max-width: none !important;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+p {
+  @apply text-base leading-relaxed md:text-lg;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+a {
+  @apply text-orange-400 hover:text-orange-500 transition;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+h1 {
+  @apply font-extrabold tracking-tight;
+}
+
+h2, h3, h4, h5, h6 {
+  @apply font-semibold;
 }
 
 @layer components {
@@ -72,3 +69,22 @@ body {
     scrollbar-color: transparent transparent;
   }
 }
+
+@screen sm {
+  .my-title {
+    @apply text-4xl;
+  }
+}
+
+@screen md {
+  .my-title {
+    @apply text-6xl;
+  }
+}
+
+@screen lg {
+  .my-title {
+    @apply text-7xl;
+  }
+}
+
