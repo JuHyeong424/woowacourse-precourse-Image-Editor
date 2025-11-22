@@ -53,7 +53,7 @@ export default function ButtonFilterComponent({
       </label>
 
       <span
-        className="text-xl cursor-pointer select-none"
+        className="small:text-sm medium:text-sm tablet:text-xm laptop:text-xl cursor-pointer select-none"
         data-testid={`${id}-label`}
         onClick={() => !disabled && setValue(!value)}
       >

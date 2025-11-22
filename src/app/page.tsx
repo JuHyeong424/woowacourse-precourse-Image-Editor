@@ -8,7 +8,7 @@ export default function Home() {
     <div
       className="flex flex-col items-center justify-center w-full min-h-screen p-4 overflow-x-hidden bg-black text-white">
       <h1
-        className="small:text-6xl medium:text-6xl laptop:text-7xl font-extrabold gradient-yellow-to-red bg-clip-text text-transparent p-4 m-4"
+        className="small:text-4xl medium:text-5xl tablet:text-6xl laptop:text-7xl font-extrabold gradient-yellow-to-red bg-clip-text text-transparent p-4 m-4"
       >
         PixelWasm
       </h1>
@@ -22,7 +22,7 @@ export default function Home() {
 
       <Link
         href="/editor"
-        className="font-bold gradient-yellow-to-red p-4 rounded-xl border-orange-400 hover:bg-none hover:bg-white hover:bg-clip-padding hover:text-orange-500 hover:border-none"
+        className="font-bold text-white gradient-yellow-to-red p-4 rounded-xl border-orange-400 hover:bg-none hover:bg-white hover:bg-clip-padding hover:text-orange-500 hover:border-none"
       >
         에디터 시작하기
       </Link>

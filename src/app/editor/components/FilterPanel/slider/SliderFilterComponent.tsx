@@ -27,8 +27,8 @@ export default function SliderFilterComponent({
   };
 
   return (
-    <div className="flex flex-col gap-4 my-6">
-      <div className="text-xl font-semibold text-white flex items-center gap-2">
+    <div className="flex flex-col gap-4 small:my-2 medium:my-2 tablet:my-4 laptop:my-4">
+      <div className="small:text-sm medium:text-sm tablet:text-xl laptop:text-xl font-semibold text-white flex items-center gap-2">
         <span>{label}</span>
         <span className="text-blue-400">{value}</span>
       </div>
