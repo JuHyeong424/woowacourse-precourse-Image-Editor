@@ -17,7 +17,7 @@ export default function SelectFileComponent({ setImage }: SelectFileProps) {
 
   return (
     <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
-      <h2 className="font-bold text-2xl m-4">이미지를 업로드하여 편집을 시작하세요</h2>
+      <h2 className="font-bold p-2 small:text-sm medium:text-sm tablet:text-xl laptop:text-2xl m-4">이미지를 업로드하여 편집을 시작하세요</h2>
       <label
         htmlFor="fileUpload"
         className="px-6 py-3 bg-white/10 text-white rounded-lg cursor-pointer text-center"

@@ -46,7 +46,7 @@ export default function EditorPage() {
   }
 
   return (
-    <div className="flex flex-row bg-black text-white h-screen overflow-hidden gap-6 p-12">
+    <div className="flex small:flex-col medium:flex-col tablet:flex-row laptop:flex-row bg-black text-white h-screen overflow-hidden gap-6 p-12">
       <FilterPanel
         filters={filters}
         setFilter={setFilter}
