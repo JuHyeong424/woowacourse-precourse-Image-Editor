@@ -1,4 +1,5 @@
 import { Page } from "@playwright/test";
+import {READ_CENTER_PIXEL_FN, READ_SINGLE_PIXEL_FN} from "./helpers";
 
 export async function loadEditorAndImage(page: Page) {
   await page.goto("http://localhost:3000/editor");
@@ -26,27 +27,20 @@ export async function waitForCanvasUpdate(page: Page) {
   );
 }
 
-export async function getPixel(page: Page, x = 10, y = 10) {
+export async function getPixel(page: Page, x: number | null = null, y: number | null = null) {
+  const fnCenter = READ_CENTER_PIXEL_FN;
+  const fnPoint = READ_SINGLE_PIXEL_FN;
+
   return await page.locator("canvas").evaluate(
-    (canvas: HTMLCanvasElement) => {
-      const ctx = canvas.getContext("2d");
-      const cx = Math.floor(canvas.width / 2);
-      const cy = Math.floor(canvas.height / 2);
+    (canvas, { x, y, fnCenter, fnPoint }) => {
+      const readCenterPixel = eval(fnCenter);
+      const readSinglePixel = eval(fnPoint);
 
-      let r = 0, g = 0, b = 0;
-
-      let count = 0;
-
-      for (let dx = -2; dx <=2; dx++) {
-        for (let dy = -2; dy <=2; dy++) {
-          const { data } = ctx.getImageData(cx + dx, cy + dy, 1, 1);
-          r += data[0];
-          g += data[1];
-          b += data[2];
-          count++;
-        }
+      if (x === null || y === null) {
+        return readCenterPixel(canvas);
       }
-      return [Math.round(r / count), Math.round(g / count), Math.round(b / count)];
+      return readSinglePixel(canvas, x, y);
     },
+    { x, y, fnCenter, fnPoint }
   );
 }

@@ -10,7 +10,7 @@ test("Vignette 필터 적용 테스트", async ({ page }) => {
 
   await waitForCanvasUpdate(page);
 
-  const after = await getPixel(page);
+  const after = await getPixel(page, 5, 5);
 
   const diff =
     Math.abs(after[0] - before[0]) +
