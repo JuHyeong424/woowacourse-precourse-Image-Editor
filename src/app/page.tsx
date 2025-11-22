@@ -1,27 +1,17 @@
 "use client"
 
 import Link from "next/link";
-import {useEffect, useState} from "react";
 
 export default function Home() {
-  const [width, setWidth] = useState(0);
-
-  useEffect(() => {
-    const resize = () => setWidth(window.innerWidth);
-    resize();
-    window.addEventListener("resize", resize);
-    return () => window.removeEventListener("resize", resize);
-  }, []);
 
   return (
     <div
       className="flex flex-col items-center justify-center w-full min-h-screen p-4 overflow-x-hidden bg-black text-white">
       <h1
-        className="my-title font-extrabold gradient-yellow-to-red bg-clip-text text-transparent p-4 m-4"
+        className="small:text-6xl medium:text-6xl laptop:text-7xl font-extrabold gradient-yellow-to-red bg-clip-text text-transparent p-4 m-4"
       >
         PixelWasm
       </h1>
-      <div style={{color:"white"}}>window width: {width}px</div>;
       <p className="pb-2 text-center">
         <strong>Rust</strong>와 <strong>WebAssembly</strong>를 활용한 차세대 고성능 웹 이미지 에디터
       </p>

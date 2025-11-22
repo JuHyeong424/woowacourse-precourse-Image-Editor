@@ -72,19 +72,19 @@ h2, h3, h4, h5, h6 {
   }
 }
 
-@screen sm {
+@screen small {
   .my-title {
     @apply text-4xl;
   }
 }
 
-@screen md {
+@screen medium {
   .my-title {
     @apply text-6xl;
   }
 }
 
-@screen lg {
+@screen laptop {
   .my-title {
     @apply text-7xl;
   }
