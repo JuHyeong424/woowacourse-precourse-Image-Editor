@@ -1,4 +1,4 @@
-type FilterState = {
+export type FilterState = {
   vignette: number;
   clarity: number;
   shadows: number;
