@@ -1,4 +1,5 @@
 import React from "react";
+import {AiErrorComponent} from "@/app/editor/components/FilterPanel/AiErrorComponent";
 
 interface AIFilterProps  {
   disabled: boolean;
@@ -15,8 +16,9 @@ const LABELS = {
 
 export default function AIFilter({ disabled, aiLoading, aiError, runAutoEnhance }: AIFilterProps) {
   return (
-    <>
+    <div className="flex flex-col">
       <button
+        type="button"
         onClick={runAutoEnhance}
         disabled={aiLoading || disabled}
         className="border rounded-lg py-2 px-3 mb-3 bg-neutral-800 hover:bg-neutral-700 disabled:opacity-40"
@@ -24,9 +26,7 @@ export default function AIFilter({ disabled, aiLoading, aiError, runAutoEnhance 
         {aiLoading ? LABELS.loading : LABELS.default}
       </button>
 
-      {aiError && (
-        <p className="text-red-500 text-sm mb-3">{aiError}</p>
-      )}
-    </>
+      {aiError && <AiErrorComponent message={aiError} />}
+    </div>
   )
 }
