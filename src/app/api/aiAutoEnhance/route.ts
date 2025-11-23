@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
 
 
     const response = await openai.chat.completions.create({
-      model: "gpt-4-vision-preview",
+      model: "gpt-4o-mini",
       response_format: { type: "json_object" },
       messages: [
         {
@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
               image_url: {
                 url: imageDataUrl,
               },
-            },
+            }
           ],
         },
       ],
@@ -64,10 +64,16 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(parsed);
   } catch (err) {
-    console.error("AI auto-enhance error:", err);
+    console.error("SERVER OPENAI ERROR >>>");
+    console.error(err);
+    console.error("ERROR MESSAGE:", err?.message);
+    console.error("ERROR RESPONSE:", err?.response?.data);
 
     return new Response(
-      JSON.stringify({ error: "AI auto-enhance failed" }),
+      JSON.stringify({
+        error: "AI auto-enhance failed",
+        detail: err?.message,
+      }),
       {
         status: 500,
         headers: { "Content-Type": "application/json" },

@@ -1,6 +1,6 @@
 import {WasmModule} from "@/lib/wasm-loader";
 import {GetCanvasImageData} from "@/app/types/filterTypes";
-import {useEffect, useMemo} from "react";
+import {useCallback, useEffect, useMemo} from "react";
 import useImageFilterState from "@/app/hooks/image/filters/core/useImageFilterState";
 import useImageFilterPipeline from "@/app/hooks/image/filters/pipeline/useImageFilterPipeline";
 import rafThrottle from "@/app/utils/rafThrottle";
@@ -57,10 +57,37 @@ export default function useImageFilterController(
     return () => clearTimeout(id);
   }, [filters, disabled, throttledApply, applyAllFilters]);
 
+  const applyFiltersFromAi = useCallback((p: FilterState) => {
+    const mapped: FilterState = {
+      brightness: 100 + p.brightness,
+      contrast: 100 + p.contrast,
+      saturation: 100 + p.saturation,
+      exposure: p.exposure,
+      temperature: p.temperature,
+      tint: p.tint,
+      highlights: p.highlights,
+      shadows: p.shadows,
+      clarity: p.clarity,
+
+      vignette: p.vignette,
+      hue: p.hue,
+
+      sharpen: p.sharpen,
+      blur: p.blur,
+      invert: p.invert,
+      isGray: p.isGray,
+    };
+
+    (Object.keys(mapped) as (keyof FilterState)[]).forEach((key) => {
+      setFilter(key, mapped[key]);
+    });
+  }, [setFilter]);
+
   return {
     filters,
     setFilter,
     applyAllFilters,
-    disabled
+    disabled,
+    applyFiltersFromAi
   };
 }

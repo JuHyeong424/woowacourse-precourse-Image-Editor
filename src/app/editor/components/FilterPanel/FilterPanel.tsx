@@ -3,10 +3,27 @@ import ButtonFilters from "@/app/editor/components/FilterPanel/button/ButtonFilt
 import SliderFilters from "@/app/editor/components/FilterPanel/slider/SliderFilters";
 import {FilterProps} from "@/app/types/filterStateTypes";
 
-export default function FilterPanel({ filters, setFilter, disabled }: FilterProps) {
+interface ExtendedFilterProps extends FilterProps {
+  aiLoading: boolean;
+  aiError: string | null;
+  runAutotoEnhance: () => void;
+}
+
+export default function FilterPanel({ filters, setFilter, disabled, aiLoading, aiError, runAutotoEnhance }: ExtendedFilterProps) {
   return (
     <div className="flex flex-col p-4 border-2 min-w-[30%] small:h-[30%] medium:h-[30%] tablet:h-full laptop:h-full rounded-xl overflow-y-auto overlay-scroll">
       <h2 className="small:text-xl medium:text-xl tablet:text-2xl laptop:text-2xl text-center font-bold small:m-3 medium:m-3 tablet:m-4 laptop:m-4">편집 도구</h2>
+      <button
+        onClick={runAutotoEnhance}
+        disabled={aiLoading || disabled}
+        className="border rounded-lg py-2 px-3 mb-3 bg-neutral-800 hover:bg-neutral-700 disabled:opacity-40"
+      >
+        {aiLoading ? "AI 자동 보정 중..." : "AI 자동 보정"}
+      </button>
+
+      {aiError && (
+        <p className="text-red-500 text-sm mb-3">{aiError}</p>
+      )}
       <ButtonFilters
         filters={filters}
         setFilter={setFilter}
