@@ -1,5 +1,5 @@
 import downloadCanvas from "@/app/utils/downloadCanvas";
-import {DEFAULT_DOWNLOAD_FILENAME} from "@/app/constants/file";
+import {DEFAULT_DOWNLOAD_FILENAME} from "@/app/config/constants/file";
 
 interface DownloadImageComponentProps {
   canvasRef: React.RefObject<HTMLCanvasElement | null>;

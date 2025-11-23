@@ -3,7 +3,7 @@ import {WasmModule} from "@/lib/wasm-loader";
 import {GetCanvasImageData} from "@/app/types/filterTypes";
 import {FilterState} from "@/app/types/filterStateTypes";
 import {FilterConfig, FilterFunctions} from "@/app/types/imageFilterTypes";
-import {FILTER_TYPE} from "@/app/config/filterConstants";
+import {FILTER_TYPE} from "@/app/config/filter/filterConstants";
 
 interface useImageFilterPipelineProps {
   wasm: WasmModule | null;

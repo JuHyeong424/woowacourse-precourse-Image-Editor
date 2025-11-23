@@ -1,4 +1,4 @@
-import {A_ELEMENT} from "@/app/constants/element";
+import {A_ELEMENT} from "@/app/config/constants/element";
 
 export default function downloadBlob(blob: Blob, fileName: string) {
   const url = URL.createObjectURL(blob);

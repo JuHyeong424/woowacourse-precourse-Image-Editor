@@ -1,4 +1,4 @@
-import {COMMA} from "@/app/constants/regex";
+import {COMMA} from "@/app/config/constants/regex";
 
 export default function base64ToBlob(dataURL: string): Blob {
   const parts = dataURL.split(COMMA);

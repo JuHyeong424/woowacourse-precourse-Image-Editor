@@ -1,5 +1,5 @@
 import base64ToBlob from "@/app/utils/base64ToBlob";
-import {IMAGE_MIME_PNG} from "@/app/constants/image";
+import {IMAGE_MIME_PNG} from "@/app/config/constants/image";
 
 export default function canvasToBlob(canvas: HTMLCanvasElement): Promise<Blob | null> {
   return new Promise<Blob | null>((resolve) => {

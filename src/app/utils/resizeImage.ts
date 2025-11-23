@@ -1,4 +1,4 @@
-import {DEFAULT_MAX_IMAGE_SIZE} from "@/app/constants/image";
+import {DEFAULT_MAX_IMAGE_SIZE} from "@/app/config/constants/image";
 
 interface resizeImageProps {
   width: number;

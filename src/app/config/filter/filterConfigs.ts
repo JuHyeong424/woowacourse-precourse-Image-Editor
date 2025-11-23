@@ -1,5 +1,5 @@
 import { FilterConfig, FilterFunctions, FilterState } from "@/app/types/imageFilterTypes";
-import { FILTER_TYPE, INITIAL_FILTER_STATE } from "@/app/config/filterConstants";
+import { FILTER_TYPE, INITIAL_FILTER_STATE } from "@/app/config/filter/filterConstants";
 
 export const getFilterConfigs = (filters: FilterFunctions): FilterConfig[] => [
   { key: 'brightness', type: FILTER_TYPE.NUMERIC, apply: filters.applyBrightness, defaultValue: INITIAL_FILTER_STATE.brightness },

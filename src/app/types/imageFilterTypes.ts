@@ -7,7 +7,7 @@ import {
   ApplyTint,
   ApplyVignette, ResetColor
 } from "@/app/types/filterTypes";
-import {FILTER_TYPE} from "@/app/config/filterConstants";
+import {FILTER_TYPE} from "@/app/config/filter/filterConstants";
 
 export interface FilterFunctions {
   applyVignette: ApplyVignette;

@@ -1,7 +1,7 @@
 import React, {useCallback} from "react";
 import resizeImage from "@/app/utils/resizeImage";
 import getCanvasUtil from "@/app/utils/canvas/getCanvasUtil";
-import {CANVAS_ORIGIN_X, CANVAS_ORIGIN_Y} from "@/app/constants/canvas";
+import {CANVAS_ORIGIN_X, CANVAS_ORIGIN_Y} from "@/app/config/constants/canvas";
 
 interface useInitializeCanvasProps {
   canvasRef: React.RefObject<HTMLCanvasElement | null>;
