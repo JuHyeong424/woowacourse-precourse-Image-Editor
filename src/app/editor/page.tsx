@@ -33,7 +33,7 @@ export default function EditorPage() {
   const {
     loading: aiLoading,
     error: aiError,
-    runAutotoEnhance,
+    runAutoEnhance,
   } = useAiAutoEnhance({
     canvasRef,
     applyFiltersFromAi,
@@ -65,7 +65,7 @@ export default function EditorPage() {
         disabled={disabled}
         aiLoading={aiLoading}
         aiError={aiError}
-        runAutotoEnhance={runAutotoEnhance}
+        runAutoEnhance={runAutoEnhance}
       />
       <CanvasPanel
         canvasRef={canvasRef}

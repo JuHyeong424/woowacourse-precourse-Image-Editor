@@ -4,14 +4,14 @@ interface AIFilterProps  {
   disabled: boolean;
   aiLoading: boolean;
   aiError: string | null;
-  runAutotoEnhance: () => void;
+  runAutoEnhance: () => void;
 }
 
-export default function AIFilter({ disabled, aiLoading, aiError, runAutotoEnhance }: AIFilterProps) {
+export default function AIFilter({ disabled, aiLoading, aiError, runAutoEnhance }: AIFilterProps) {
   return (
     <>
       <button
-        onClick={runAutotoEnhance}
+        onClick={runAutoEnhance}
         disabled={aiLoading || disabled}
         className="border rounded-lg py-2 px-3 mb-3 bg-neutral-800 hover:bg-neutral-700 disabled:opacity-40"
       >

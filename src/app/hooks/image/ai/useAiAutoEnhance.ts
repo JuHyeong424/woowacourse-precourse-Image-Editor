@@ -12,7 +12,7 @@ export function useAiAutoEnhance({ canvasRef, applyFiltersFromAi }: UseAiAutoEnh
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const runAutotoEnhance = useCallback(async () => {
+  const runAutoEnhance = useCallback(async () => {
     const canvas = canvasRef.current;
     if (!canvas) {
       setError("캔버스를 찾을 수 없습니다.");
@@ -49,6 +49,6 @@ export function useAiAutoEnhance({ canvasRef, applyFiltersFromAi }: UseAiAutoEnh
   return {
     loading,
     error,
-    runAutotoEnhance,
+    runAutoEnhance,
   };
 }
