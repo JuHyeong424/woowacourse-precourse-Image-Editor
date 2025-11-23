@@ -17,13 +17,7 @@ interface UseImageFilterControllerProps {
   getCanvasImageData: GetCanvasImageData;
 }
 
-export default function useImageFilterController(
-  {
-    wasm,
-    image,
-    originalPixels,
-    getCanvasImageData
-  }: UseImageFilterControllerProps) {
+export default function useImageFilterController({ wasm, image, originalPixels, getCanvasImageData }: UseImageFilterControllerProps) {
   const filterFunctions = useImageFilters();
 
   const {filters, setFilter} = useImageFilterState(image);
@@ -58,8 +52,7 @@ export default function useImageFilterController(
     return () => clearTimeout(id);
   }, [filters, disabled, throttledApply, applyAllFilters]);
 
-  const applyFiltersFromAi = useCallback(
-    (params: FilterState) => {
+  const applyFiltersFromAi = useCallback((params: FilterState) => {
       const mapped = mapAiFilters(params);
 
       (Object.keys(mapped) as (keyof FilterState)[]).forEach((key) => {
