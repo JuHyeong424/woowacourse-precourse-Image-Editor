@@ -8,6 +8,7 @@ import {FilterState} from "@/app/types/filterStateTypes";
 import {FINAL_FILTER_APPLY_DELAY} from "@/app/constants/filter";
 import useImageFilters from "@/app/hooks/image/filters/manager/useImageFilters";
 import {getFilterConfigs} from "@/app/config/filterConfigs";
+import {mapAiFilters} from "@/app/utils/mapAiFilters";
 
 interface UseImageFilterControllerProps {
   wasm: WasmModule | null;
@@ -57,31 +58,16 @@ export default function useImageFilterController(
     return () => clearTimeout(id);
   }, [filters, disabled, throttledApply, applyAllFilters]);
 
-  const applyFiltersFromAi = useCallback((p: FilterState) => {
-    const mapped: FilterState = {
-      brightness: 100 + p.brightness,
-      contrast: 100 + p.contrast,
-      saturation: 100 + p.saturation,
-      exposure: p.exposure,
-      temperature: p.temperature,
-      tint: p.tint,
-      highlights: p.highlights,
-      shadows: p.shadows,
-      clarity: p.clarity,
+  const applyFiltersFromAi = useCallback(
+    (params: FilterState) => {
+      const mapped = mapAiFilters(params);
 
-      vignette: p.vignette,
-      hue: p.hue,
-
-      sharpen: p.sharpen,
-      blur: p.blur,
-      invert: p.invert,
-      isGray: p.isGray,
-    };
-
-    (Object.keys(mapped) as (keyof FilterState)[]).forEach((key) => {
-      setFilter(key, mapped[key]);
-    });
-  }, [setFilter]);
+      (Object.keys(mapped) as (keyof FilterState)[]).forEach((key) => {
+        setFilter(key, mapped[key]);
+      });
+    },
+    [setFilter]
+  );
 
   return {
     filters,
