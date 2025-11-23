@@ -1,22 +1,27 @@
-// src/app/utils/mapAiFilters.ts
 import { FilterState } from "@/app/types/filterStateTypes";
 
-export function mapAiFilters(p: FilterState): FilterState {
+const NORMALIZED_BASE_PERCENT = 100;
+
+function addBasePercent (value: number): number {
+  return NORMALIZED_BASE_PERCENT + value;
+}
+
+export function mapAiFilters(aiFilters: FilterState): FilterState {
   return {
-    brightness: 100 + p.brightness,
-    contrast: 100 + p.contrast,
-    saturation: 100 + p.saturation,
-    exposure: p.exposure,
-    temperature: p.temperature,
-    tint: p.tint,
-    highlights: p.highlights,
-    shadows: p.shadows,
-    clarity: p.clarity,
-    vignette: p.vignette,
-    hue: p.hue,
-    sharpen: p.sharpen,
-    blur: p.blur,
-    invert: p.invert,
-    isGray: p.isGray,
+    brightness: addBasePercent(aiFilters.brightness),
+    contrast: addBasePercent(aiFilters.contrast),
+    saturation: addBasePercent(aiFilters.saturation),
+    exposure: aiFilters.exposure,
+    temperature: aiFilters.temperature,
+    tint: aiFilters.tint,
+    highlights: aiFilters.highlights,
+    shadows: aiFilters.shadows,
+    clarity: aiFilters.clarity,
+    vignette: aiFilters.vignette,
+    hue: aiFilters.hue,
+    sharpen: aiFilters.sharpen,
+    blur: aiFilters.blur,
+    invert: aiFilters.invert,
+    isGray: aiFilters.isGray,
   };
 }
