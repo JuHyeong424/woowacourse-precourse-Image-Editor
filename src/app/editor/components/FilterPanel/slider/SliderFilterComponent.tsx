@@ -21,11 +21,6 @@ export default function SliderFilterComponent({
     className,
     id
   }: SliderFilterComponentProps) {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = Number(e.target.value);
-    setValue(newValue);
-  };
-
   return (
     <div className="flex flex-col gap-4 small:my-2 medium:my-2 tablet:my-4 laptop:my-4">
       <div className="small:text-sm medium:text-sm tablet:text-xl laptop:text-xl font-semibold text-white flex items-center gap-2">
@@ -40,7 +35,7 @@ export default function SliderFilterComponent({
         min={min}
         max={max}
         value={value}
-        onChange={handleChange}
+        onChange={(e) => setValue(Number(e.target.value))}
         disabled={disabled}
         className={className}
       />
