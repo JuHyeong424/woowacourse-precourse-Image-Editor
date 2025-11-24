@@ -3,6 +3,7 @@
 <img src="./public/readme/home.png" alt="home" />
 
 <h2>프로젝트 소개</h2>
+<strong><a href="https://woowacourse-precourse-image-editor.vercel.app/">배포 링크</a></strong>
 <p>Image Editor는 WebAssembly 기반의 필터 엔진과 AI 자동 보정 기능을 갖춘 고성능 웹 이미지 편집기입니다.</p>
 <ul>
     <li>Rust → WebAssembly로 변환된 초고속 필터 엔진</li>
@@ -116,6 +117,11 @@ http://localhost:3000
   </tr>
 </table>
 
+<h2>Architecture Diagram</h2>
+<pre><code>
+Image Upload → Resize → Canvas Draw → FilterController  
+ → WASM Filters(Rust) → return ImageData → CanvasRender → Download
+</code></pre>
 
 <h2>성능 문제 & 해결 과정</h2>
 <p>이 프로젝트해서 가장 큰 난관은 <strong>특정 이미지에서 필터 조정 시 캔버스가 끊기거나 버벅임</strong>이었다.</p>
