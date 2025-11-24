@@ -15,10 +15,6 @@ export default function ButtonFilterComponent({
     value,
     setValue
   }: ButtonFilterComponentProps) {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.checked);
-  };
-
   return (
     <div className="flex items-center gap-3">
       <input
@@ -26,7 +22,7 @@ export default function ButtonFilterComponent({
         id={id}
         checked={value}
         disabled={disabled}
-        onChange={handleChange}
+        onChange={(e) => setValue(e.target.checked)}
         className="peer hidden"
       />
 
@@ -52,13 +48,13 @@ export default function ButtonFilterComponent({
         </span>
       </label>
 
-      <span
-        className="small:text-sm medium:text-sm tablet:text-xm laptop:text-xl cursor-pointer select-none"
+      <label
+        className="small:text-sm medium:text-sm tablet:text-xl laptop:text-xl cursor-pointer select-none"
         data-testid={`${id}-label`}
         onClick={() => !disabled && setValue(!value)}
       >
         {label}
-    </span>
+      </label>
     </div>
   );
 }
