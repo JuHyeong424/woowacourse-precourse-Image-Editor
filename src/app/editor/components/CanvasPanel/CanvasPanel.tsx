@@ -24,14 +24,17 @@ export default function CanvasPanel({ canvasRef, image, setImage }: UploadedImag
       {!hasImage && <SelectFileComponent setImage={setImage}/>}
       {hasImage && (
         <>
-          <IoMdCloseCircle
-            onClick={deleteImage}
-            className="
+          <button>
+            <IoMdCloseCircle
+              onClick={deleteImage}
+              className="
             absolute small:top-1 small:left-1 medium:top-1 medium:left-1 tablet:top-1 tablet:left-1 laptop:top-4 laptop:left-4
             text-red-500
             small:text-2xl medium:text-2xl tablet:text-4xl laptop:text-4xl
             cursor-pointer z-10 bg-white rounded-full m-4"
-          />
+            />
+          </button>
+
           <DownloadImageComponent canvasRef={canvasRef} />
         </>
       )}
