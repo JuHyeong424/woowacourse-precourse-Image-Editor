@@ -71,6 +71,9 @@ npm dev
 </code></pre>
 http://localhost:3000
 
+<h2>테스트 실행 방법</h2>
+<pre><code>npx playwright test</code></pre>
+
 <h2>기술 스택</h2>
 <table>
   <tr>
