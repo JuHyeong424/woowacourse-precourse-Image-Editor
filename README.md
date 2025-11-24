@@ -122,6 +122,21 @@ http://localhost:3000
 Image Upload → Resize → Canvas Draw → FilterController  
  → WASM Filters(Rust) → return ImageData → CanvasRender → Download
 </code></pre>
+<h3>1. ImageUpload</h3>
+<p>유저가 PNG/JPG/WebP 업로드</p>
+<h3>2. Resize</h3>
+<p>해상도 1080px 이하로 제한하여 GPU/CPU 부하 줄이기</p>
+<h3>3. Canvas Draw</h3>
+<p>원본 → Canvas에 렌더링</p>
+<h3>4. FilterController</h3>
+<p>slider 값 → filter state → applyPipeline()</p>
+<h3>5. WASM Filters (Rust)</h3>
+<p>Rust 코드에서 각 필터 처리</p>
+<p>grayscale, brightness, contrast, hue 등</p>
+<h3>6. Processed ImageData 변환</h3>
+<p>Uint8ClampedArray로 JS에 다시 전달</p>
+<h3>7. 최종 Canvas Render 후 다운로드</h3>
+<p>canvas.toBlob → 저장</p>
 
 <h2>성능 문제 & 해결 과정</h2>
 <p>이 프로젝트해서 가장 큰 난관은 <strong>특정 이미지에서 필터 조정 시 캔버스가 끊기거나 버벅임</strong>이었다.</p>
