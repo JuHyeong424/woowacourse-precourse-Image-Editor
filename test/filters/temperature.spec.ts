@@ -12,5 +12,5 @@ test("Temperature 필터 적용 테스트", async ({ page }) => {
 
   const after = await getPixel(page);
 
-  expect(after[2]).not.toBe(before[2]); // Blue 채널 변화 예상
+  expect(after[2]).not.toBe(before[2]);
 });
