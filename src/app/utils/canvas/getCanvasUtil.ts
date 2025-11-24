@@ -1,4 +1,4 @@
-import { CANVAS_CONTEXT_2D } from "@/app/constants/canvas";
+import { CANVAS_CONTEXT_2D } from "@/app/config/constants/canvas";
 import React from "react";
 
 export interface CanvasInfo {

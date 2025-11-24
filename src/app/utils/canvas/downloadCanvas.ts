@@ -1,7 +1,7 @@
-import canvasToBlob from "@/app/utils/canvasToBlob";
-import isIOS from "@/app/utils/isIOS";
-import openInIOS from "@/app/utils/openInIOS";
-import downloadBlob from "@/app/utils/downloadBlob";
+import canvasToBlob from "@/app/utils/canvas/canvasToBlob";
+import isIOS from "@/app/utils/browser/isIOS";
+import openInIOS from "@/app/utils/browser/openInIOS";
+import downloadBlob from "@/app/utils/blob/downloadBlob";
 
 interface DownloadCanvasProps {
   canvasRef: React.RefObject<HTMLCanvasElement | null>;

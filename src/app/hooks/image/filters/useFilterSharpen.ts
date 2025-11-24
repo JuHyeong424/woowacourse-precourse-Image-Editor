@@ -1,7 +1,7 @@
 import useFilterBase from "@/app/hooks/image/filters/core/useFilterBase";
 import {WasmModule} from "@/lib/wasm-loader";
 import {GetCanvasImageData} from "@/app/types/filterTypes";
-import {CANVAS_ORIGIN_X, CANVAS_ORIGIN_Y} from "@/app/constants/canvas";
+import {CANVAS_ORIGIN_X, CANVAS_ORIGIN_Y} from "@/app/config/constants/canvas";
 
 export default function useFilterSharpen() {
   const { prepareFilter } = useFilterBase();

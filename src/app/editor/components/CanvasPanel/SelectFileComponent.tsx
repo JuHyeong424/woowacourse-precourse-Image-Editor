@@ -1,6 +1,6 @@
 import React from "react";
 import useLoadImage from "@/app/hooks/image/useLoadImage";
-import {UPLOAD_FIRST_FILE} from "@/app/constants/file";
+import {UPLOAD_FIRST_FILE} from "@/app/config/constants/file";
 
 interface SelectFileProps {
   setImage: (img: HTMLImageElement | null) => void;

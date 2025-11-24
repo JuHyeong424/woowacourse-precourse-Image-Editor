@@ -1,7 +1,7 @@
 import SliderFilterComponent from "@/app/editor/components/FilterPanel/slider/SliderFilterComponent";
 import React from "react";
 import {FilterProps} from "@/app/types/filterStateTypes";
-import {SLIDER_FLITER} from "@/app/constants/filter";
+import {SLIDER_FLITER} from "@/app/config/filter/filter";
 
 export default function SliderFilters({ filters, setFilter, disabled }: FilterProps) {
   return (

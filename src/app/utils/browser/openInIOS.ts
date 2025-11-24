@@ -1,4 +1,4 @@
-import {BLANK} from "@/app/constants/window";
+import {BLANK} from "@/app/config/constants/window";
 
 export default function openInIOS(blob: Blob) {
   const url = URL.createObjectURL(blob);

@@ -1,7 +1,7 @@
 import ButtonFilterComponent from "@/app/editor/components/FilterPanel/button/ButtonFilterComponent";
 import React from "react";
 import {FilterProps} from "@/app/types/filterStateTypes";
-import {BUTTON_FILTERS} from "@/app/constants/filter";
+import {BUTTON_FILTERS} from "@/app/config/filter/filter";
 
 export default function ButtonFilters({ filters, setFilter, disabled }: FilterProps) {
   return (

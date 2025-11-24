@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useState} from "react";
-import {INITIAL_FILTER_STATE} from "@/app/config/filterConstants";
+import {INITIAL_FILTER_STATE} from "@/app/config/filter/filterConstants";
 import {FilterState} from "@/app/types/filterStateTypes";
 
 export default function useImageFilterState(image: HTMLImageElement | null) {

@@ -1,6 +1,6 @@
 import {WasmModule} from "@/lib/wasm-loader";
 import useFilterBase from "@/app/hooks/image/filters/core/useFilterBase";
-import {CANVAS_ORIGIN_X, CANVAS_ORIGIN_Y} from "@/app/constants/canvas";
+import {CANVAS_ORIGIN_X, CANVAS_ORIGIN_Y} from "@/app/config/constants/canvas";
 
 interface CanvasInfo {
   ctx: CanvasRenderingContext2D;
