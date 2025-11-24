@@ -65,21 +65,57 @@
 </ul>
 
 <h2>실행 방법</h2>
-<pre><code>
-    npm install
-    npm dev
+<pre><code>npm install
+npm dev
 </code></pre>
 http://localhost:3000
 
 <h2>기술 스택</h2>
-| 구분 | 기술 |
-|------|------|
-| **Frontend** | <img src="https://skillicons.dev/icons?i=nextjs" height="24" /> <img src="https://skillicons.dev/icons?i=react" height="24" /> |
-| **Styling** | <img src="https://skillicons.dev/icons?i=tailwind" height="24" /> |
-| **WASM Engine** | <img src="https://skillicons.dev/icons?i=rust" height="24" /> |
-| **AI** | <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" height="24" /> OpenAI API |
-| **Testing** |  Playwright |
-| **Rendering** | HTMLCanvas + Web Worker |
+<table>
+  <tr>
+    <th>Frontend</th>
+    <td>
+      <img src="https://skillicons.dev/icons?i=nextjs" height="24" alt="next" />
+      <img src="https://skillicons.dev/icons?i=react" height="24" alt="react" />
+    </td>
+  </tr>
+
+  <tr>
+    <th>Styling</th>
+    <td>
+      <img src="https://skillicons.dev/icons?i=tailwind" height="24" alt="tailwind "/>
+    </td>
+  </tr>
+
+  <tr>
+    <th>WASM Engine</th>
+    <td>
+      <img src="https://skillicons.dev/icons?i=rust" height="24" alt="wasm" />
+    </td>
+  </tr>
+
+  <tr>
+    <th>AI</th>
+    <td>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" height="24" alt="gpt" />
+    </td>
+  </tr>
+
+  <tr>
+    <th>Testing</th>
+    <td>
+      Playwright
+    </td>
+  </tr>
+
+  <tr>
+    <th>Rendering</th>
+    <td>
+      HTMLCanvas + Web Worker
+    </td>
+  </tr>
+</table>
+
 
 <h2>성능 문제 & 해결 과정</h2>
 <p>이 프로젝트해서 가장 큰 난관은 <strong>특정 이미지에서 필터 조정 시 캔버스가 끊기거나 버벅임</strong>이었다.</p>
