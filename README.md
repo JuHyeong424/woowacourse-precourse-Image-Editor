@@ -211,9 +211,15 @@ slider onChange -> setFilter -> WASM 호출 -> putImageData
 특히 “렌더링 성능 문제 해결” 과정이 가장 큰 성장 포인트였다.</p>
 
 <h2>프로젝트 진행 블로그 주소</h2>
-<a href="https://j-brothers.tistory.com/166">이미지 업로드 & 픅백 필터 적용하</a>
+<a href="https://j-brothers.tistory.com/166">이미지 업로드 & 픅백 필터 적용하기</a>
+
 <a href="https://j-brothers.tistory.com/167">밝기 조절하기</a>
+
 <a href="https://j-brothers.tistory.com/168">대비 만들기</a>
+
 <a href="https://j-brothers.tistory.com/169">이미지 다운로드하기</a>
+
 <a href="https://j-brothers.tistory.com/170">트러블 슈팅 - 이미지 필터 처리</a>
+
 <a href="https://j-brothers.tistory.com/171">트러블 슈팅 - 반응형 웹 만들기</a>
+
