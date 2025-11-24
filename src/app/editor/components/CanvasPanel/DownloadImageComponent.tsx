@@ -1,4 +1,4 @@
-import downloadCanvas from "@/app/utils/downloadCanvas";
+import downloadCanvas from "@/app/utils/canvas/downloadCanvas";
 import {DEFAULT_DOWNLOAD_FILENAME} from "@/app/config/constants/file";
 
 interface DownloadImageComponentProps {

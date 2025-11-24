@@ -3,12 +3,12 @@ import {GetCanvasImageData} from "@/app/types/filterTypes";
 import {useCallback, useEffect, useMemo} from "react";
 import useImageFilterState from "@/app/hooks/image/filters/core/useImageFilterState";
 import useImageFilterPipeline from "@/app/hooks/image/filters/pipeline/useImageFilterPipeline";
-import rafThrottle from "@/app/utils/rafThrottle";
+import rafThrottle from "@/app/utils/performance/rafThrottle";
 import {FilterState} from "@/app/types/filterStateTypes";
 import {FINAL_FILTER_APPLY_DELAY} from "@/app/config/filter/filter";
 import useImageFilters from "@/app/hooks/image/filters/manager/useImageFilters";
 import {getFilterConfigs} from "@/app/config/filter/filterConfigs";
-import {mapAiFilters} from "@/app/utils/mapAiFilters";
+import {mapAiFilters} from "@/app/utils/ai/mapAiFilters";
 
 interface UseImageFilterControllerProps {
   wasm: WasmModule | null;
