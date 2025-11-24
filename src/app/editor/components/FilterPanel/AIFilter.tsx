@@ -16,7 +16,7 @@ const LABELS = {
 
 export default function AIFilter({ disabled, aiLoading, aiError, runAutoEnhance }: AIFilterProps) {
   return (
-    <div className="flex flex-col">
+    <section aria-label="AI 자동 보정" className="flex flex-col">
       <button
         type="button"
         onClick={runAutoEnhance}
@@ -27,6 +27,6 @@ export default function AIFilter({ disabled, aiLoading, aiError, runAutoEnhance 
       </button>
 
       {aiError && <AiErrorComponent message={aiError} />}
-    </div>
+    </section>
   )
 }
