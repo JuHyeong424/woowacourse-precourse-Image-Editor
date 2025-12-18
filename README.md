@@ -1,5 +1,8 @@
 <h1>ImageEditor - 고성능 WebAssembly && AI 기반 웹 이미지 편집기</h1>
 
+<h2>2025.12.18</h2>
+<p>next 버전 취약점에 따른 버전 업데이트</p>
+
 <img src="./public/readme/home.png" alt="home" />
 
 <h2>프로젝트 소개</h2>
