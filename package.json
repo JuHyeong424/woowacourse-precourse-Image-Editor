@@ -11,7 +11,7 @@
     "wasm:copy": "rm -rf ./src/wasm && cp -r ./rust-core/pkg ./src/wasm && rm ./src/wasm/.gitignore ./src/wasm/package.json ./src/wasm/README.md"
   },
   "dependencies": {
-    "next": "16.0.1",
+    "next": "16.0.10",
     "openai": "^6.9.1",
     "react": "19.2.0",
     "react-dom": "19.2.0",
